@@ -5,6 +5,8 @@ services:
     plan: free
     region: frankfurt
     branch: main
+    dockerfilePath: ./Rhinemiddleeast/Dockerfile
+    dockerContext: ./Rhinemiddleeast
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
