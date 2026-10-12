@@ -1,0 +1,61 @@
+## .NET / ASP.NET Core .gitignore
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Build output
+*.exe
+*.pdb
+*.dll
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+nuget.config
+
+# Publish
+[Pp]ublish/
+PublishProfiles/
+
+# Test
+TestResults/
+
+# Rider
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Large review HTML (generated artifact)
+RHINE_REVIEW.html

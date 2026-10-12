@@ -1,0 +1,7 @@
+/* Custom scoped layout styles for Rhine Middle East */
+.rhine-app-wrapper {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
