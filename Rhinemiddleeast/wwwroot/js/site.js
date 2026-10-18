@@ -7,7 +7,7 @@
 (function () {
     'use strict';
 
-    const order = ['home', 'about', 'how', 'industries', 'ourwork', 'insights', 'contact'];
+    const order = ['home', 'how', 'agentfactory', 'about', 'industries', 'ourwork', 'insights', 'contact'];
 
     const RhineApp = {
         init: function () {
@@ -204,8 +204,9 @@
         EN: {
             nav: {
                 home: 'Home',
-                about: 'About',
                 how: 'How It Works',
+                agentfactory: 'Agent Factory',
+                about: 'About Us',
                 industries: 'Industries',
                 ourwork: 'Our Work',
                 insights: 'Insights',
@@ -308,8 +309,9 @@
         AR: {
             nav: {
                 home: 'الرئيسية',
-                about: 'نبذة عنا',
                 how: 'كيف نعمل',
+                agentfactory: 'مصنع الوكلاء',
+                about: 'نبذة عنا',
                 industries: 'القطاعات',
                 ourwork: 'أعمالنا',
                 insights: 'الرؤى والأفكار',
@@ -438,7 +440,7 @@
             try { localStorage.setItem('rhine_lang', lang); } catch (e) { }
 
             // 3. Navigation Links (Header & Sidenav)
-            const navKeys = ['home', 'about', 'how', 'industries', 'ourwork', 'insights', 'contact'];
+            const navKeys = ['home', 'how', 'agentfactory', 'about', 'industries', 'ourwork', 'insights', 'contact'];
             navKeys.forEach(k => {
                 document.querySelectorAll(`.center-nav [data-go="${k}"]`).forEach(el => el.innerText = dict.nav[k]);
                 document.querySelectorAll(`#rhineSidenav [data-go="${k}"] .sidenav-link-text`).forEach(el => el.innerText = dict.nav[k]);
@@ -553,23 +555,17 @@
         },
 
         /**
-         * Open Quick Contact / Inquiry Modal
+         * Open Workforce Wizard (now navigates to Agent Factory)
          */
-        openInquiryModal: function () {
-            const modalEl = document.getElementById('inquiryModal');
-            if (modalEl && window.bootstrap) {
-                new bootstrap.Modal(modalEl).show();
-            }
+        openWorkforceWizard: function () {
+            this.go('agentfactory');
         },
 
         /**
-         * Open Workforce Wizard Modal
+         * Open Inquiry Modal (now navigates to Contact)
          */
-        openWorkforceWizard: function () {
-            const modalEl = document.getElementById('workforceModal');
-            if (modalEl && window.bootstrap) {
-                new bootstrap.Modal(modalEl).show();
-            }
+        openInquiryModal: function () {
+            this.go('contact');
         },
 
         /**

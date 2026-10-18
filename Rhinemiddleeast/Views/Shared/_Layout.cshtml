@@ -10,6 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- Favicon & Browser Tab Icon (Rhine 'R' matching logo) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="~/favicon-32x32.png" asp-append-version="true" />
+    <link rel="icon" type="image/png" sizes="16x16" href="~/favicon-16x16.png" asp-append-version="true" />
+    <link rel="apple-touch-icon" sizes="180x180" href="~/apple-touch-icon.png" asp-append-version="true" />
+    <link rel="shortcut icon" href="~/favicon.ico" asp-append-version="true" />
+    <link rel="manifest" href="~/site.webmanifest" />
 </head>
 <body class="rhine-app-body">
     <!-- Header: Matches your design reference image precisely -->
@@ -25,8 +32,9 @@
             <!-- Center Navigation Menu: Smooth switching without page reloads -->
             <nav class="center-nav" aria-label="Primary navigation">
                 <button class="nav-item-btn active" data-go="home">Home</button>
-                <button class="nav-item-btn" data-go="about">About</button>
                 <button class="nav-item-btn" data-go="how">How It Works</button>
+                <button class="nav-item-btn" data-go="agentfactory">Agent Factory</button>
+                <button class="nav-item-btn" data-go="about">About Us</button>
                 <button class="nav-item-btn" data-go="industries">Industries</button>
                 <button class="nav-item-btn" data-go="ourwork">Our Work</button>
                 <button class="nav-item-btn" data-go="insights">Insights</button>
@@ -88,11 +96,14 @@
                 <button class="sidenav-link active" data-go="home">
                     <span class="sidenav-link-text">Home</span>
                 </button>
-                <button class="sidenav-link" data-go="about">
-                    <span class="sidenav-link-text">About</span>
-                </button>
                 <button class="sidenav-link" data-go="how">
                     <span class="sidenav-link-text">How It Works</span>
+                </button>
+                <button class="sidenav-link" data-go="agentfactory">
+                    <span class="sidenav-link-text">Agent Factory</span>
+                </button>
+                <button class="sidenav-link" data-go="about">
+                    <span class="sidenav-link-text">About Us</span>
                 </button>
                 <button class="sidenav-link" data-go="industries">
                     <span class="sidenav-link-text">Industries</span>
@@ -128,146 +139,8 @@
         @RenderBody()
     </main>
 
-    <!-- Bottom Review Tag -->
-    <div class="review-tag" id="reviewTag">
-        <span class="status-indicator"></span>
-        <span>RHINE &mdash; Website Review</span>
-    </div>
 
-    <!-- Interactive Modal: Build Your Company Configurator -->
-    <div class="modal fade" id="workforceModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content glass-dialog">
-                <div class="modal-header border-0 pb-0">
-                    <div>
-                        <span class="dialog-eyebrow">RHINE INTELLIGENT OPERATING PLATFORM</span>
-                        <h4 class="dialog-title text-white mt-1">Build Your Company &mdash; AI Workforce Architect</h4>
-                    </div>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body py-4">
-                    <p class="text-secondary small mb-3">
-                        Configure industry-specific workforce platforms where human talent and governed AI agents work together as one coordinated enterprise.
-                    </p>
-                    <div class="row g-2 mb-3">
-                        <div class="col-md-6">
-                            <label class="config-choice">
-                                <input type="radio" name="bIndustry" value="Banking & Sovereign Wealth" checked />
-                                <div class="choice-box">
-                                    <strong>Sovereign Wealth &amp; Banking</strong>
-                                    <span>Due diligence, risk modeling &amp; DIFC/ADGM compliance</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="config-choice">
-                                <input type="radio" name="bIndustry" value="Energy & Infrastructure" />
-                                <div class="choice-box">
-                                    <strong>Energy &amp; Infrastructure</strong>
-                                    <span>Asset telemetry, SCADA safety &amp; predictive maintenance</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="config-choice">
-                                <input type="radio" name="bIndustry" value="Government & Smart Cities" />
-                                <div class="choice-box">
-                                    <strong>Government &amp; Smart Cities</strong>
-                                    <span>Citizen concierge, licensing &amp; digital government</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="config-choice">
-                                <input type="radio" name="bIndustry" value="Logistics & Global Trade" />
-                                <div class="choice-box">
-                                    <strong>Logistics &amp; JAFZA Freezone</strong>
-                                    <span>Port clearance, cargo routing &amp; customs tariff automation</span>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
 
-                    <div class="mb-4">
-                        <label class="form-label text-muted small">Current Enterprise Knowledge Workforce: <strong id="wfHeadcount" class="text-white">350</strong> professionals</label>
-                        <input type="range" class="form-range custom-range" min="50" max="2500" step="50" value="350" id="wfSlider" oninput="document.getElementById('wfHeadcount').innerText = this.value" />
-                    </div>
-
-                    <div id="blueprintOutput" class="blueprint-result-box d-none mb-3">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h5 id="bpTitle" class="m-0 text-gold">Architecture Blueprint</h5>
-                            <span class="badge bg-warning text-dark">GCC SOVEREIGN CLOUD READY</span>
-                        </div>
-                        <div class="row text-center g-2 my-2">
-                            <div class="col-4 p-2 bg-dark rounded">
-                                <div class="small text-muted">Dedicated AI Agents</div>
-                                <div id="bpAgents" class="h4 text-warning m-0">98</div>
-                            </div>
-                            <div class="col-4 p-2 bg-dark rounded">
-                                <div class="small text-muted">Projected Gain</div>
-                                <div id="bpGain" class="h5 text-white m-0">+340%</div>
-                            </div>
-                            <div class="col-4 p-2 bg-dark rounded">
-                                <div class="small text-muted">Deployment Window</div>
-                                <div id="bpTime" class="h5 text-white m-0">4-6 Weeks</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex justify-content-end gap-2">
-                        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn-gold-action" onclick="window.rhineApp.generateBlueprint()">Generate Custom Blueprint &rarr;</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Interactive Modal: Quick Contact & Brief Submission -->
-    <div class="modal fade" id="inquiryModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content glass-dialog">
-                <div class="modal-header border-0 pb-0">
-                    <div>
-                        <span class="dialog-eyebrow">RHINE MIDDLE EAST FZE &bull; JEBEL ALI FREEZONE</span>
-                        <h4 class="dialog-title text-white mt-1">Let's Build What's Next.</h4>
-                    </div>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body py-3">
-                    <div class="contact-card-box mb-3">
-                        <div><strong>Address:</strong> JAFZA One, Office No: FZJOBB1906, Jebel Ali Freezone, Dubai, UAE</div>
-                        <div class="mt-1"><strong>Tel:</strong> <a href="tel:+97148818618" class="text-gold">+971 4 8818618</a></div>
-                        <div class="mt-1"><strong>Email:</strong> <a href="mailto:info@rhineme.com" class="text-gold">info@rhineme.com</a></div>
-                    </div>
-
-                    <form id="quickContactForm" onsubmit="window.rhineApp.submitQuickContact(event)">
-                        @Html.AntiForgeryToken()
-                        <div id="quickFormAlert" class="alert d-none py-2 px-3 small"></div>
-                        <div class="mb-2">
-                            <label class="form-label small text-muted">Full Name *</label>
-                            <input type="text" id="qName" class="form-control form-control-sm dark-input" placeholder="Your Name" required />
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label small text-muted">Corporate Email *</label>
-                            <input type="email" id="qEmail" class="form-control form-control-sm dark-input" placeholder="name@company.com" required />
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label small text-muted">Enterprise / Organization *</label>
-                            <input type="text" id="qCompany" class="form-control form-control-sm dark-input" placeholder="Company Name" required />
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small text-muted">Operational Brief *</label>
-                            <textarea id="qMessage" class="form-control form-control-sm dark-input" rows="3" placeholder="Describe your inquiry..." required></textarea>
-                        </div>
-                        <button type="submit" id="btnQuickSubmit" class="btn-gold-action w-100 py-2">
-                            <span>Submit Confidential Brief &rarr;</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -9,32 +9,35 @@
         <!-- Subtle atmospheric lighting overlay -->
         <div class="landing-ambient-overlay"></div>
 
-        <!-- Right-aligned content wrapper matching Image 2 -->
+        <!-- Left-aligned content container matching Image 2 -->
         <div class="landing-content-container">
-            <div class="landing-right-hero-card">
+            <div class="landing-hero-card">
                 <span class="landing-eyebrow">INTELLIGENT WORKFORCES FOR A REAL WORLD</span>
 
                 <h1 class="landing-main-title">
-                    People and AI<br />
-                    Working for<br />
-                    <span class="hero-gold-text">What's Next.</span>
+                    People and AI.<br />
+                    Working for <span class="hero-gold-text">What's Next.</span>
                 </h1>
 
                 <p class="landing-desc-text">
-                    We design industry-specific workforce platforms where human talent and governed AI agents work together to achieve real business outcomes.
+                    RHINE designs industry-specific operating platforms where human talent and governed AI agents work together as one coordinated workforce.
                 </p>
 
                 <div class="landing-action-row">
-                    <button type="button" class="btn-gold-hero" onclick="window.rhineApp.openWorkforceWizard()">
+                    <button type="button" class="btn-gold-hero" data-go="agentfactory">
                         <span>Build Your Company &rarr;</span>
                     </button>
+                    <button type="button" class="btn-secondary-hero" data-go="contact">
+                        <span>Transform Your Company</span>
+                    </button>
                 </div>
-            </div>
 
-            <!-- Bottom Right Tagline -->
-            <div class="landing-bottom-tagline">
-                <span class="tagline-row">SAME PEOPLE.</span>
-                <span class="tagline-row">BIGGER POSSIBILITIES.</span>
+                <!-- Bottom Tagline directly below buttons with gold bar, matching Image 2 -->
+                <div class="landing-bottom-tagline">
+                    <span class="landing-tagline-bar"></span>
+                    <span class="tagline-row">SAME PEOPLE.</span>
+                    <span class="tagline-row">BIGGER POSSIBILITIES.</span>
+                </div>
             </div>
         </div>
     </div>
@@ -93,14 +96,14 @@
             to operating capability.
         </p>
 
-        <!-- CTA Button -->
-        <button type="button" class="about-cta-btn" onclick="window.rhineApp.openWorkforceWizard()">
+       @*  <!-- CTA Button -->
+        <button type="button" class="about-cta-btn" data-go="agentfactory">
             <span>Configure Your Workforce</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
-        </button>
+        </button> *@
 
     </div>
 
@@ -160,6 +163,87 @@
 
 </section>
 
+<!-- Page 2b: Agent Factory — Where Intelligent Agents Are Built -->
+<section class="page agentfactory-page-section" id="agentfactory" aria-label="Agent Factory">
+
+    <!-- Full-width background image: Agent-Factory.png -->
+    <div class="agentfactory-bg-wrap" aria-hidden="true"></div>
+
+    <!-- Soft gradient overlay for text readability -->
+    <div class="agentfactory-overlay" aria-hidden="true"></div>
+
+    <!-- Top right watermark / mezzanine branding -->
+    <div class="agentfactory-watermark" aria-hidden="true">
+        <span class="af-wm-tagline">DESIGN. BUILD. PREPARE.</span>
+        <div class="af-wm-brand">
+            <span class="af-wm-name">RHINE</span>
+            <span class="af-wm-sub">MIDDLE EAST FZE</span>
+        </div>
+    </div>
+
+    <!-- Far left vertical stack -->
+    <div class="agentfactory-vertical-text" aria-hidden="true">
+        <span>IDEAS</span>
+        <span>TO AGENTS</span>
+        <span class="agentfactory-vertical-line"></span>
+        <span>REAL</span>
+        <span>CAPABILITIES</span>
+        <span class="agentfactory-vertical-line"></span>
+        <span>REAL</span>
+        <span>OUTCOMES</span>
+    </div>
+
+    <!-- Left-side main content overlay -->
+    <div class="agentfactory-content">
+
+        <!-- Eyebrow -->
+        <div class="agentfactory-eyebrow">
+            <span class="agentfactory-eyebrow-text">AGENT FACTORY</span>
+        </div>
+
+        <!-- Headline -->
+        <h2 class="agentfactory-headline">
+            Where Intelligent<br />
+            Agents Are <span class="agentfactory-headline-gold">Built.</span>
+        </h2>
+
+        <!-- Description -->
+        <p class="agentfactory-desc">
+            From defining business roles to preparing real deployment,
+            RHINE transforms operational needs into high-quality
+            AI agents through a governed multi-stage
+            production process.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="agentfactory-btn-row">
+            <button type="button" class="agentfactory-btn-primary" data-go="contact">
+                <span>Talk to RHINE &rarr;</span>
+            </button>
+            <button type="button" class="agentfactory-btn-secondary" data-go="home">
+                <span>Back to Home</span>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Bottom left desk badge -->
+    <div class="agentfactory-desk-badge" aria-hidden="true">
+        <span class="af-desk-title">INTELLIGENT AGENTS.</span>
+        <span class="af-desk-subtitle">REAL WORK.</span>
+        <span class="af-desk-gold-bar"></span>
+    </div>
+
+    <!-- Bottom right crate badge -->
+    <div class="agentfactory-crate-badge" aria-hidden="true">
+        <span>AI AGENTS</span>
+        <span>FOR A BRIGHTER</span>
+        <span>TOMORROW</span>
+        <span class="af-crate-gold-bar"></span>
+    </div>
+
+</section>
+
 <!-- Page 3: How It Works — Full background + separated content overlay -->
 <section class="page how-page-section" id="how" aria-label="How It Works">
 
@@ -205,7 +289,7 @@
         </p>
 
         <!-- CTA Button -->
-        <button type="button" class="how-cta-btn" onclick="window.rhineApp.openWorkforceWizard()">
+        <button type="button" class="how-cta-btn" data-go="contact">
             <span>Start Your Journey</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -213,49 +297,6 @@
             </svg>
         </button>
 
-    </div>
-
-    <!-- Bottom Badges Bar -->
-    <div class="how-badges-bar">
-        <div class="how-badge-item">
-            <div class="how-badge-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-            </div>
-            <div class="how-badge-info">
-                <strong>Human + AI Workforces</strong>
-                <span>Flexible by design</span>
-            </div>
-        </div>
-
-        <div class="how-badge-item">
-            <div class="how-badge-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-            </div>
-            <div class="how-badge-info">
-                <strong>Industry Focused</strong>
-                <span>Built for real operations</span>
-            </div>
-        </div>
-
-        <div class="how-badge-item">
-            <div class="how-badge-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
-            </div>
-            <div class="how-badge-info">
-                <strong>Governed &amp; Trusted</strong>
-                <span>Secure. Compliant. Responsible.</span>
-            </div>
-        </div>
-
-        <div class="how-badge-item">
-            <div class="how-badge-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-            </div>
-            <div class="how-badge-info">
-                <strong>Real Business Value</strong>
-                <span>More than technology</span>
-            </div>
-        </div>
     </div>
 
 </section>
@@ -295,14 +336,14 @@
             and create measurable value.
         </p>
 
-        <!-- CTA Button -->
+       @*  <!-- CTA Button -->
         <button type="button" class="industries-cta-btn" data-go="contact">
             <span>Explore Industries</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
-        </button>
+        </button> *@
 
         <!-- Tagline -->
         <div class="industries-tagline">
