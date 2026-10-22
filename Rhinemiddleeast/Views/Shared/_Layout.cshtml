@@ -38,6 +38,7 @@
                 <button class="nav-item-btn" data-go="industries">Industries</button>
                 <button class="nav-item-btn" data-go="ourwork">Our Work</button>
                 <button class="nav-item-btn" data-go="insights">Insights</button>
+                <button class="nav-item-btn" data-go="Product">Product</button>
             </nav>
 
             <!-- Right Actions: Golden Contact button + Language Selector -->
@@ -114,6 +115,9 @@
                 <button class="sidenav-link" data-go="insights">
                     <span class="sidenav-link-text">Insights</span>
                 </button>
+                <button class="sidenav-link" data-go="Product">
+                    <span class="sidenav-link-text">Product</span>
+                </button>
                 <button class="sidenav-link" data-go="contact">
                     <span class="sidenav-link-text">Contact</span>
                 </button>
@@ -146,5 +150,8 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- Rhine AI Avatar Widget (appears on all pages) -->
+    @await Html.PartialAsync("_AvatarWidgetPartial")
 </body>
 </html>

@@ -16,8 +16,14 @@
             this.bindSidenav();
             this.handleInitialHash();
             const savedLang = localStorage.getItem('rhine_lang');
-            if (savedLang && savedLang === 'AR') {
+            const browserIsAr = (typeof navigator !== 'undefined' && navigator.languages)
+                ? Array.from(navigator.languages).some(l => l.toLowerCase().startsWith('ar'))
+                : (typeof navigator !== 'undefined' && navigator.language && navigator.language.toLowerCase().startsWith('ar'));
+
+            if (savedLang === 'AR' || (!savedLang && browserIsAr)) {
                 this.switchLang('AR');
+            } else if (savedLang === 'EN') {
+                this.switchLang('EN');
             }
         },
 
@@ -464,6 +470,11 @@
             document.documentElement.setAttribute('lang', isAr ? 'ar' : 'en');
             document.documentElement.setAttribute('dir', isAr ? 'rtl' : 'ltr');
             try { localStorage.setItem('rhine_lang', lang); } catch (e) { }
+
+            // Sync AI Agent language
+            if (window.rhineAvatar && typeof window.rhineAvatar.setLanguage === 'function') {
+                window.rhineAvatar.setLanguage(isAr ? 'ar' : 'en');
+            }
 
             // 3. Navigation Links (Header & Sidenav)
             const navKeys = ['home', 'how', 'agentfactory', 'about', 'industries', 'ourwork', 'insights', 'contact'];

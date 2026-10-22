@@ -1,7 +1,14 @@
+using RhineAgent.TestWeb.Services.Agent;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAntiforgery();
+
+// AI Agent services
+builder.Services.Configure<AgentSettings>(builder.Configuration.GetSection("Agent"));
+builder.Services.AddHttpClient<IAgentProvider, OllamaAgentProvider>();
 
 // Configure forwarded headers for reverse proxies (Render, Azure, Linux containers)
 builder.Services.Configure<Microsoft.AspNetCore.Builder.ForwardedHeadersOptions>(options =>

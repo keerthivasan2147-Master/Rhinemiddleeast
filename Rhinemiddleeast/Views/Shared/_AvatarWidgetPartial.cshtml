@@ -1,0 +1,67 @@
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
+@{
+    var requestToken = Antiforgery.GetAndStoreTokens(Context).RequestToken;
+}
+
+<!-- Rhine AI Avatar Widget Integration -->
+<link rel="stylesheet" href="~/avatar-widget/avatar-widget.css" asp-append-version="true" />
+<script src="~/avatar-widget/avatar-widget.js" asp-append-version="true"></script>
+
+<!-- Backdrop overlay for centered popup -->
+<div id="rhineBackdrop" class="rhine-backdrop" aria-hidden="true"></div>
+
+<script>
+    function initRhineAvatar() {
+        if (!window.RhineAvatarWidget || window.rhineAvatar) return;
+
+        var savedLang = localStorage.getItem('rhine_lang');
+        var browserIsAr = (typeof navigator !== 'undefined' && navigator.languages)
+            ? Array.from(navigator.languages).some(function(l) { return l.toLowerCase().startsWith('ar'); })
+            : (typeof navigator !== 'undefined' && navigator.language && navigator.language.toLowerCase().startsWith('ar'));
+        var docLang = (document.documentElement.getAttribute("lang") || "").toLowerCase();
+        var docDir = (document.documentElement.getAttribute("dir") || "").toLowerCase();
+        var isAr = (savedLang === 'AR') || (!savedLang && browserIsAr) || docLang.startsWith('ar') || docDir === 'rtl';
+        var initialLang = isAr ? "ar" : "en";
+
+        window.rhineAvatar = new window.RhineAvatarWidget({
+            endpoint: "/api/agent/chat",
+            statusEndpoint: "/api/agent/status",
+            videoSrc: "/avatar-widget/assets/presenter.mp4",
+            posterSrc: "/avatar-widget/assets/presenter-ai.png",
+            kbUrl: null,
+            title: isAr ? "مساعد راين الذكي" : "RHINE AI Assistant",
+            language: initialLang,
+            antiForgeryHeader: "RequestVerificationToken",
+            antiForgeryToken: "@requestToken",
+            autoOpen: false
+        });
+
+        // Backdrop wiring — show/hide when widget opens/closes
+        var backdrop = document.getElementById("rhineBackdrop");
+        if (backdrop) {
+            var _origOpen = window.rhineAvatar.open.bind(window.rhineAvatar);
+            var _origClose = window.rhineAvatar.close.bind(window.rhineAvatar);
+
+            window.rhineAvatar.open = function () {
+                _origOpen.apply(window.rhineAvatar, arguments);
+                backdrop.classList.add("active");
+            };
+
+            window.rhineAvatar.close = function () {
+                _origClose.apply(window.rhineAvatar, arguments);
+                backdrop.classList.remove("active");
+            };
+
+            // Click backdrop to close
+            backdrop.addEventListener("click", function () {
+                window.rhineAvatar.close();
+            });
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener("DOMContentLoaded", initRhineAvatar);
+    } else {
+        initRhineAvatar();
+    }
+</script>
