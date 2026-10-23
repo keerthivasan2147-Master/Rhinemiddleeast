@@ -216,6 +216,8 @@
                 industries: 'Industries',
                 ourwork: 'Our Work',
                 insights: 'Insights',
+                Product: 'Product',
+                product: 'Product',
                 contact: 'Contact',
                 getInTouch: 'Contact Us →'
             },
@@ -231,7 +233,7 @@
                 eyebrow: 'AGENT FACTORY',
                 title: 'Where Intelligent<br />Agents Are <span class="agentfactory-headline-gold">Built.</span>',
                 desc: 'From defining business roles to preparing real deployment, RHINE transforms operational needs into high-quality AI agents through a governed multi-stage production process.',
-                ctaPrimary: 'Talk to RHINE &rarr;',
+                ctaPrimary: 'Talk to RHINE',
                 ctaSecondary: 'Back to Home',
                 s1Title: 'DEFINE', s1_1: 'ROLES', s1_2: 'GOALS', s1_3: 'KNOWLEDGE',
                 s2Title: 'BUILD', s2_1: 'TOOLS', s2_2: 'SKILLS', s2_3: 'CAPABILITIES',
@@ -250,8 +252,8 @@
                 f2Title: 'BUILT FOR REAL WORK',
                 f2Desc: 'Agents designed around real roles and real workflows.',
                 f3Title: 'FROM IDEA TO IMPACT',
-                f3Desc: 'Structured, governed execution you can rely on.',
-                tagline: 'BUILT FOR WHAT\'S NEXT'
+                f3Desc: 'Structured, governed execution you can rely on.'
+                
             },
             how: {
                 eyebrow1: 'A CLEAR PROCESS.',
@@ -334,6 +336,8 @@
                 industries: 'القطاعات',
                 ourwork: 'أعمالنا',
                 insights: 'الرؤى والأفكار',
+                Product: 'منتج',
+                product: 'منتج',
                 contact: 'اتصل بنا',
                 getInTouch: 'تواصل معنا &larr;'
             },
@@ -471,13 +475,24 @@
             document.documentElement.setAttribute('dir', isAr ? 'rtl' : 'ltr');
             try { localStorage.setItem('rhine_lang', lang); } catch (e) { }
 
-            // AI widget language is independent — website menu language change does not affect AI
+            // AI Assistant button alignment & language synced with menu language
+            if (window.rhineAvatar && typeof window.rhineAvatar.setLanguage === 'function') {
+                window.rhineAvatar.setLanguage(isAr ? 'ar' : 'en');
+            } else {
+                const launcher = document.querySelector('.rhine-launcher');
+                if (launcher) {
+                    launcher.setAttribute('dir', isAr ? 'rtl' : 'ltr');
+                }
+            }
 
             // 3. Navigation Links (Header & Sidenav)
-            const navKeys = ['home', 'how', 'agentfactory', 'about', 'industries', 'ourwork', 'insights', 'contact'];
+            const navKeys = ['home', 'how', 'agentfactory', 'about', 'industries', 'ourwork', 'insights', 'Product', 'product', 'contact'];
             navKeys.forEach(k => {
-                document.querySelectorAll(`.center-nav [data-go="${k}"]`).forEach(el => el.innerText = dict.nav[k]);
-                document.querySelectorAll(`#rhineSidenav [data-go="${k}"] .sidenav-link-text`).forEach(el => el.innerText = dict.nav[k]);
+                const text = dict.nav[k] || dict.nav[k.toLowerCase()];
+                if (text) {
+                    document.querySelectorAll(`.center-nav [data-go="${k}"]`).forEach(el => el.innerText = text);
+                    document.querySelectorAll(`#rhineSidenav [data-go="${k}"] .sidenav-link-text`).forEach(el => el.innerText = text);
+                }
             });
 
             document.querySelectorAll('.header-right-actions .btn-gold-action').forEach(el => el.innerText = dict.nav.contact);

@@ -54,6 +54,17 @@ html[dir="rtl"] .rhine-launcher-text,
   text-align: right;
 }
 
+html[dir="ltr"] .rhine-launcher,
+.rhine-launcher[dir="ltr"] {
+  right: 24px;
+  left: auto;
+}
+
+html[dir="ltr"] .rhine-launcher-text,
+.rhine-launcher[dir="ltr"] .rhine-launcher-text {
+  text-align: left;
+}
+
 .rhine-launcher:hover {
   transform: translateY(-2px);
   border-color: var(--rhine-gold);
@@ -174,6 +185,11 @@ html[dir="rtl"] .rhine-launcher-text,
 [dir="rtl"] .rhine-launcher {
   right: auto;
   left: 24px;
+}
+
+[dir="ltr"] .rhine-launcher {
+  right: 24px;
+  left: auto;
 }
 
 /* Background Presenter Video (fills 100% of the card) */

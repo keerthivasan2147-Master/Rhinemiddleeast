@@ -438,9 +438,7 @@
       this.launcherEl.className = "rhine-launcher";
       this.launcherEl.setAttribute("role", "button");
       this.launcherEl.setAttribute("aria-label", isAr ? "فتح المساعد الذكي" : "Open AI Assistant");
-      if (isAr) {
-        this.launcherEl.setAttribute("dir", "rtl");
-      }
+      this.launcherEl.setAttribute("dir", isAr ? "rtl" : "ltr");
       this.launcherEl.innerHTML = `
         <div class="rhine-launcher-avatar">
           <img src="${this._escapeHtml(this.options.posterSrc)}" alt="Presenter" onerror="this.style.display='none'" />
