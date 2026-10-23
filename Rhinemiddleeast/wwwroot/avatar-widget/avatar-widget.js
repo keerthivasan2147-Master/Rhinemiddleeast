@@ -398,7 +398,7 @@
       }
 
       if (this.options.autoOpen) {
-        this.open(false);
+        this.open(true);
       } else {
         this.close();
       }
@@ -703,10 +703,6 @@
         this.activeRecognition.lang = isAr ? "ar-SA" : "en-US";
       }
 
-      // On language switch: speak greeting in the newly selected language
-      this._greetingSpoken = true;
-      const kb = RHINE_KNOWLEDGE[lang] || RHINE_KNOWLEDGE.en;
-      this.setCaptionAndSpeak(kb.greeting, true, null, "greeting");
     }
 
     _bindEvents() {
@@ -781,16 +777,14 @@
         });
       }
 
-      // Language Switcher
+      // Language Switcher (AI widget language only — does NOT change website language)
       this.langToggleBtn.addEventListener("click", () => {
         const nextLang = this.options.language === "en" ? "ar" : "en";
         this.setLanguage(nextLang);
-        if (window.rhineApp && typeof window.rhineApp.switchLang === "function") {
-          window.rhineApp.switchLang(nextLang.toUpperCase());
-        }
-        if (typeof window.setStagingLanguage === "function") {
-          window.setStagingLanguage(nextLang);
-        }
+        // Speak greeting in the newly selected language
+        this._greetingSpoken = true;
+        const kb = RHINE_KNOWLEDGE[nextLang] || RHINE_KNOWLEDGE.en;
+        this.setCaptionAndSpeak(kb.greeting, true, null, "greeting");
       });
 
       // Chat Form submission — empty input triggers mic
@@ -821,27 +815,8 @@
       // Set up speech recognition / mic button
       this._setupSpeechRecognition();
 
-      // Automatically detect and synchronize language with page / document language changes
-      try {
-        const syncFromDoc = () => {
-          const docLang = (document.documentElement.getAttribute("lang") || "").toLowerCase();
-          const docDir = (document.documentElement.getAttribute("dir") || "").toLowerCase();
-          const targetLang = (docLang.startsWith("ar") || docDir === "rtl") ? "ar" : "en";
-          if (this.options.language !== targetLang) {
-            this.setLanguage(targetLang);
-          }
-        };
-
-        const observer = new MutationObserver((mutations) => {
-          for (const m of mutations) {
-            if (m.attributeName === "lang" || m.attributeName === "dir") {
-              syncFromDoc();
-              break;
-            }
-          }
-        });
-        observer.observe(document.documentElement, { attributes: true, attributeFilter: ["lang", "dir"] });
-      } catch { }
+      // AI widget language is independent of website language.
+      // No MutationObserver sync — changing website language does not affect AI widget.
     }
 
     async _triggerMic() {
@@ -1595,6 +1570,7 @@
         if (this.videoEl) {
           try {
             this.videoEl.pause();
+            this.videoEl.currentTime = 0; // Reset to frame 0 so avatar mouth is closed
           } catch { }
         }
       }

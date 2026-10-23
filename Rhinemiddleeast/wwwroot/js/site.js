@@ -471,10 +471,7 @@
             document.documentElement.setAttribute('dir', isAr ? 'rtl' : 'ltr');
             try { localStorage.setItem('rhine_lang', lang); } catch (e) { }
 
-            // Sync AI Agent language
-            if (window.rhineAvatar && typeof window.rhineAvatar.setLanguage === 'function') {
-                window.rhineAvatar.setLanguage(isAr ? 'ar' : 'en');
-            }
+            // AI widget language is independent — website menu language change does not affect AI
 
             // 3. Navigation Links (Header & Sidenav)
             const navKeys = ['home', 'how', 'agentfactory', 'about', 'industries', 'ourwork', 'insights', 'contact'];
