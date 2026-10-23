@@ -402,6 +402,9 @@
       } else {
         this.close();
       }
+
+      // Speak initial welcome message on Home page load/refresh
+      this.speakWelcomeOnHome();
     }
 
     _extractAntiforgeryToken() {
@@ -451,7 +454,17 @@
       `;
       document.body.appendChild(this.launcherEl);
 
-      // 2. Main Avatar Presenter Card (Matches gssilatam.org reference layout)
+      // 2. Backdrop Overlay (Dark background for centered popup)
+      this.backdropEl = document.getElementById("rhineBackdrop");
+      if (!this.backdropEl) {
+        this.backdropEl = document.createElement("div");
+        this.backdropEl.id = "rhineBackdrop";
+        this.backdropEl.className = "rhine-backdrop";
+        this.backdropEl.setAttribute("aria-hidden", "true");
+        document.body.appendChild(this.backdropEl);
+      }
+
+      // 3. Main Avatar Presenter Card (Centered Modal Popup)
       this.widgetEl = document.createElement("div");
       this.widgetEl.className = "rhine-avatar-widget rhine-hidden";
       this.widgetEl.setAttribute("role", "dialog");
@@ -661,6 +674,13 @@
         const lSub = this.launcherEl.querySelector(".rhine-launcher-subtitle");
         if (lTitle) lTitle.textContent = isAr ? "مساعد راين الذكي" : (this.options.title || "RHINE AI Assistant");
         if (lSub) lSub.textContent = isAr ? "راين الشرق الأوسط ش.م.ح" : "RHINE Middle East FZE";
+
+        if (!this._hasCustomPos) {
+          this.launcherEl.style.left = "";
+          this.launcherEl.style.top = "";
+          this.launcherEl.style.right = "";
+          this.launcherEl.style.bottom = "";
+        }
       }
 
       if (this.langToggleBtn) {
@@ -703,8 +723,119 @@
 
     }
 
+    _makeLauncherDraggable() {
+      const el = this.launcherEl;
+      if (!el) return;
+
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+      let initialLeft = 0;
+      let initialTop = 0;
+      let hasMoved = false;
+      const DRAG_THRESHOLD = 6;
+
+      const onPointerDown = (e) => {
+        if (e.button !== undefined && e.button !== 0) return;
+
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        startX = clientX;
+        startY = clientY;
+
+        const rect = el.getBoundingClientRect();
+        initialLeft = rect.left;
+        initialTop = rect.top;
+
+        isDragging = false;
+        hasMoved = false;
+
+        const onPointerMove = (ev) => {
+          const curX = ev.touches ? ev.touches[0].clientX : ev.clientX;
+          const curY = ev.touches ? ev.touches[0].clientY : ev.clientY;
+
+          const dx = curX - startX;
+          const dy = curY - startY;
+
+          if (!hasMoved && Math.hypot(dx, dy) > DRAG_THRESHOLD) {
+            hasMoved = true;
+            isDragging = true;
+            el.classList.add("rhine-launcher-dragging");
+            el.style.transition = "none";
+          }
+
+          if (isDragging) {
+            if (ev.cancelable) ev.preventDefault();
+
+            const rectNow = el.getBoundingClientRect();
+            const pad = 12;
+            const maxLeft = window.innerWidth - rectNow.width - pad;
+            const maxTop = window.innerHeight - rectNow.height - pad;
+
+            const newLeft = Math.max(pad, Math.min(initialLeft + dx, maxLeft));
+            const newTop = Math.max(pad, Math.min(initialTop + dy, maxTop));
+
+            el.style.left = newLeft + "px";
+            el.style.top = newTop + "px";
+            el.style.right = "auto";
+            el.style.bottom = "auto";
+            this._hasCustomPos = true;
+          }
+        };
+
+        const onPointerUp = () => {
+          window.removeEventListener("mousemove", onPointerMove);
+          window.removeEventListener("mouseup", onPointerUp);
+          window.removeEventListener("touchmove", onPointerMove);
+          window.removeEventListener("touchend", onPointerUp);
+          window.removeEventListener("touchcancel", onPointerUp);
+
+          if (isDragging || hasMoved) {
+            this._justDragged = true;
+            setTimeout(() => { this._justDragged = false; }, 140);
+          }
+
+          isDragging = false;
+          hasMoved = false;
+          el.classList.remove("rhine-launcher-dragging");
+          el.style.transition = "";
+        };
+
+        window.addEventListener("mousemove", onPointerMove, { passive: false });
+        window.addEventListener("mouseup", onPointerUp);
+        window.addEventListener("touchmove", onPointerMove, { passive: false });
+        window.addEventListener("touchend", onPointerUp);
+        window.addEventListener("touchcancel", onPointerUp);
+      };
+
+      el.addEventListener("mousedown", onPointerDown);
+      el.addEventListener("touchstart", onPointerDown, { passive: false });
+
+      window.addEventListener("resize", () => {
+        if (!this._hasCustomPos || !this.launcherEl) return;
+        const rectNow = this.launcherEl.getBoundingClientRect();
+        const pad = 12;
+        const maxLeft = window.innerWidth - rectNow.width - pad;
+        const maxTop = window.innerHeight - rectNow.height - pad;
+        if (rectNow.left > maxLeft || rectNow.top > maxTop) {
+          this.launcherEl.style.left = Math.max(pad, Math.min(rectNow.left, maxLeft)) + "px";
+          this.launcherEl.style.top = Math.max(pad, Math.min(rectNow.top, maxTop)) + "px";
+        }
+      });
+    }
+
     _bindEvents() {
-      this.launcherEl.addEventListener("click", () => this.open(true));
+      this._makeLauncherDraggable();
+
+      this.launcherEl.addEventListener("click", (e) => {
+        if (this._justDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+        this.open(true);
+      });
       this.closeBtn.addEventListener("click", () => this.close());
       this.muteBtn.addEventListener("click", () => this.toggleMute());
       this.ccBtn.addEventListener("click", () => this.toggleCaptions());
@@ -812,6 +943,11 @@
 
       // Set up speech recognition / mic button
       this._setupSpeechRecognition();
+
+      // Click backdrop to close centered popup
+      if (this.backdropEl) {
+        this.backdropEl.addEventListener("click", () => this.close());
+      }
 
       // AI widget language is independent of website language.
       // No MutationObserver sync — changing website language does not affect AI widget.
@@ -1080,24 +1216,119 @@
       if (this.statusText) this.statusText.textContent = text;
     }
 
+    speakWelcomeOnHome() {
+      // Check if we are on Home page (path is / or /Home or hash is #home or empty)
+      const path = (window.location.pathname || "/").toLowerCase();
+      const hash = (window.location.hash || "").replace("#", "").trim().toLowerCase();
+      const isHomePath = (path === "/" || path === "/home" || path === "/home/index" || path === "/index");
+      const isHome = isHomePath && (!hash || hash === "home");
+      if (!isHome || this._homeGreetingSpoken) return;
+
+      const kb = RHINE_KNOWLEDGE[this.options.language] || RHINE_KNOWLEDGE.en;
+      const greetingText = kb.greeting;
+      this.lastCaption = greetingText;
+
+      // Automatically speak initial welcome message
+      this._homeGreetingSpoken = true;
+      this._greetingSpoken = true;
+
+      // 1. Direct speech playback
+      if (window.speechSynthesis && window.speechSynthesis.paused) {
+        try { window.speechSynthesis.resume(); } catch { }
+      }
+      this.setCaptionAndSpeak(greetingText, true, null, "greeting");
+
+      // 2. Default browser permission prompt (shows native browser dialog if needed)
+      if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === "function") {
+        navigator.mediaDevices.getUserMedia({ audio: true })
+          .then((stream) => {
+            stream.getTracks().forEach((t) => t.stop());
+            if (window.speechSynthesis && window.speechSynthesis.paused) {
+              try { window.speechSynthesis.resume(); } catch { }
+            }
+            if (!this.isSpeaking && !this.isSpeechMuted) {
+              this.speak(greetingText);
+            }
+          })
+          .catch(() => {
+            // Dismissed or denied, fallback gesture below handles speech
+          });
+      }
+
+      // 3. Fallback: on any user gesture (click/touch/key anywhere on screen), immediately resume/speak
+      this._ensureInitialGreetingSpeaks(greetingText);
+    }
+
+    _ensureInitialGreetingSpeaks(text) {
+      if (this.isSpeechMuted) return;
+
+      const triggerSpeech = () => {
+        window.removeEventListener("pointerdown", triggerSpeech, true);
+        window.removeEventListener("click", triggerSpeech, true);
+        window.removeEventListener("keydown", triggerSpeech, true);
+        window.removeEventListener("touchstart", triggerSpeech, true);
+
+        if (window.speechSynthesis && window.speechSynthesis.paused) {
+          try { window.speechSynthesis.resume(); } catch { }
+        }
+
+        if (!this.isSpeaking && this.isOpen && !this.isSpeechMuted) {
+          this.speak(text);
+        }
+      };
+
+      // Set up on window to capture the very first user interaction
+      window.addEventListener("pointerdown", triggerSpeech, { once: true, capture: true });
+      window.addEventListener("click", triggerSpeech, { once: true, capture: true });
+      window.addEventListener("keydown", triggerSpeech, { once: true, capture: true });
+      window.addEventListener("touchstart", triggerSpeech, { once: true, capture: true });
+
+      // If speech starts successfully, remove the listeners
+      const checkInterval = setInterval(() => {
+        if (this.isSpeaking) {
+          clearInterval(checkInterval);
+          window.removeEventListener("pointerdown", triggerSpeech, true);
+          window.removeEventListener("click", triggerSpeech, true);
+          window.removeEventListener("keydown", triggerSpeech, true);
+          window.removeEventListener("touchstart", triggerSpeech, true);
+        }
+      }, 300);
+      setTimeout(() => clearInterval(checkInterval), 10000);
+    }
+
     open(speakGreeting = true) {
       this.isOpen = true;
       this.widgetEl.classList.remove("rhine-hidden");
       this.launcherEl.style.display = "none";
+      if (this.backdropEl) {
+        this.backdropEl.classList.add("active");
+      }
       setTimeout(() => this.chatInput.focus(), 150);
 
-      // Speak initial greeting only once per session (not repeated on re-open)
-      if (speakGreeting && !this.isSpeechMuted && !this._greetingSpoken) {
+      if (window.speechSynthesis && window.speechSynthesis.paused) {
+        try { window.speechSynthesis.resume(); } catch { }
+      }
+
+      // Automatically speak welcome greeting when opened
+      if (speakGreeting && !this.isSpeechMuted && !this._greetingSpoken && !this._homeGreetingSpoken) {
         this._greetingSpoken = true;
+        this._homeGreetingSpoken = true;
         const kb = RHINE_KNOWLEDGE[this.options.language] || RHINE_KNOWLEDGE.en;
         const greetingText = kb.greeting;
         this.setCaptionAndSpeak(greetingText, true, null, "greeting");
+        this._ensureInitialGreetingSpeaks(greetingText);
+      } else if (!this.lastCaption) {
+        const kb = RHINE_KNOWLEDGE[this.options.language] || RHINE_KNOWLEDGE.en;
+        this.setCaptionAndSpeak(kb.greeting, false, null, "greeting");
       }
     }
     close() {
       this.isOpen = false;
       this.widgetEl.classList.add("rhine-hidden");
       this.launcherEl.style.display = "flex";
+      if (this.backdropEl) {
+        this.backdropEl.classList.remove("active");
+      }
       this.stopSpeech();
     }
 
@@ -1419,13 +1650,25 @@
 
             const p = fallbackAudio.play();
             if (p !== undefined) {
-              p.catch(() => fallbackAudio.onerror());
+              p.catch((err) => {
+                if (err && err.name === "NotAllowedError") {
+                  this._ensureInitialGreetingSpeaks(this.lastCaption || clean);
+                } else {
+                  fallbackAudio.onerror();
+                }
+              });
             }
           };
 
           const playPromise = currentAudio.play();
           if (playPromise !== undefined) {
-            playPromise.catch(() => currentAudio.onerror());
+            playPromise.catch((err) => {
+              if (err && err.name === "NotAllowedError") {
+                this._ensureInitialGreetingSpeaks(this.lastCaption || clean);
+              } else {
+                currentAudio.onerror();
+              }
+            });
           }
         };
 
@@ -1555,6 +1798,7 @@
       if (active) {
         this._videoIntentionallyPaused = false;
         this.widgetEl.classList.add("rhine-speaking");
+        if (this.launcherEl) this.launcherEl.classList.add("rhine-speaking");
         if (this.videoEl && !this.videoFallbackEl.classList.contains("visible")) {
           // Always keep video muted — TTS provides the voice
           this.videoEl.muted = true;
@@ -1565,6 +1809,7 @@
       } else {
         this._videoIntentionallyPaused = true;
         this.widgetEl.classList.remove("rhine-speaking");
+        if (this.launcherEl) this.launcherEl.classList.remove("rhine-speaking");
         if (this.videoEl) {
           try {
             this.videoEl.pause();

@@ -51,6 +51,11 @@
                 n.classList.toggle('active', n.getAttribute('data-go') === id);
             });
 
+            // Stop welcome speech if navigating away from home page
+            if (id !== 'home' && window.rhineAvatar && typeof window.rhineAvatar.stopSpeech === 'function') {
+                window.rhineAvatar.stopSpeech();
+            }
+
             // Update URL hash cleanly without page reload
             if (history.pushState) {
                 history.pushState(null, '', id === 'home' ? window.location.pathname : '#' + id);

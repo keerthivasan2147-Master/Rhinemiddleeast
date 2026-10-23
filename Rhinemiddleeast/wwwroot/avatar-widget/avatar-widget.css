@@ -35,12 +35,34 @@
   border-radius: 9999px;
   padding: 8px 16px 8px 8px;
   box-shadow: var(--rhine-shadow);
-  cursor: pointer;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition: var(--rhine-transition);
-  font-family: var(--rhine-font);
+  cursor: grab;
+  touch-action: none;
   user-select: none;
+  -webkit-user-select: none;
+}
+
+.rhine-launcher.rhine-launcher-dragging {
+  cursor: grabbing !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  transition: none !important;
+  opacity: 0.95;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 0 2px var(--rhine-gold) !important;
+}
+
+.rhine-launcher.rhine-speaking {
+  border-color: var(--rhine-gold);
+  box-shadow: 0 0 0 3px rgba(236, 213, 158, 0.35), var(--rhine-shadow);
+}
+
+.rhine-launcher.rhine-speaking .rhine-launcher-badge {
+  background: #10b981;
+  animation: rhineBadgePulse 1.4s infinite;
+}
+
+@keyframes rhineBadgePulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+  50% { transform: scale(1.2); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
 }
 
 html[dir="rtl"] .rhine-launcher,
@@ -191,6 +213,7 @@ html[dir="ltr"] .rhine-launcher-text,
   right: 24px;
   left: auto;
 }
+
 
 /* Background Presenter Video (fills 100% of the card) */
 .rhine-video-stage {

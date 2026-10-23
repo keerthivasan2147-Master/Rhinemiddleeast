@@ -23,6 +23,11 @@
         var isAr = (savedLang === 'AR') || (!savedLang && browserIsAr) || docLang.startsWith('ar') || docDir === 'rtl';
         var initialLang = isAr ? "ar" : "en";
 
+        var path = (window.location.pathname || "/").toLowerCase();
+        var hash = (window.location.hash || "").replace("#", "").trim().toLowerCase();
+        var isHomePath = (path === "/" || path === "/home" || path === "/home/index" || path === "/index");
+        var isHomePage = isHomePath && (!hash || hash === "home");
+
         window.rhineAvatar = new window.RhineAvatarWidget({
             endpoint: "/api/agent/chat",
             statusEndpoint: "/api/agent/status",
@@ -33,30 +38,8 @@
             language: initialLang,
             antiForgeryHeader: "RequestVerificationToken",
             antiForgeryToken: "@requestToken",
-            autoOpen: true
+            autoOpen: isHomePage
         });
-
-        // Backdrop wiring — show/hide when widget opens/closes
-        var backdrop = document.getElementById("rhineBackdrop");
-        if (backdrop) {
-            var _origOpen = window.rhineAvatar.open.bind(window.rhineAvatar);
-            var _origClose = window.rhineAvatar.close.bind(window.rhineAvatar);
-
-            window.rhineAvatar.open = function () {
-                _origOpen.apply(window.rhineAvatar, arguments);
-                backdrop.classList.add("active");
-            };
-
-            window.rhineAvatar.close = function () {
-                _origClose.apply(window.rhineAvatar, arguments);
-                backdrop.classList.remove("active");
-            };
-
-            // Click backdrop to close
-            backdrop.addEventListener("click", function () {
-                window.rhineAvatar.close();
-            });
-        }
     }
 
     if (document.readyState === 'loading') {
