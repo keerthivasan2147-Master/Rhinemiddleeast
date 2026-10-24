@@ -218,6 +218,7 @@
                 title: 'People and AI.<br />Working for <span class="hero-gold-text">What\'s Next.</span>',
                 desc: 'RHINE designs industry-specific operating platforms where human talent and governed AI agents work together as one coordinated workforce.',
                 cta: 'Build Your Company &rarr;',
+                ctaSecondary: 'Transform Your Company',
                 tagline: '<span class="landing-tagline-bar"></span><span class="tagline-row">SAME PEOPLE.</span><span class="tagline-row">BIGGER POSSIBILITIES.</span>'
             },
             agentfactory: {
@@ -335,13 +336,14 @@
                 title: 'كوادر بشرية وذكاء اصطناعي<br />يعملان لصناعة<br /><span class="hero-gold-text">المستقبل.</span>',
                 desc: 'تصمم راين منصات تشغيل متخصصة لكل قطاع حيث تعمل الكفاءات البشرية ووكلاء الذكاء الاصطناعي معاً كقوة عاملة متكاملة ومحكومة.',
                 cta: 'ابدأ بناء شركتك &larr;',
+                ctaSecondary: 'حوّل شركتك',
                 tagline: '<span class="landing-tagline-bar"></span><span class="tagline-row">نفس الكفاءات.</span><span class="tagline-row">آفاق أوسع.</span>'
             },
             agentfactory: {
                 eyebrow: 'مصنع الوكلاء',
                 title: 'حيث يُبنى<br />وكلاء <span class="agentfactory-headline-gold">المستقبل.</span>',
                 desc: 'من تحديد الأدوار التشغيلية إلى الجاهزية للنشر الفعلي، تحول راين متطلبات أعمالك إلى وكلاء ذكاء اصطناعي فائقين عبر مراحل إنتاج محكومة.',
-                ctaPrimary: 'تحدث مع راين &larr;',
+                ctaPrimary: 'تحدث مع راين',
                 ctaSecondary: 'العودة للرئيسية',
                 s1Title: 'تحديد', s1_1: 'الأدوار', s1_2: 'الأهداف', s1_3: 'المعرفة',
                 s2Title: 'بناء', s2_1: 'الأدوات', s2_2: 'المهارات', s2_3: 'القدرات',
@@ -447,7 +449,7 @@
 
             // 1. Update Language Selector dropdown and Sidenav buttons
             document.querySelectorAll('.lang-txt').forEach(el => el.innerText = lang);
-            document.querySelectorAll('.sidenav-lang-btn').forEach(btn => {
+            document.querySelectorAll('.sidenav-lang-btnVALIDATE').forEach(btn => {
                 const text = btn.innerText;
                 const match = isAr ? text.includes('العربية') : text.includes('English');
                 btn.classList.toggle('active', match);
@@ -485,6 +487,7 @@
             setHtml('#home .landing-main-title', dict.home.title);
             setText('#home .landing-desc-text', dict.home.desc);
             setHtml('#home .btn-gold-hero span', dict.home.cta);
+            setText('#home .btn-secondary-hero span', dict.home.ctaSecondary);
             setHtml('#home .landing-bottom-tagline', dict.home.tagline);
 
             // 4b. Agent Factory Section
@@ -494,26 +497,29 @@
                 setText('#agentfactory .agentfactory-desc', dict.agentfactory.desc);
                 setText('#agentfactory .agentfactory-btn-primary span', dict.agentfactory.ctaPrimary);
                 setText('#agentfactory .agentfactory-btn-secondary span', dict.agentfactory.ctaSecondary);
-                setText('#agentfactory .af-stage-card:nth-of-type(1) .af-card-title', dict.agentfactory.s1Title);
-                setText('#agentfactory .af-stage-card:nth-of-type(1) .af-card-list li:nth-child(1)', dict.agentfactory.s1_1);
-                setText('#agentfactory .af-stage-card:nth-of-type(1) .af-card-list li:nth-child(2)', dict.agentfactory.s1_2);
-                setText('#agentfactory .af-stage-card:nth-of-type(1) .af-card-list li:nth-child(3)', dict.agentfactory.s1_3);
-                setText('#agentfactory .af-stage-card:nth-of-type(2) .af-card-title', dict.agentfactory.s2Title);
-                setText('#agentfactory .af-stage-card:nth-of-type(2) .af-card-list li:nth-child(1)', dict.agentfactory.s2_1);
-                setText('#agentfactory .af-stage-card:nth-of-type(2) .af-card-list li:nth-child(2)', dict.agentfactory.s2_2);
-                setText('#agentfactory .af-stage-card:nth-of-type(2) .af-card-list li:nth-child(3)', dict.agentfactory.s2_3);
-                setText('#agentfactory .af-stage-card:nth-of-type(3) .af-card-title', dict.agentfactory.s3Title);
-                setText('#agentfactory .af-stage-card:nth-of-type(3) .af-card-list li:nth-child(1)', dict.agentfactory.s3_1);
-                setText('#agentfactory .af-stage-card:nth-of-type(3) .af-card-list li:nth-child(2)', dict.agentfactory.s3_2);
-                setText('#agentfactory .af-stage-card:nth-of-type(3) .af-card-list li:nth-child(3)', dict.agentfactory.s3_3);
-                setText('#agentfactory .af-stage-card:nth-of-type(4) .af-card-title', dict.agentfactory.s4Title);
-                setText('#agentfactory .af-stage-card:nth-of-type(4) .af-card-list li:nth-child(1)', dict.agentfactory.s4_1);
-                setText('#agentfactory .af-stage-card:nth-of-type(4) .af-card-list li:nth-child(2)', dict.agentfactory.s4_2);
-                setText('#agentfactory .af-stage-card:nth-of-type(4) .af-card-list li:nth-child(3)', dict.agentfactory.s4_3);
-                setText('#agentfactory .af-stage-card:nth-of-type(5) .af-card-title', dict.agentfactory.s5Title);
-                setText('#agentfactory .af-stage-card:nth-of-type(5) .af-card-list li:nth-child(1)', dict.agentfactory.s5_1);
-                setText('#agentfactory .af-stage-card:nth-of-type(5) .af-card-list li:nth-child(2)', dict.agentfactory.s5_2);
-                setText('#agentfactory .af-stage-card:nth-of-type(5) .af-card-list li:nth-child(3)', dict.agentfactory.s5_3);
+
+                // Translate all 5 pipeline cards by index to avoid :nth-of-type sibling issues
+                const stageCards = document.querySelectorAll('#agentfactory .af-stage-card');
+                if (stageCards.length >= 5) {
+                    const stages = [
+                        { title: dict.agentfactory.s1Title, items: [dict.agentfactory.s1_1, dict.agentfactory.s1_2, dict.agentfactory.s1_3] },
+                        { title: dict.agentfactory.s2Title, items: [dict.agentfactory.s2_1, dict.agentfactory.s2_2, dict.agentfactory.s2_3] },
+                        { title: dict.agentfactory.s3Title, items: [dict.agentfactory.s3_1, dict.agentfactory.s3_2, dict.agentfactory.s3_3] },
+                        { title: dict.agentfactory.s4Title, items: [dict.agentfactory.s4_1, dict.agentfactory.s4_2, dict.agentfactory.s4_3] },
+                        { title: dict.agentfactory.s5Title, items: [dict.agentfactory.s5_1, dict.agentfactory.s5_2, dict.agentfactory.s5_3] }
+                    ];
+                    stages.forEach((st, idx) => {
+                        const card = stageCards[idx];
+                        if (card) {
+                            const titleEl = card.querySelector('.af-card-title');
+                            if (titleEl) titleEl.innerText = st.title;
+                            const lis = card.querySelectorAll('.af-card-list li');
+                            st.items.forEach((itemText, lIdx) => {
+                                if (lis[lIdx]) lis[lIdx].innerText = itemText;
+                            });
+                        }
+                    });
+                }
             }
 
             // 5. About Section

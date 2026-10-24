@@ -271,12 +271,12 @@ html, body {
 .landing-ambient-overlay {
     position: absolute;
     inset: 0;
-    /* Clean and bright: no dark mask on the left so the original bright scene and "PEOPLE AI PROGRESS" are crystal clear */
+    /* Brightened: very light vignette so the landing image shows clearly */
     background: radial-gradient(
         ellipse at 82% 48%,
-        rgba(4, 14, 26, 0.42) 0%,
-        rgba(4, 14, 26, 0.15) 58%,
-        transparent 80%
+        rgba(4, 14, 26, 0.20) 0%,
+        rgba(4, 14, 26, 0.06) 52%,
+        transparent 75%
     );
     pointer-events: none;
     z-index: 1;
@@ -703,10 +703,10 @@ html, body {
     z-index: 1;
     background: linear-gradient(
         to right,
-        rgba(4, 12, 22, 0.96) 0%,
-        rgba(4, 12, 22, 0.88) 28%,
-        rgba(4, 12, 22, 0.55) 50%,
-        rgba(4, 12, 22, 0.08) 72%,
+        rgba(4, 12, 22, 0.60) 0%,
+        rgba(4, 12, 22, 0.42) 28%,
+        rgba(4, 12, 22, 0.18) 50%,
+        rgba(4, 12, 22, 0.04) 72%,
         transparent 100%
     );
 }
@@ -928,7 +928,8 @@ html, body {
     background-image: url('/images/insights-bg.png');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center bottom;
+    background-position: center top;
+    filter: brightness(1.16) contrast(1.12);
 }
 
 /* Atmospheric lighting & readability overlays */
@@ -937,8 +938,8 @@ html, body {
     inset: 0;
     z-index: 1;
     background: 
-        linear-gradient(to right, rgba(4, 10, 20, 0.92) 0%, rgba(4, 10, 20, 0.78) 32%, rgba(4, 10, 20, 0.3) 56%, transparent 100%),
-        linear-gradient(to bottom, rgba(5, 14, 25, 0.45) 0%, transparent 22%, transparent 68%, rgba(4, 10, 20, 0.75) 100%);
+        linear-gradient(to right, rgba(4, 10, 20, 0.55) 0%, rgba(4, 10, 20, 0.36) 32%, rgba(4, 10, 20, 0.10) 56%, transparent 100%),
+        linear-gradient(to bottom, rgba(5, 14, 25, 0.20) 0%, transparent 22%, transparent 68%, rgba(4, 10, 20, 0.38) 100%);
     pointer-events: none;
 }
 
@@ -1059,10 +1060,10 @@ html, body {
 
 .insights-tagline-text {
     font-family: 'Outfit', sans-serif;
-    font-size: 9.5px;
+    font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.22em;
-    color: rgba(255, 255, 255, 0.52);
+    color: var(--gold-primary);
     text-transform: uppercase;
 }
 
@@ -1224,10 +1225,12 @@ html, body {
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image: url('/images/ourwork-bg.jpg');
+    background-image: url('/images/ourwork-bg.png');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center bottom;
+    /*background-position: center bottom;*/
+    background-position: center top;
+   /* transform: translateY(-10px);*/
 }
 
 /* Atmospheric lighting & readability overlays */
@@ -1358,7 +1361,7 @@ html, body {
     font-size: 9.5px;
     font-weight: 700;
     letter-spacing: 0.22em;
-    color: #3e4f61;
+    color: black;
     text-transform: uppercase;
 }
 
@@ -1440,8 +1443,8 @@ html, body {
     inset: 0;
     z-index: 1;
     background: 
-        linear-gradient(to right, rgba(5, 14, 25, 0.88) 0%, rgba(5, 14, 25, 0.65) 34%, rgba(5, 14, 25, 0.15) 58%, transparent 100%),
-        linear-gradient(to bottom, rgba(7, 21, 34, 0.45) 0%, transparent 22%, transparent 68%, rgba(5, 14, 25, 0.85) 100%);
+        linear-gradient(to right, rgba(5, 14, 25, 0.55) 0%, rgba(5, 14, 25, 0.38) 34%, rgba(5, 14, 25, 0.08) 58%, transparent 100%),
+        linear-gradient(to bottom, rgba(7, 21, 34, 0.22) 0%, transparent 22%, transparent 68%, rgba(5, 14, 25, 0.45) 100%);
     pointer-events: none;
 }
 
@@ -1691,8 +1694,8 @@ html, body {
     inset: 0;
     z-index: 1;
     background: 
-        linear-gradient(to right, rgba(5, 14, 25, 0.92) 0%, rgba(5, 14, 25, 0.72) 34%, rgba(5, 14, 25, 0.25) 55%, transparent 100%),
-        linear-gradient(to bottom, rgba(7, 21, 34, 0.45) 0%, transparent 22%, transparent 72%, rgba(5, 14, 25, 0.85) 100%);
+        linear-gradient(to right, rgba(5, 14, 25, 0.55) 0%, rgba(5, 14, 25, 0.38) 34%, rgba(5, 14, 25, 0.10) 55%, transparent 100%),
+        linear-gradient(to bottom, rgba(7, 21, 34, 0.22) 0%, transparent 22%, transparent 72%, rgba(5, 14, 25, 0.45) 100%);
     pointer-events: none;
 }
 
@@ -1828,1563 +1831,1862 @@ html, body {
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image: url('/images/industries-bg.jpg');
+    background-image: url('/images/industries-bg.png');
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center top;
+    /*background-size: cover;
+    background-position: center top;*/
+    transform: translateY(40px);
+    background-size: 100% 100%;
+    background-position: center center;
+}
+@media (max-width: 768px) {
+    .industries-bg-wrap {
+        transform: none;
+        background-size: auto 100%;
+        background-position: center center;
+    }
 }
 
 .industries-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.25) 28%, transparent 55%),
-        linear-gradient(to bottom, rgba(7, 21, 34, 0.45) 0%, transparent 22%, transparent 75%, rgba(0, 0, 0, 0.25) 100%);
-    pointer-events: none;
-}
-
-.industries-content {
-    position: absolute;
-    top: calc(var(--header-height) + 36px);
-    left: clamp(40px, 7.5vw, 110px);
-    z-index: 10;
-    max-width: 480px;
-    width: 100%;
-}
-
-.industries-eyebrow {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.74rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    color: #0c1a2d;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-}
-
-.industries-headline {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(1.85rem, 2.7vw, 2.5rem);
-    font-weight: 700;
-    line-height: 1.15;
-    color: #0c1a2d;
-    margin: 0 0 14px;
-    letter-spacing: -0.015em;
-}
-
-.industries-headline-bar {
-    width: 44px;
-    height: 2px;
-    background: #0c1a2d;
-    margin-bottom: 16px;
-}
-
-.industries-desc {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.92rem;
-    font-weight: 500;
-    color: #2b3a4a;
-    line-height: 1.65;
-    margin-bottom: 24px;
-    max-width: 460px;
-}
-
-.industries-cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: #0c1a2d;
-    color: #ffffff;
-    border: none;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 700;
-    padding: 12px 26px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.22s ease;
-    box-shadow: 0 4px 16px rgba(12, 26, 45, 0.35);
-    text-decoration: none;
-}
-
-.industries-cta-btn:hover {
-    background: #182e4e;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 22px rgba(12, 26, 45, 0.5);
-    color: #ffffff;
-}
-
-.industries-cta-btn svg {
-    transition: transform 0.2s ease;
-}
-
-.industries-cta-btn:hover svg {
-    transform: translateX(3px);
-}
-
-.industries-tagline {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    margin-top: 50px;
-}
-
-.industries-tagline-bar {
-    display: block;
-    width: 36px;
-    height: 2px;
-    background: #0c1a2d;
-    flex-shrink: 0;
-}
-
-.industries-tagline-text {
-    font-family: 'Outfit', sans-serif;
-    font-size: 9.5px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    color: #3e4f61;
-    text-transform: uppercase;
-}
-
-/* ==========================================================================
-   SIDENAV BUTTON & DRAWER (Tablet & Mobile Navigation)
-   ========================================================================== */
-
-/* Hamburger Button */
-.sidenav-toggle-btn {
-    display: none; /* Hidden on desktop (>1024px) */
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 44px;
-    height: 44px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 10px;
-    cursor: pointer;
-    padding: 0;
-    gap: 5px;
-    transition: all 0.25s ease;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-}
-
-.sidenav-toggle-btn:hover {
-    background: rgba(204, 168, 119, 0.18);
-    border-color: var(--gold-primary);
-}
-
-.sidenav-toggle-btn .hamburger-bar {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background: #ffffff;
-    border-radius: 2px;
-    transition: transform 0.28s ease, opacity 0.28s ease, background 0.28s ease;
-}
-
-.sidenav-toggle-btn:hover .hamburger-bar {
-    background: var(--gold-primary);
-}
-
-/* Animate hamburger to X when active */
-.sidenav-toggle-btn.is-active .hamburger-bar:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-    background: var(--gold-primary);
-}
-.sidenav-toggle-btn.is-active .hamburger-bar:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
-}
-.sidenav-toggle-btn.is-active .hamburger-bar:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-    background: var(--gold-primary);
-}
-
-/* Sidenav Overlay */
-.rhine-sidenav-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 6000;
-    background: rgba(4, 10, 18, 0.72);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.rhine-sidenav-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Sidenav Drawer Panel */
-.rhine-sidenav {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 380px;
-    max-width: 88vw;
-    z-index: 6001;
-    background: linear-gradient(180deg, #091726 0%, #06101a 100%);
-    border-left: 1px solid rgba(204, 168, 119, 0.25);
-    box-shadow: -10px 0 45px rgba(0, 0, 0, 0.65);
-    display: flex;
-    flex-direction: column;
-    transform: translateX(100%);
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    visibility: hidden;
-}
-
-.rhine-sidenav.active {
-    transform: translateX(0);
-    visibility: visible;
-}
-
-.sidenav-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 24px 28px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.sidenav-logo-img {
-    height: 34px;
-    width: auto;
-    filter: brightness(0) invert(1);
-    opacity: 0.95;
-}
-
-.sidenav-close-btn {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: #ffffff;
-    width: 38px;
-    height: 38px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.22s ease;
-}
-
-.sidenav-close-btn:hover {
-    background: rgba(204, 168, 119, 0.2);
-    border-color: var(--gold-primary);
-    color: var(--gold-primary);
-    transform: rotate(90deg);
-}
-
-.sidenav-body {
-    flex: 1;
-    overflow-y: auto;
-    padding: 24px 20px;
-}
-
-.sidenav-nav-list {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.sidenav-link {
-    display: flex;
-    align-items: center;
-    padding: 13px 20px;
-    background: transparent;
-    border: 1px solid transparent;
-    border-radius: 12px;
-    color: rgba(255, 255, 255, 0.85);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.22s ease;
-    width: 100%;
-}
-
-.sidenav-link-text {
-    flex: 1;
-}
-
-.sidenav-link:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
-    padding-left: 24px;
-}
-
-.sidenav-link.active {
-    background: rgba(204, 168, 119, 0.12);
-    border-color: rgba(204, 168, 119, 0.35);
-    color: var(--gold-primary);
-    font-weight: 700;
-    box-shadow: 0 4px 16px rgba(204, 168, 119, 0.12);
-}
-
-.sidenav-footer {
-    padding: 24px 24px 28px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(4, 10, 18, 0.5);
-}
-
-.sidenav-lang-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.sidenav-lang-label {
-    font-size: 12.5px;
-    color: rgba(255, 255, 255, 0.55);
-    font-weight: 500;
-}
-
-.sidenav-lang-btns {
-    display: flex;
-    gap: 6px;
-}
-
-.sidenav-lang-btn {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 12px;
-    font-weight: 600;
-    padding: 5px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.sidenav-lang-btn:hover,
-.sidenav-lang-btn.active {
-    background: var(--gold-primary);
-    color: #0c0d12;
-    border-color: var(--gold-primary);
-}
-
-body.sidenav-open {
-    overflow: hidden;
-}
-
-/* ==========================================================================
-   RESPONSIVE DESIGN SYSTEM: DESKTOP, TABLET & MOBILE
-   ========================================================================== */
-
-/* --------------------------------------------------------------------------
-   1. DESKTOP OPTIMIZATIONS (min-width: 1025px)
-   -------------------------------------------------------------------------- */
-@media (min-width: 1025px) {
-    .center-nav {
-        display: flex;
-    }
-    .sidenav-toggle-btn {
-        display: none !important;
-    }
-    .rhine-sidenav,
-    .rhine-sidenav-overlay {
-        display: none !important;
-    }
-}
-
-/* --------------------------------------------------------------------------
-   2. TABLET OPTIMIZATIONS (769px to 1024px)
-   -------------------------------------------------------------------------- */
-@media (max-width: 1024px) {
-    /* Header & Navigation: Sidenav button is available, desktop center nav hides */
-    .center-nav {
-        display: none !important;
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.25) 28%, transparent 55%), linear-gradient(to bottom, rgba(7, 21, 34, 0.45) 0%, transparent 22%, transparent 75%, rgba(0, 0, 0, 0.25) 100%);
+        pointer-events: none;
     }
 
-    .sidenav-toggle-btn {
-        display: flex !important;
+    .industries-content {
+        position: absolute;
+        top: calc(var(--header-height) + 36px);
+        left: clamp(32px, 7.5vw, 113px);
+        z-index: 10;
+        max-width: 327px;
+        width: 100%;
     }
 
-    .rhine-sidenav,
-    .rhine-sidenav-overlay {
-        display: block;
-    }
-
-    .header-inner {
-        padding: 0 4%;
-    }
-
-    .header-right-actions {
-        gap: 14px;
-    }
-
-    /* Page container: enable smooth touch vertical scrolling if content overflows */
-    .page {
-        overflow-y: auto;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    /* Hide decorative vertical side pillar text to prevent overlap with content */
-    .about-vertical-top-text,
-    .about-vertical-text,
-    .how-vertical-text,
-    .insights-vertical-text,
-    .ourwork-vertical-text,
-    .contact-vertical-text {
-        display: none !important;
-    }
-
-    /* Content sizing & positioning */
-    .about-content,
-    .how-content,
-    .industries-content,
-    .ourwork-content,
-    .insights-content,
-    .contact-content {
-        left: 6%;
-        top: calc(var(--header-height) + 24px);
-        max-width: 580px;
-        width: 88%;
-        padding-bottom: 120px;
-    }
-
-    .landing-right-hero-card {
-        max-width: 520px;
-    }
-
-    /* Bottom cards & bars adapt to 2-column grids */
-    .about-features-bar {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        bottom: 24px;
-        left: 6%;
-        right: 6%;
-    }
-
-    .how-badges-bar {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-        bottom: 24px;
-        left: 6%;
-        right: 6%;
-    }
-
-    .insights-cards-bar {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-        bottom: 20px;
-        left: 6%;
-        right: 6%;
-    }
-}
-
-/* --------------------------------------------------------------------------
-   3. MOBILE OPTIMIZATIONS (max-width: 768px)
-   -------------------------------------------------------------------------- */
-@media (max-width: 768px) {
-    :root {
-        --header-height: 72px;
-    }
-
-    /* Header adjustments for mobile */
-    .header-inner {
-        padding: 0 4.5%;
-    }
-
-    .brand-logo-img {
-        height: 32px;
-    }
-
-    .header-right-actions .btn-gold-action {
-        display: none; /* Contact CTA is prominently placed inside the Sidenav */
-    }
-
-    .btn-lang-toggle {
-        padding: 5px 10px;
-        font-size: 12px;
-    }
-
-    .sidenav-toggle-btn {
-        width: 40px;
-        height: 40px;
-    }
-
-    /* Page scrolling & padding on mobile */
-    .page {
-        overflow-y: auto;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 80px;
-    }
-
-    /* Mobile Headlines & Typography */
-    .landing-main-title {
-        font-size: clamp(2rem, 8vw, 2.8rem);
-        line-height: 1.15;
-    }
-
-    .about-headline,
-    .how-headline,
-    .industries-headline,
-    .ourwork-headline,
-    .insights-headline,
-    .contact-main-headline {
-        font-size: clamp(1.9rem, 7.5vw, 2.5rem);
-        line-height: 1.15;
+    .industries-eyebrow {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.74rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        color: #0c1a2d;
+        text-transform: uppercase;
         margin-bottom: 14px;
     }
 
-    .landing-desc-text,
-    .about-desc,
-    .how-desc,
-    .industries-desc,
-    .ourwork-desc,
-    .insights-desc,
-    .contact-subline {
-        font-size: 0.98rem;
-        line-height: 1.6;
-        margin-bottom: 22px;
+    .industries-headline {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(1.85rem, 2.7vw, 2.5rem);
+        font-weight: 700;
+        line-height: 1.15;
+        color: #0c1a2d;
+        margin: 0 0 14px;
+        letter-spacing: -0.015em;
     }
 
-    /* Content block flow on mobile */
-    .landing-content-container {
-        padding: calc(var(--header-height) + 16px) 5% 40px;
+    .industries-headline-bar {
+        width: 44px;
+        height: 2px;
+        background: #0c1a2d;
+        margin-bottom: 16px;
     }
 
-    .landing-right-hero-card,
-    .landing-hero-card {
-        max-width: 100%;
-        padding: 24px 0;
-    }
-
-    .about-content,
-    .how-content,
-    .industries-content,
-    .ourwork-content,
-    .insights-content,
-    .contact-content {
-        position: relative;
-        left: auto;
-        top: auto;
-        width: 100%;
-        max-width: 100%;
-        padding: calc(var(--header-height) + 20px) 5% 30px;
-    }
-
-    /* Mobile buttons */
-    .about-cta-btn {
-        margin-left: 0;
-        width: 100%;
-        justify-content: center;
-        padding: 13px 24px;
-    }
-
-    .btn-gold-hero,
-    .btn-secondary-hero,
-    .how-cta-btn,
-    .industries-cta-btn,
-    .ourwork-cta-btn,
-    .insights-cta-btn {
-        width: 100%;
-        justify-content: center;
-        padding: 13px 24px;
-    }
-
-    /* Bottom bars & cards: convert from absolute bottom to natural stacked flow */
-    .about-features-bar,
-    .how-badges-bar,
-    .insights-cards-bar {
-        position: relative;
-        left: auto;
-        right: auto;
-        bottom: auto;
-        grid-template-columns: 1fr;
-        gap: 14px;
-        padding: 0 5%;
-        margin-top: 24px;
-        margin-bottom: 40px;
-    }
-
-    .about-feature-item,
-    .how-badge-item,
-    .insights-card {
-        padding: 14px 16px;
-    }
-
-    /* Contact details list */
-    .contact-details-list {
+    .industries-desc {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 0.92rem;
+        font-weight: 500;
+        color: #2b3a4a;
+        line-height: 1.65;
         margin-bottom: 24px;
+        max-width: 460px;
     }
 
-    .contact-detail-row {
-        gap: 12px;
+    .industries-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #0c1a2d;
+        color: #ffffff;
+        border: none;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.88rem;
+        font-weight: 700;
+        padding: 12px 26px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.22s ease;
+        box-shadow: 0 4px 16px rgba(12, 26, 45, 0.35);
+        text-decoration: none;
     }
 
-    /* Review badge: position nicely on mobile */
-    .review-tag {
-        bottom: 12px;
-        right: 12px;
-        font-size: 11px;
-        padding: 5px 12px;
+        .industries-cta-btn:hover {
+            background: #182e4e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(12, 26, 45, 0.5);
+            color: #ffffff;
+        }
+
+        .industries-cta-btn svg {
+            transition: transform 0.2s ease;
+        }
+
+        .industries-cta-btn:hover svg {
+            transform: translateX(3px);
+        }
+
+    .industries-tagline {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        margin-top: 50px;
     }
 
-    /* Modals & Dialogs — Compact Mobile Optimization */
-    .modal-dialog {
-        margin: 8px auto !important;
-        max-width: 94% !important;
-        width: 94% !important;
-    }
-
-    .glass-dialog {
-        padding: 12px 14px !important;
-        max-height: 88vh !important;
-        border-radius: 12px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        overflow: hidden !important;
-    }
-
-    .glass-dialog .modal-header {
-        padding: 0 0 6px 0 !important;
-        margin-bottom: 2px !important;
-    }
-
-    .glass-dialog .dialog-eyebrow {
-        font-size: 8.5px !important;
-        letter-spacing: 0.12em !important;
+    .industries-tagline-bar {
         display: block;
+        width: 36px;
+        height: 2px;
+        background: #0c1a2d;
+        flex-shrink: 0;
     }
 
-    .glass-dialog .dialog-title {
-        font-size: 1.05rem !important;
-        margin: 2px 0 0 0 !important;
-        line-height: 1.25 !important;
+    .industries-tagline-text {
+        font-family: 'Outfit', sans-serif;
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        color: #0e0f10;
+        text-transform: uppercase;
     }
 
-    .glass-dialog .btn-close {
-        padding: 6px !important;
-        transform: scale(0.85);
+    /* ==========================================================================
+   SIDENAV BUTTON & DRAWER (Tablet & Mobile Navigation)
+   ========================================================================== */
+
+    /* Hamburger Button */
+    .sidenav-toggle-btn {
+        display: none; /* Hidden on desktop (>1024px) */
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 44px;
+        height: 44px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 0;
+        gap: 5px;
+        transition: all 0.25s ease;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
     }
 
-    .glass-dialog .modal-body {
-        padding: 6px 0 0 0 !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch;
-        flex: 1 1 auto;
+        .sidenav-toggle-btn:hover {
+            background: rgba(204, 168, 119, 0.18);
+            border-color: var(--gold-primary);
+        }
+
+        .sidenav-toggle-btn .hamburger-bar {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: #ffffff;
+            border-radius: 2px;
+            transition: transform 0.28s ease, opacity 0.28s ease, background 0.28s ease;
+        }
+
+        .sidenav-toggle-btn:hover .hamburger-bar {
+            background: var(--gold-primary);
+        }
+
+        /* Animate hamburger to X when active */
+        .sidenav-toggle-btn.is-active .hamburger-bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+            background: var(--gold-primary);
+        }
+
+        .sidenav-toggle-btn.is-active .hamburger-bar:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .sidenav-toggle-btn.is-active .hamburger-bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+            background: var(--gold-primary);
+        }
+
+    /* Sidenav Overlay */
+    .rhine-sidenav-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 6000;
+        background: rgba(4, 10, 18, 0.72);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
-    .glass-dialog .modal-body > p {
-        font-size: 11px !important;
-        line-height: 1.35 !important;
-        margin-bottom: 8px !important;
-        color: rgba(255, 255, 255, 0.72) !important;
-    }
+        .rhine-sidenav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
 
-    /* Choice boxes: Compact, slim on mobile */
-    .glass-dialog .row.g-2 {
-        --bs-gutter-x: 6px !important;
-        --bs-gutter-y: 6px !important;
-        margin-bottom: 8px !important;
-    }
-
-    .glass-dialog .col-md-6 {
-        width: 100% !important;
-    }
-
-    .config-choice .choice-box {
-        padding: 7px 10px !important;
-        border-radius: 7px !important;
-    }
-
-    .config-choice .choice-box strong {
-        font-size: 11.5px !important;
-        line-height: 1.2 !important;
-        margin-bottom: 1px !important;
-        display: block;
-    }
-
-    .config-choice .choice-box span {
-        font-size: 9.5px !important;
-        line-height: 1.25 !important;
-        color: rgba(255, 255, 255, 0.65) !important;
-        display: block;
-    }
-
-    /* Compact Slider */
-    .glass-dialog .mb-4 {
-        margin-bottom: 8px !important;
-    }
-
-    .glass-dialog .form-label {
-        font-size: 10.5px !important;
-        margin-bottom: 3px !important;
-    }
-
-    .glass-dialog .custom-range {
-        height: 4px !important;
-        margin-top: 2px;
-    }
-
-    /* Blueprint result box */
-    .blueprint-result-box {
-        padding: 8px 10px !important;
-        margin-bottom: 8px !important;
-    }
-
-    .blueprint-result-box h5 {
-        font-size: 12px !important;
-    }
-
-    .blueprint-result-box .badge {
-        font-size: 8px !important;
-        padding: 3px 6px !important;
-    }
-
-    .blueprint-result-box .col-4 {
-        padding: 4px !important;
-    }
-
-    .blueprint-result-box .col-4 .small {
-        font-size: 9px !important;
-    }
-
-    .blueprint-result-box .col-4 .h4,
-    .blueprint-result-box .col-4 .h5 {
-        font-size: 13px !important;
-    }
-
-    /* Footer Buttons in Modal */
-    .glass-dialog .d-flex.justify-content-end {
-        gap: 6px !important;
-        padding-top: 6px !important;
-        margin-top: 4px !important;
-    }
-
-    .glass-dialog .btn-gold-action {
-        font-size: 11.5px !important;
-        padding: 7px 14px !important;
-        border-radius: 6px !important;
-    }
-
-    .glass-dialog .btn-outline-secondary {
-        font-size: 11.5px !important;
-        padding: 7px 12px !important;
-        border-radius: 6px !important;
-    }
-
-    /* Inquiry Quick Contact Modal compact on mobile */
-    .contact-card-box {
-        padding: 8px 10px !important;
-        font-size: 11px !important;
-        margin-bottom: 8px !important;
-    }
-
-    #quickContactForm .mb-2,
-    #quickContactForm .mb-3 {
-        margin-bottom: 6px !important;
-    }
-
-    #quickContactForm .form-label {
-        font-size: 10px !important;
-        margin-bottom: 1px !important;
-    }
-
-    #quickContactForm .form-control {
-        font-size: 11.5px !important;
-        padding: 5px 8px !important;
-        height: auto !important;
-    }
-
-    #quickContactForm textarea {
-        min-height: 50px;
-    }
-
-    #btnQuickSubmit {
-        font-size: 12px !important;
-        padding: 8px !important;
-    }
-}
-
-/* --------------------------------------------------------------------------
-   4. SMALL MOBILE / COMPACT PHONES (max-width: 480px)
-   -------------------------------------------------------------------------- */
-@media (max-width: 480px) {
-    .header-inner {
-        padding: 0 3.5%;
-    }
-
-    .brand-logo-img {
-        height: 28px;
-    }
-
+    /* Sidenav Drawer Panel */
     .rhine-sidenav {
-        width: 100vw;
-        max-width: 100vw;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 380px;
+        max-width: 88vw;
+        z-index: 6001;
+        background: linear-gradient(180deg, #091726 0%, #06101a 100%);
+        border-left: 1px solid rgba(204, 168, 119, 0.25);
+        box-shadow: -10px 0 45px rgba(0, 0, 0, 0.65);
+        display: flex;
+        flex-direction: column;
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        visibility: hidden;
     }
 
-    .landing-eyebrow,
-    .about-eyebrow,
-    .how-eyebrow,
-    .industries-eyebrow,
-    .ourwork-eyebrow,
-    .insights-eyebrow,
-    .contact-eyebrow-label {
-        font-size: 11px;
-        letter-spacing: 0.18em;
+        .rhine-sidenav.active {
+            transform: translateX(0);
+            visibility: visible;
+        }
+
+    .sidenav-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 24px 28px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .review-tag {
-        display: none; /* Hide on smallest screens to maximize content area */
-    }
-}
-
-/* ==========================================================================
-   5. ARABIC LANGUAGE (RTL) STYLING & TYPOGRAPHY
-   ========================================================================== */
-
-[dir="rtl"] {
-    font-family: 'Cairo', 'Plus Jakarta Sans', sans-serif;
-    text-align: right;
-}
-
-[dir="rtl"] .brand-btn {
-    text-align: right;
-}
-
-[dir="rtl"] .sidenav-link {
-    text-align: right;
-}
-
-[dir="rtl"] .sidenav-link:hover {
-    padding-left: 20px;
-    padding-right: 26px;
-}
-
-[dir="rtl"] .dropdown-menu-end {
-    right: auto !important;
-    left: 0 !important;
-}
-
-[dir="rtl"] .about-content,
-[dir="rtl"] .how-content,
-[dir="rtl"] .industries-content,
-[dir="rtl"] .ourwork-content,
-[dir="rtl"] .insights-content,
-[dir="rtl"] .contact-content {
-    left: auto;
-    right: 5%;
-    text-align: right;
-}
-
-[dir="rtl"] .about-headline,
-[dir="rtl"] .how-headline,
-[dir="rtl"] .industries-headline,
-[dir="rtl"] .ourwork-headline,
-[dir="rtl"] .insights-headline,
-[dir="rtl"] .contact-main-headline {
-    font-family: 'Cairo', sans-serif;
-    letter-spacing: 0;
-}
-
-[dir="rtl"] .about-cta-btn {
-    margin-left: 0;
-    margin-right: 18px;
-}
-
-[dir="rtl"] .about-feature-item,
-[dir="rtl"] .how-badge-item,
-[dir="rtl"] .insights-card,
-[dir="rtl"] .contact-detail-row {
-    text-align: right;
-}
-
-[dir="rtl"] .contact-icon-badge {
-    margin-left: 14px;
-    margin-right: 0;
-}
-
-[dir="rtl"] .rhine-sidenav {
-    right: auto;
-    left: 0;
-    border-left: none;
-    border-right: 1px solid rgba(204, 168, 119, 0.25);
-    transform: translateX(-100%);
-}
-
-[dir="rtl"] .rhine-sidenav.active {
-    transform: translateX(0);
-}
-
-@media (max-width: 768px) {
-    [dir="rtl"] .about-content,
-    [dir="rtl"] .how-content,
-    [dir="rtl"] .industries-content,
-    [dir="rtl"] .ourwork-content,
-    [dir="rtl"] .insights-content,
-    [dir="rtl"] .contact-content {
-        right: auto;
-        left: auto;
-        text-align: right;
+    .sidenav-logo-img {
+        height: 34px;
+        width: auto;
+        filter: brightness(0) invert(1);
+        opacity: 0.95;
     }
 
-    [dir="rtl"] .about-cta-btn {
-        margin-right: 0;
-        margin-left: 0;
-    }
-}
-
-/* ==========================================================================
-   AGENT FACTORY PAGE
-   ========================================================================== */
-
-.agentfactory-page-section {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #040e1a;
-}
-
-/* Background image: Agent-Factory.png */
-.agentfactory-bg-wrap {
-    position: absolute;
-    inset: 0;
-    background-image: url('/images/Agent-Factory.png');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    transform: scale(1.02);
-    transition: transform 0.8s ease;
-    z-index: 0;
-    TOP: 80PX;
-}
-
-/* Soft gradient overlay: brighten left side, subtle vignette for readability without darkening the factory artwork */
-.agentfactory-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        90deg,
-        rgba(4, 14, 26, 0.45) 0%,
-        rgba(4, 14, 26, 0.28) 28%,
-        rgba(4, 14, 26, 0.10) 45%,
-        rgba(4, 14, 26, 0) 65%
-    );
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* Top-right watermark / mezzanine branding */
-.agentfactory-watermark {
-    position: absolute;
-    top: calc(var(--header-height) + 16px);
-    right: 3%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: clamp(520px, 47vw, 760px);
-    z-index: 3;
-    pointer-events: none;
-}
-
-.af-wm-tagline {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(0.6rem, 0.8vw, 0.76rem);
-    font-weight: 700;
-    letter-spacing: 0.26em;
-    color: #f2bd48;
-    text-transform: uppercase;
-    opacity: 0.95;
-    text-shadow: 0 0 12px rgba(242, 189, 72, 0.5);
-}
-
-.af-wm-brand {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    line-height: 1.1;
-}
-
-.af-wm-name {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(0.78rem, 1vw, 0.95rem);
-    font-weight: 800;
-    letter-spacing: 0.2em;
-    color: #ffffff;
-}
-
-.af-wm-sub {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(0.44rem, 0.55vw, 0.54rem);
-    font-weight: 600;
-    letter-spacing: 0.24em;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-/* 5-Stage Agent Factory Pipeline Cards (Define, Build, Challenge, Validate, Prepare) */
-.af-pipeline-container {
-    position: absolute;
-    top: calc(var(--header-height) + 100px);
-    right: 3%;
-    display: flex;
-    align-items: center;
-    gap: clamp(6px, 0.8vw, 13px);
-    z-index: 4;
-}
-
-.af-stage-card {
-    width: clamp(92px, 8.4vw, 132px);
-    min-height: clamp(142px, 17vh, 184px);
-    background: rgba(6, 26, 44, 0.72);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1.5px solid rgba(80, 200, 255, 0.42);
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(56, 189, 248, 0.22);
-    padding: clamp(12px, 1.3vw, 16px) clamp(8px, 0.9vw, 12px) clamp(10px, 1.1vw, 14px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
-}
-
-.af-stage-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(125, 211, 252, 0.9);
-    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65), 0 0 28px rgba(56, 189, 248, 0.45);
-}
-
-.af-card-icon {
-    color: #7dd3fc;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.65));
-}
-
-.af-card-icon svg {
-    width: clamp(20px, 1.6vw, 25px);
-    height: clamp(20px, 1.6vw, 25px);
-}
-
-.af-card-title {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(0.74rem, 0.88vw, 0.92rem);
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    color: #ffffff;
-    margin: 0 0 clamp(8px, 1vw, 12px);
-    text-transform: uppercase;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.55), 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.af-card-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(2px, 0.35vw, 5px);
-    width: 100%;
-}
-
-.af-card-list li {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(0.52rem, 0.64vw, 0.68rem);
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    color: rgba(224, 242, 254, 0.88);
-    line-height: 1.45;
-    text-transform: uppercase;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
-}
-
-.af-pipeline-arrow {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(1rem, 1.4vw, 1.5rem);
-    font-weight: 700;
-    color: #f2bd48;
-    opacity: 0.9;
-    filter: drop-shadow(0 0 8px rgba(242, 189, 72, 0.7));
-    user-select: none;
-    line-height: 1;
-}
-
-/* Left vertical text */
-.agentfactory-vertical-text {
-    position: absolute;
-    left: clamp(18px, 2.2vw, 36px);
-    top: calc(var(--header-height) + 80px);
-    transform: none;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    z-index: 3;
-    pointer-events: none;
-}
-
-.agentfactory-vertical-text span {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(0.46rem, 0.55vw, 0.6rem);
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    color: rgba(255, 255, 255, 0.42);
-    text-transform: uppercase;
-    white-space: nowrap;
-    line-height: 1.35;
-}
-
-.agentfactory-vertical-line {
-    width: 1px !important;
-    height: 32px !important;
-    background: rgba(204, 168, 119, 0.45) !important;
-    margin: 10px 0 !important;
-    letter-spacing: 0 !important;
-}
-
-/* Main left-side content block */
-.agentfactory-content {
-    position: absolute;
-    top: calc(var(--header-height) + 20px);
-    left: clamp(130px, 10.5vw, 175px);
-    transform: none;
-    max-width: 470px;
-    z-index: 3;
-}
-
-/* Eyebrow */
-.agentfactory-eyebrow {
-    margin-bottom: 12px;
-}
-
-.agentfactory-eyebrow-text {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.24em;
-    color: var(--gold-primary);
-    text-transform: uppercase;
-    opacity: 0.95;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
-}
-
-/* Headline */
-.agentfactory-headline {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(2rem, 3.1vw, 2.85rem);
-    font-weight: 800;
-    line-height: 1.12;
-    color: #ffffff;
-    margin: 0 0 18px;
-    letter-spacing: -0.02em;
-    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8);
-}
-
-.agentfactory-headline-gold {
-    background: var(--gold-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* Description */
-.agentfactory-desc {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(0.86rem, 0.95vw, 0.94rem);
-    font-weight: 400;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.88);
-    margin: 0 0 24px;
-    max-width: 420px;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
-}
-
-/* CTA Buttons */
-.agentfactory-btn-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.agentfactory-btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 22px;
-    border: none;
-    border-radius: 6px;
-    background: #f2bd48;
-    color: #071522;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.86rem;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-    cursor: pointer;
-    transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.18s;
-    white-space: nowrap;
-}
-
-.agentfactory-btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(204, 168, 119, 0.35);
-    opacity: 0.94;
-}
-
-.agentfactory-btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 9px 20px;
-    border: 1.5px solid rgba(255, 255, 255, 0.35);
-    border-radius: 6px;
-    background: rgba(4, 14, 26, 0.35);
-    color: rgba(255, 255, 255, 0.88);
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.86rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    cursor: pointer;
-    transition: all 0.22s ease;
-    white-space: nowrap;
-    backdrop-filter: blur(8px);
-}
-
-.agentfactory-btn-secondary:hover {
-    border-color: rgba(204, 168, 119, 0.65);
-    color: var(--gold-primary);
-    background: rgba(204, 168, 119, 0.12);
-}
-
-/* Bottom left desk badge (placed right on the control desk front panel) */
-.agentfactory-desk-badge {
-    position: absolute;
-    bottom: clamp(9%, 13.5vh, 17%);
-    left: clamp(140px, 14.8vw, 220px);
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    z-index: 3;
-    pointer-events: none;
-}
-
-.af-desk-title {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(0.55rem, 0.72vw, 0.7rem);
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    color: rgba(255, 255, 255, 0.55);
-    text-transform: uppercase;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
-}
-
-.af-desk-subtitle {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(0.55rem, 0.72vw, 0.7rem);
-    font-weight: 800;
-    letter-spacing: 0.2em;
-    color: var(--gold-primary);
-    opacity: 0.92;
-    text-transform: uppercase;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
-}
-
-.af-desk-gold-bar {
-    width: 32px;
-    height: 2px;
-    background: var(--gold-primary);
-    margin-top: 4px;
-    opacity: 0.85;
-}
-
-/* Bottom right crate badge (placed directly on the crate panel at bottom-right) */
-.agentfactory-crate-badge {
-    position: absolute;
-    bottom: clamp(6%, 8vh, 11%);
-    right: clamp(100px, 10.5vw, 165px);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
-    z-index: 3;
-    pointer-events: none;
-}
-
-.agentfactory-crate-badge span {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(0.48rem, 0.62vw, 0.6rem);
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    color: rgba(255, 255, 255, 0.52);
-    text-transform: uppercase;
-    text-align: right;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
-}
-
-.af-crate-gold-bar {
-    width: 28px;
-    height: 2px;
-    background: var(--gold-primary);
-    margin-top: 4px;
-    opacity: 0.75;
-}
-
-/* ==========================================================================
-   RESPONSIVE — AGENT FACTORY
-   ========================================================================== */
-
-/* Tablet (769px – 1199px) */
-@media (min-width: 769px) and (max-width: 1199px) {
-    .agentfactory-content {
-        max-width: 380px;
-        left: 5%;
-        top: 50%;
-        transform: translateY(-50%);
+    .sidenav-close-btn {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.22s ease;
     }
 
-    .agentfactory-vertical-text {
-        display: none;
+        .sidenav-close-btn:hover {
+            background: rgba(204, 168, 119, 0.2);
+            border-color: var(--gold-primary);
+            color: var(--gold-primary);
+            transform: rotate(90deg);
+        }
+
+    .sidenav-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 24px 20px;
     }
 
-    .af-pipeline-container {
-        top: calc(var(--header-height) + 52px);
-        right: 2%;
+    .sidenav-nav-list {
+        display: flex;
+        flex-direction: column;
         gap: 6px;
     }
 
-    .af-stage-card {
-        width: 86px;
-        min-height: 135px;
-        padding: 10px 6px 8px;
+    .sidenav-link {
+        display: flex;
+        align-items: center;
+        padding: 13px 20px;
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 12px;
+        color: rgba(255, 255, 255, 0.85);
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.22s ease;
+        width: 100%;
     }
 
-    .af-card-title {
-        font-size: 0.68rem;
+    .sidenav-link-text {
+        flex: 1;
     }
 
-    .af-card-list li {
-        font-size: 0.5rem;
+    .sidenav-link:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: #ffffff;
+        padding-left: 24px;
     }
+
+    .sidenav-link.active {
+        background: rgba(204, 168, 119, 0.12);
+        border-color: rgba(204, 168, 119, 0.35);
+        color: var(--gold-primary);
+        font-weight: 700;
+        box-shadow: 0 4px 16px rgba(204, 168, 119, 0.12);
+    }
+
+    .sidenav-footer {
+        padding: 24px 24px 28px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(4, 10, 18, 0.5);
+    }
+
+    .sidenav-lang-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .sidenav-lang-label {
+        font-size: 12.5px;
+        color: rgba(255, 255, 255, 0.55);
+        font-weight: 500;
+    }
+
+    .sidenav-lang-btns {
+        display: flex;
+        gap: 6px;
+    }
+
+    .sidenav-lang-btn {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 5px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+        .sidenav-lang-btn:hover,
+        .sidenav-lang-btn.active {
+            background: var(--gold-primary);
+            color: #0c0d12;
+            border-color: var(--gold-primary);
+        }
+
+    body.sidenav-open {
+        overflow: hidden;
+    }
+
+    /* ==========================================================================
+   RESPONSIVE DESIGN SYSTEM: DESKTOP, TABLET & MOBILE
+   ========================================================================== */
+
+    /* --------------------------------------------------------------------------
+   1. DESKTOP OPTIMIZATIONS (min-width: 1025px)
+   -------------------------------------------------------------------------- */
+    @media (min-width: 1025px) {
+        .center-nav {
+            display: flex;
+        }
+
+        .sidenav-toggle-btn {
+            display: none !important;
+        }
+
+        .rhine-sidenav,
+        .rhine-sidenav-overlay {
+            display: none !important;
+        }
+    }
+
+    /* --------------------------------------------------------------------------
+   2. TABLET OPTIMIZATIONS (769px to 1024px)
+   -------------------------------------------------------------------------- */
+    @media (max-width: 1024px) {
+        /* Header & Navigation: Sidenav button is available, desktop center nav hides */
+        .center-nav {
+            display: none !important;
+        }
+
+        .sidenav-toggle-btn {
+            display: flex !important;
+        }
+
+        .rhine-sidenav,
+        .rhine-sidenav-overlay {
+            display: block;
+        }
+
+        .header-inner {
+            padding: 0 4%;
+        }
+
+        .header-right-actions {
+            gap: 14px;
+        }
+
+        /* Page container: enable smooth touch vertical scrolling if content overflows */
+        .page {
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Hide decorative vertical side pillar text to prevent overlap with content */
+        .about-vertical-top-text,
+        .about-vertical-text,
+        .how-vertical-text,
+        .insights-vertical-text,
+        .ourwork-vertical-text,
+        .contact-vertical-text {
+            display: none !important;
+        }
+
+        /* Content sizing & positioning */
+        .about-content,
+        .how-content,
+        .industries-content,
+        .ourwork-content,
+        .insights-content,
+        .contact-content {
+            left: 6%;
+            top: calc(var(--header-height) + 24px);
+            max-width: 580px;
+            width: 88%;
+            padding-bottom: 120px;
+        }
+
+        .landing-right-hero-card {
+            max-width: 520px;
+        }
+
+        /* Bottom cards & bars adapt to 2-column grids */
+        .about-features-bar {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            bottom: 24px;
+            left: 6%;
+            right: 6%;
+        }
+
+        .how-badges-bar {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            bottom: 24px;
+            left: 6%;
+            right: 6%;
+        }
+
+        .insights-cards-bar {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            bottom: 20px;
+            left: 6%;
+            right: 6%;
+        }
+    }
+
+    /* --------------------------------------------------------------------------
+   3. MOBILE OPTIMIZATIONS (max-width: 768px)
+   -------------------------------------------------------------------------- */
+    @media (max-width: 768px) {
+        :root {
+            --header-height: 72px;
+        }
+
+        /* Header adjustments for mobile */
+        .header-inner {
+            padding: 0 4.5%;
+        }
+
+        .brand-logo-img {
+            height: 32px;
+        }
+
+        .header-right-actions .btn-gold-action {
+            display: none; /* Contact CTA is prominently placed inside the Sidenav */
+        }
+
+        .btn-lang-toggle {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+
+        .sidenav-toggle-btn {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Page scrolling & padding on mobile */
+        .page {
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 80px;
+        }
+
+        /* Mobile Headlines & Typography */
+        .landing-main-title {
+            font-size: clamp(2rem, 8vw, 2.8rem);
+            line-height: 1.15;
+        }
+
+        .about-headline,
+        .how-headline,
+        .industries-headline,
+        .ourwork-headline,
+        .insights-headline,
+        .contact-main-headline {
+            font-size: clamp(1.9rem, 7.5vw, 2.5rem);
+            line-height: 1.15;
+            margin-bottom: 14px;
+        }
+
+        .landing-desc-text,
+        .about-desc,
+        .how-desc,
+        .industries-desc,
+        .ourwork-desc,
+        .insights-desc,
+        .contact-subline {
+            font-size: 0.98rem;
+            line-height: 1.6;
+            margin-bottom: 22px;
+        }
+
+        /* Content block flow on mobile */
+        .landing-content-container {
+            padding: calc(var(--header-height) + 16px) 5% 40px;
+        }
+
+        .landing-right-hero-card,
+        .landing-hero-card {
+            max-width: 100%;
+            padding: 24px 0;
+        }
+
+        .about-content,
+        .how-content,
+        .industries-content,
+        .ourwork-content,
+        .insights-content,
+        .contact-content {
+            position: relative;
+            left: auto;
+            top: auto;
+            width: 100%;
+            max-width: 100%;
+            padding: calc(var(--header-height) + 20px) 5% 30px;
+        }
+
+        /* Mobile buttons */
+        .about-cta-btn {
+            margin-left: 0;
+            width: 100%;
+            justify-content: center;
+            padding: 13px 24px;
+        }
+
+        .btn-gold-hero,
+        .btn-secondary-hero,
+        .how-cta-btn,
+        .industries-cta-btn,
+        .ourwork-cta-btn,
+        .insights-cta-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 13px 24px;
+        }
+
+        /* Bottom bars & cards: convert from absolute bottom to natural stacked flow */
+        .about-features-bar,
+        .how-badges-bar,
+        .insights-cards-bar {
+            position: relative;
+            left: auto;
+            right: auto;
+            bottom: auto;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            padding: 0 5%;
+            margin-top: 24px;
+            margin-bottom: 40px;
+        }
+
+        .about-feature-item,
+        .how-badge-item,
+        .insights-card {
+            padding: 14px 16px;
+        }
+
+        /* Contact details list */
+        .contact-details-list {
+            margin-bottom: 24px;
+        }
+
+        .contact-detail-row {
+            gap: 12px;
+        }
+
+        /* Review badge: position nicely on mobile */
+        .review-tag {
+            bottom: 12px;
+            right: 12px;
+            font-size: 11px;
+            padding: 5px 12px;
+        }
+
+        /* Modals & Dialogs — Compact Mobile Optimization */
+        .modal-dialog {
+            margin: 8px auto !important;
+            max-width: 94% !important;
+            width: 94% !important;
+        }
+
+        .glass-dialog {
+            padding: 12px 14px !important;
+            max-height: 88vh !important;
+            border-radius: 12px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            overflow: hidden !important;
+        }
+
+            .glass-dialog .modal-header {
+                padding: 0 0 6px 0 !important;
+                margin-bottom: 2px !important;
+            }
+
+            .glass-dialog .dialog-eyebrow {
+                font-size: 8.5px !important;
+                letter-spacing: 0.12em !important;
+                display: block;
+            }
+
+            .glass-dialog .dialog-title {
+                font-size: 1.05rem !important;
+                margin: 2px 0 0 0 !important;
+                line-height: 1.25 !important;
+            }
+
+            .glass-dialog .btn-close {
+                padding: 6px !important;
+                transform: scale(0.85);
+            }
+
+            .glass-dialog .modal-body {
+                padding: 6px 0 0 0 !important;
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch;
+                flex: 1 1 auto;
+            }
+
+                .glass-dialog .modal-body > p {
+                    font-size: 11px !important;
+                    line-height: 1.35 !important;
+                    margin-bottom: 8px !important;
+                    color: rgba(255, 255, 255, 0.72) !important;
+                }
+
+            /* Choice boxes: Compact, slim on mobile */
+            .glass-dialog .row.g-2 {
+                --bs-gutter-x: 6px !important;
+                --bs-gutter-y: 6px !important;
+                margin-bottom: 8px !important;
+            }
+
+            .glass-dialog .col-md-6 {
+                width: 100% !important;
+            }
+
+        .config-choice .choice-box {
+            padding: 7px 10px !important;
+            border-radius: 7px !important;
+        }
+
+            .config-choice .choice-box strong {
+                font-size: 11.5px !important;
+                line-height: 1.2 !important;
+                margin-bottom: 1px !important;
+                display: block;
+            }
+
+            .config-choice .choice-box span {
+                font-size: 9.5px !important;
+                line-height: 1.25 !important;
+                color: rgba(255, 255, 255, 0.65) !important;
+                display: block;
+            }
+
+        /* Compact Slider */
+        .glass-dialog .mb-4 {
+            margin-bottom: 8px !important;
+        }
+
+        .glass-dialog .form-label {
+            font-size: 10.5px !important;
+            margin-bottom: 3px !important;
+        }
+
+        .glass-dialog .custom-range {
+            height: 4px !important;
+            margin-top: 2px;
+        }
+
+        /* Blueprint result box */
+        .blueprint-result-box {
+            padding: 8px 10px !important;
+            margin-bottom: 8px !important;
+        }
+
+            .blueprint-result-box h5 {
+                font-size: 12px !important;
+            }
+
+            .blueprint-result-box .badge {
+                font-size: 8px !important;
+                padding: 3px 6px !important;
+            }
+
+            .blueprint-result-box .col-4 {
+                padding: 4px !important;
+            }
+
+                .blueprint-result-box .col-4 .small {
+                    font-size: 9px !important;
+                }
+
+                .blueprint-result-box .col-4 .h4,
+                .blueprint-result-box .col-4 .h5 {
+                    font-size: 13px !important;
+                }
+
+        /* Footer Buttons in Modal */
+        .glass-dialog .d-flex.justify-content-end {
+            gap: 6px !important;
+            padding-top: 6px !important;
+            margin-top: 4px !important;
+        }
+
+        .glass-dialog .btn-gold-action {
+            font-size: 11.5px !important;
+            padding: 7px 14px !important;
+            border-radius: 6px !important;
+        }
+
+        .glass-dialog .btn-outline-secondary {
+            font-size: 11.5px !important;
+            padding: 7px 12px !important;
+            border-radius: 6px !important;
+        }
+
+        /* Inquiry Quick Contact Modal compact on mobile */
+        .contact-card-box {
+            padding: 8px 10px !important;
+            font-size: 11px !important;
+            margin-bottom: 8px !important;
+        }
+
+        #quickContactForm .mb-2,
+        #quickContactForm .mb-3 {
+            margin-bottom: 6px !important;
+        }
+
+        #quickContactForm .form-label {
+            font-size: 10px !important;
+            margin-bottom: 1px !important;
+        }
+
+        #quickContactForm .form-control {
+            font-size: 11.5px !important;
+            padding: 5px 8px !important;
+            height: auto !important;
+        }
+
+        #quickContactForm textarea {
+            min-height: 50px;
+        }
+
+        #btnQuickSubmit {
+            font-size: 12px !important;
+            padding: 8px !important;
+        }
+    }
+
+    /* --------------------------------------------------------------------------
+   4. SMALL MOBILE / COMPACT PHONES (max-width: 480px)
+   -------------------------------------------------------------------------- */
+    @media (max-width: 480px) {
+        .header-inner {
+            padding: 0 3.5%;
+        }
+
+        .brand-logo-img {
+            height: 28px;
+        }
+
+        .rhine-sidenav {
+            width: 100vw;
+            max-width: 100vw;
+        }
+
+        .landing-eyebrow,
+        .about-eyebrow,
+        .how-eyebrow,
+        .industries-eyebrow,
+        .ourwork-eyebrow,
+        .insights-eyebrow,
+        .contact-eyebrow-label {
+            font-size: 11px;
+            letter-spacing: 0.18em;
+        }
+
+        .review-tag {
+            display: none; /* Hide on smallest screens to maximize content area */
+        }
+    }
+
+    /* ==========================================================================
+   5. ARABIC LANGUAGE (RTL) STYLING & TYPOGRAPHY
+   ========================================================================== */
+
+    [dir="rtl"] {
+        font-family: 'Cairo', 'Plus Jakarta Sans', sans-serif;
+        text-align: right;
+    }
+
+        [dir="rtl"] .brand-btn {
+            text-align: right;
+        }
+
+        [dir="rtl"] .sidenav-link {
+            text-align: right;
+        }
+
+            [dir="rtl"] .sidenav-link:hover {
+                padding-left: 20px;
+                padding-right: 26px;
+            }
+
+        [dir="rtl"] .dropdown-menu-end {
+            right: auto !important;
+            left: 0 !important;
+        }
+
+        /* Sidenav drawer for RTL */
+        [dir="rtl"] .rhine-sidenav {
+            right: auto;
+            left: 0;
+            border-left: none;
+            border-right: 1px solid rgba(204, 168, 119, 0.25);
+            transform: translateX(-100%);
+        }
+
+            [dir="rtl"] .rhine-sidenav.active {
+                transform: translateX(0);
+            }
+
+        /* Global Arabic font styling for headlines & subheads */
+        [dir="rtl"] .about-headline,
+        [dir="rtl"] .how-headline,
+        [dir="rtl"] .industries-headline,
+        [dir="rtl"] .ourwork-headline,
+        [dir="rtl"] .insights-headline,
+        [dir="rtl"] .contact-main-headline,
+        [dir="rtl"] .agentfactory-headline {
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 0;
+        }
+
+    /* ==========================================================================
+   DESKTOP, TAB & HIGHER DESKTOP (>= 768px):
+   Arabic content alignment SAME AS ENGLISH (LEFT-ALIGNED) for:
+   About Us, How It Works, Agent Factory, Industries, Our Work, Insights, Contact
+   ========================================================================== */
+    @media (min-width: 768px) {
+        /* Standard left-positioned content (no left vertical text) */
+        [dir="rtl"] .about-content,
+        [dir="rtl"] .industries-content,
+        [dir="rtl"] .ourwork-content,
+        [dir="rtl"] .insights-content {
+            text-align: left !important;
+            direction: ltr !important;
+            left: clamp(40px, 7.5vw, 110px) !important;
+            right: auto !important;
+        }
+
+        /* Agent Factory: generous left gap from left vertical text stack */
+        [dir="rtl"] .agentfactory-content {
+            text-align: left !important;
+            direction: ltr !important;
+            left: clamp(140px, 11vw, 185px) !important;
+            right: auto !important;
+            top: calc(var(--header-height) + 24px) !important;
+            max-width: 480px !important;
+        }
+
+        /* How It Works: generous left gap from left vertical text stack */
+        [dir="rtl"] .how-content {
+            text-align: left !important;
+            direction: ltr !important;
+            left: clamp(145px, 12vw, 190px) !important;
+            right: auto !important;
+            top: calc(var(--header-height) + 36px) !important;
+            max-width: 490px !important;
+        }
+
+        /* Contact Us: generous left position and strict LTR flex alignment */
+        [dir="rtl"] .contact-content {
+            text-align: left !important;
+            direction: ltr !important;
+            left: clamp(40px, 6vw, 90px) !important;
+            right: auto !important;
+            width: 44% !important;
+            max-width: 500px !important;
+        }
+
+        /* Headlines */
+        [dir="rtl"] .about-headline,
+        [dir="rtl"] .how-headline,
+        [dir="rtl"] .industries-headline,
+        [dir="rtl"] .ourwork-headline,
+        [dir="rtl"] .insights-headline,
+        [dir="rtl"] .contact-main-headline,
+        [dir="rtl"] .agentfactory-headline {
+            text-align: left !important;
+            margin-bottom: 18px !important;
+        }
+
+            [dir="rtl"] .about-headline *,
+            [dir="rtl"] .how-headline *,
+            [dir="rtl"] .industries-headline *,
+            [dir="rtl"] .ourwork-headline *,
+            [dir="rtl"] .insights-headline *,
+            [dir="rtl"] .contact-main-headline *,
+            [dir="rtl"] .agentfactory-headline *,
+            [dir="rtl"] .contact-gold-line,
+            [dir="rtl"] .insights-headline-gold,
+            [dir="rtl"] .ourwork-headline-gold,
+            [dir="rtl"] .how-headline-gold {
+                text-align: left !important;
+            }
+
+        /* Descriptions & Sublines with proper line-height and bottom gaps */
+        [dir="rtl"] .about-subhead,
+        [dir="rtl"] .how-desc,
+        [dir="rtl"] .industries-desc,
+        [dir="rtl"] .ourwork-desc,
+        [dir="rtl"] .insights-desc,
+        [dir="rtl"] .agentfactory-desc {
+            text-align: left !important;
+            margin-bottom: 26px !important;
+            line-height: 1.7 !important;
+        }
+
+        [dir="rtl"] .contact-subline {
+            text-align: left !important;
+            margin-bottom: 28px !important;
+            line-height: 1.65 !important;
+        }
+
+        /* Eyebrows */
+        [dir="rtl"] .about-eyebrow,
+        [dir="rtl"] .industries-eyebrow,
+        [dir="rtl"] .ourwork-eyebrow,
+        [dir="rtl"] .insights-eyebrow,
+        [dir="rtl"] .contact-eyebrow,
+        [dir="rtl"] .agentfactory-eyebrow {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            text-align: left !important;
+            direction: ltr !important;
+            gap: 14px !important;
+            margin-bottom: 16px !important;
+        }
+
+        [dir="rtl"] .how-eyebrow {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            text-align: left !important;
+            direction: ltr !important;
+            gap: 4px !important;
+            margin-bottom: 16px !important;
+        }
+
+        [dir="rtl"] .about-eyebrow-text,
+        [dir="rtl"] .how-eyebrow-text,
+        [dir="rtl"] .industries-eyebrow span,
+        [dir="rtl"] .ourwork-eyebrow-text,
+        [dir="rtl"] .insights-eyebrow-text,
+        [dir="rtl"] .contact-eyebrow-label,
+        [dir="rtl"] .agentfactory-eyebrow-text {
+            text-align: left !important;
+        }
+
+        [dir="rtl"] .industries-headline-bar {
+            margin-left: 0 !important;
+            margin-right: auto !important;
+        }
+
+        /* Contact Details: strictly left-aligned rows, no staircase offset, generous gaps */
+        [dir="rtl"] .contact-details-list {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            justify-content: flex-start !important;
+            direction: ltr !important;
+            width: 100% !important;
+            gap: 20px !important;
+            margin-top: 10px !important;
+            margin-bottom: 34px !important;
+            text-align: left !important;
+        }
+
+        [dir="rtl"] .contact-detail-row {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: flex-start !important;
+            justify-content: flex-start !important;
+            text-align: left !important;
+            direction: ltr !important;
+            gap: 16px !important;
+            width: auto !important;
+            margin-left: 0 !important;
+            margin-right: auto !important;
+        }
+
+        [dir="rtl"] .contact-icon-badge {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            flex-shrink: 0 !important;
+        }
+
+        [dir="rtl"] .contact-detail-body {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            text-align: left !important;
+            direction: ltr !important;
+            gap: 2px !important;
+        }
+
+            [dir="rtl"] .contact-detail-body strong,
+            [dir="rtl"] .contact-detail-body span,
+            [dir="rtl"] .contact-detail-body a {
+                text-align: left !important;
+                direction: ltr !important;
+                display: block !important;
+            }
+
+        [dir="rtl"] .contact-tagline {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            direction: ltr !important;
+            text-align: left !important;
+            gap: 14px !important;
+            margin-top: 24px !important;
+        }
+
+        /* Action buttons & badges */
+        [dir="rtl"] .about-cta-btn,
+        [dir="rtl"] .how-cta-btn,
+        [dir="rtl"] .ourwork-cta-btn,
+        [dir="rtl"] .insights-cta-btn {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            direction: ltr !important;
+            align-self: flex-start !important;
+        }
+
+        [dir="rtl"] .about-feature-item,
+        [dir="rtl"] .how-badge-item,
+        [dir="rtl"] .insights-card,
+        [dir="rtl"] .industries-tagline,
+        [dir="rtl"] .ourwork-tagline,
+        [dir="rtl"] .insights-tagline {
+            text-align: left !important;
+            direction: ltr !important;
+        }
+
+        [dir="rtl"] .about-feature-item {
+            align-items: flex-start !important;
+        }
+
+        [dir="rtl"] .about-feature-title,
+        [dir="rtl"] .about-feature-desc,
+        [dir="rtl"] .how-badge-title,
+        [dir="rtl"] .how-badge-desc,
+        [dir="rtl"] .insights-card-title,
+        [dir="rtl"] .insights-card-desc {
+            text-align: left !important;
+            font-family: 'Cairo', sans-serif !important;
+        }
+
+        /* Agent Factory Buttons: generous gap and clean row flow */
+        [dir="rtl"] .agentfactory-btn-row {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            direction: ltr !important;
+            gap: 16px !important;
+            margin-top: 8px !important;
+        }
+
+        [dir="rtl"] .agentfactory-vertical-text {
+            left: clamp(18px, 2.2vw, 36px) !important;
+            right: auto !important;
+        }
+    }
+
+    /* Mobile only (< 768px): Stack layout */
+    @media (max-width: 767.98px) {
+        [dir="rtl"] .about-content,
+        [dir="rtl"] .how-content,
+        [dir="rtl"] .industries-content,
+        [dir="rtl"] .ourwork-content,
+        [dir="rtl"] .insights-content,
+        [dir="rtl"] .contact-content {
+            right: auto;
+            left: auto;
+            text-align: right;
+        }
+
+        [dir="rtl"] .about-cta-btn {
+            margin-right: 0;
+            margin-left: 0;
+        }
+    }
+
+    /*.contact-content {
+    position: absolute;
+    top: 50%;
+    right: 70%;
+    left: auto;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 100%;
+    max-width: 490px;
+    padding: 0;
+    text-align: right;
+    color: #ffffff;
+    box-sizing: border-box;
 }
 
-/* Mobile (≤ 768px) */
-@media (max-width: 768px) {
+    .contact-content .contact-main-headline,
+    .contact-content .contact-subline,
+    .contact-content .contact-address-line,
+    .contact-content .contact-comm-line {
+        text-align: right;
+        color: #ffffff;
+    }*/
+
+
+    /* Contact content - LEFT side of background image */
+    .contact-content {
+        position: absolute;
+        top: 50%;
+        left: 5%;
+        right: auto;
+        transform: translateY(-50%);
+        width: 42%;
+        max-width: 490px;
+        padding: 20px;
+        box-sizing: border-box;
+        z-index: 10;
+        color: #ffffff;
+        text-align: left;
+    }
+
+    /* English content */
+    [dir="ltr"] .contact-content,
+    [dir="ltr"] .contact-content .contact-main-headline,
+    [dir="ltr"] .contact-content .contact-subline {
+        text-align: left;
+    }
+
+    /* Arabic content mobile fallback */
+    @media (max-width: 767.98px) {
+        [dir="rtl"] .contact-content,
+        [dir="rtl"] .contact-content .contact-main-headline,
+        [dir="rtl"] .contact-content .contact-subline {
+            text-align: right;
+        }
+    }
+
+    /* Address and contact details */
+    .contact-content .contact-address-line,
+    .contact-content .contact-comm-line {
+        color: #ffffff;
+        line-height: 1.8;
+    }
+
+    /* Tablet and mobile */
+    @media (max-width: 767px) {
+        .contact-content {
+            left: 5%;
+            right: auto;
+            width: 90%;
+            max-width: none;
+            padding: 12px;
+        }
+    }
+
+
+    /* ==========================================================================
+   AGENT FACTORY PAGE
+   ========================================================================== */
+
+    .agentfactory-page-section {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #040e1a;
+    }
+
+    /* Background image: Agent-Factory.png */
+    .agentfactory-bg-wrap {
+        position: absolute;
+        inset: 0;
+        background-image: url('/images/Agent-Factory.png');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        transform: scale(1.02);
+        transition: transform 0.8s ease;
+        z-index: 0;
+        TOP: 80PX;
+    }
+
+    /* Soft gradient overlay: brighten left side, subtle vignette for readability without darkening the factory artwork */
     .agentfactory-overlay {
-        background: linear-gradient(
-            180deg,
-            rgba(4, 14, 26, 0.85) 0%,
-            rgba(4, 14, 26, 0.75) 60%,
-            rgba(4, 14, 26, 0.90) 100%
-        );
+        position: absolute;
+        inset: 0;
+        background: linear-gradient( 90deg, rgba(4, 14, 26, 0.45) 0%, rgba(4, 14, 26, 0.28) 28%, rgba(4, 14, 26, 0.10) 45%, rgba(4, 14, 26, 0) 65% );
+        z-index: 1;
+        pointer-events: none;
     }
 
-    .agentfactory-content {
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none;
-        max-width: 100%;
-        padding: calc(var(--header-height) + 24px) 6% 16px;
-        z-index: 3;
-    }
-
+    /* Top-right watermark / mezzanine branding */
     .agentfactory-watermark {
-        position: relative;
-        top: auto;
-        right: auto;
-        width: 100%;
-        padding: 0 6%;
-        margin-top: 14px;
-        margin-bottom: 6px;
+        position: absolute;
+        top: calc(var(--header-height) + 16px);
+        right: 3%;
         display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: clamp(520px, 47vw, 760px);
+        z-index: 3;
+        pointer-events: none;
     }
 
+    .af-wm-tagline {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(0.6rem, 0.8vw, 0.76rem);
+        font-weight: 700;
+        letter-spacing: 0.26em;
+        color: #f2bd48;
+        text-transform: uppercase;
+        opacity: 0.95;
+        text-shadow: 0 0 12px rgba(242, 189, 72, 0.5);
+    }
+
+    .af-wm-brand {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        line-height: 1.1;
+    }
+
+    .af-wm-name {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(0.78rem, 1vw, 0.95rem);
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        color: #ffffff;
+    }
+
+    .af-wm-sub {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(0.44rem, 0.55vw, 0.54rem);
+        font-weight: 600;
+        letter-spacing: 0.24em;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* 5-Stage Agent Factory Pipeline Cards (Define, Build, Challenge, Validate, Prepare) */
     .af-pipeline-container {
-        position: relative;
-        top: auto;
-        right: auto;
-        width: 100%;
-        max-width: 100%;
-        overflow-x: auto;
-        padding: 14px 6%;
-        margin-top: 12px;
-        margin-bottom: 24px;
-        justify-content: flex-start;
-        gap: 8px;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(80, 200, 255, 0.5) transparent;
+        position: absolute;
+        top: calc(var(--header-height) + 100px);
+        right: 3%;
+        display: flex;
+        align-items: center;
+        gap: clamp(6px, 0.8vw, 13px);
         z-index: 4;
     }
 
     .af-stage-card {
-        flex: 0 0 110px;
-        width: 110px;
-        min-height: 148px;
-    }
-
-    .agentfactory-page-section {
-        overflow-y: auto;
-    }
-
-    .agentfactory-vertical-text {
-        display: none;
-    }
-
-    .agentfactory-desk-badge,
-    .agentfactory-crate-badge {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        right: auto;
-        padding: 10px 6%;
-    }
-
-    .agentfactory-btn-row {
+        width: clamp(92px, 8.4vw, 132px);
+        min-height: clamp(142px, 17vh, 184px);
+        background: rgba(6, 26, 44, 0.72);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1.5px solid rgba(80, 200, 255, 0.42);
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(56, 189, 248, 0.22);
+        padding: clamp(12px, 1.3vw, 16px) clamp(8px, 0.9vw, 12px) clamp(10px, 1.1vw, 14px);
+        display: flex;
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
     }
 
-    .agentfactory-btn-primary,
-    .agentfactory-btn-secondary {
-        width: 100%;
+        .af-stage-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(125, 211, 252, 0.9);
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65), 0 0 28px rgba(56, 189, 248, 0.45);
+        }
+
+    .af-card-icon {
+        color: #7dd3fc;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
         justify-content: center;
+        filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.65));
     }
 
-    .agentfactory-headline {
-        font-size: clamp(1.8rem, 7vw, 2.4rem);
-    }
-}
+        .af-card-icon svg {
+            width: clamp(20px, 1.6vw, 25px);
+            height: clamp(20px, 1.6vw, 25px);
+        }
 
-/* Small mobile (≤ 480px) */
-@media (max-width: 480px) {
-    .agentfactory-headline {
-        font-size: 1.8rem;
+    .af-card-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(0.74rem, 0.88vw, 0.92rem);
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        color: #ffffff;
+        margin: 0 0 clamp(8px, 1vw, 12px);
+        text-transform: uppercase;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.55), 0 2px 4px rgba(0, 0, 0, 0.8);
     }
-}
 
-/* Large desktop / Mac (≥ 1440px) */
-@media (min-width: 1440px) {
+    .af-card-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(2px, 0.35vw, 5px);
+        width: 100%;
+    }
+
+        .af-card-list li {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(0.52rem, 0.64vw, 0.68rem);
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            color: rgba(224, 242, 254, 0.88);
+            line-height: 1.45;
+            text-transform: uppercase;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+        }
+
+    .af-pipeline-arrow {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(1rem, 1.4vw, 1.5rem);
+        font-weight: 700;
+        color: #f2bd48;
+        opacity: 0.9;
+        filter: drop-shadow(0 0 8px rgba(242, 189, 72, 0.7));
+        user-select: none;
+        line-height: 1;
+    }
+
+    /* Left vertical text */
+    .agentfactory-vertical-text {
+        position: absolute;
+        left: clamp(18px, 2.2vw, 36px);
+        top: calc(var(--header-height) + 80px);
+        transform: none;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        z-index: 3;
+        pointer-events: none;
+    }
+
+        .agentfactory-vertical-text span {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(0.46rem, 0.55vw, 0.6rem);
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            color: rgba(255, 255, 255, 0.42);
+            text-transform: uppercase;
+            white-space: nowrap;
+            line-height: 1.35;
+        }
+
+    .agentfactory-vertical-line {
+        width: 1px !important;
+        height: 32px !important;
+        background: rgba(204, 168, 119, 0.45) !important;
+        margin: 10px 0 !important;
+        letter-spacing: 0 !important;
+    }
+
+    /* Main left-side content block */
     .agentfactory-content {
-        max-width: 480px;
-        left: 7%;
+        position: absolute;
+        top: calc(var(--header-height) + 20px);
+        left: clamp(130px, 10.5vw, 175px);
+        transform: none;
+        max-width: 470px;
+        z-index: 3;
     }
 
+    /* Eyebrow */
+    .agentfactory-eyebrow {
+        margin-bottom: 12px;
+    }
+
+    .agentfactory-eyebrow-text {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.24em;
+        color: var(--gold-primary);
+        text-transform: uppercase;
+        opacity: 0.95;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+    }
+
+    /* Headline */
     .agentfactory-headline {
-        font-size: 3.5rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(2rem, 3.1vw, 2.85rem);
+        font-weight: 800;
+        line-height: 1.12;
+        color: #ffffff;
+        margin: 0 0 18px;
+        letter-spacing: -0.02em;
+        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8);
     }
-}
 
-/* Extra Large (≥ 1920px) */
-@media (min-width: 1920px) {
-    .agentfactory-content {
-        max-width: 520px;
+    .agentfactory-headline-gold {
+        background: var(--gold-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
-    .agentfactory-headline {
-        font-size: 3.8rem;
+    /* Description */
+    .agentfactory-desc {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: clamp(0.86rem, 0.95vw, 0.94rem);
+        font-weight: 400;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.88);
+        margin: 0 0 24px;
+        max-width: 420px;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
     }
-}
 
-/* ==========================================================================
+    /* CTA Buttons */
+    .agentfactory-btn-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .agentfactory-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 22px;
+        border: none;
+        border-radius: 6px;
+        background: #f2bd48;
+        color: #071522;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.86rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        cursor: pointer;
+        transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.18s;
+        white-space: nowrap;
+    }
+
+        .agentfactory-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(204, 168, 119, 0.35);
+            opacity: 0.94;
+        }
+
+    .agentfactory-btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 20px;
+        border: 1.5px solid rgba(255, 255, 255, 0.35);
+        border-radius: 6px;
+        background: rgba(4, 14, 26, 0.35);
+        color: rgba(255, 255, 255, 0.88);
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.86rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        cursor: pointer;
+        transition: all 0.22s ease;
+        white-space: nowrap;
+        backdrop-filter: blur(8px);
+    }
+
+        .agentfactory-btn-secondary:hover {
+            border-color: rgba(204, 168, 119, 0.65);
+            color: var(--gold-primary);
+            background: rgba(204, 168, 119, 0.12);
+        }
+
+    /* Bottom left desk badge (placed right on the control desk front panel) */
+    .agentfactory-desk-badge {
+        position: absolute;
+        bottom: clamp(9%, 13.5vh, 17%);
+        left: clamp(140px, 14.8vw, 220px);
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        z-index: 3;
+        pointer-events: none;
+    }
+
+    .af-desk-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(0.55rem, 0.72vw, 0.7rem);
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        color: rgba(255, 255, 255, 0.55);
+        text-transform: uppercase;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+    }
+
+    .af-desk-subtitle {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(0.55rem, 0.72vw, 0.7rem);
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        color: var(--gold-primary);
+        opacity: 0.92;
+        text-transform: uppercase;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+    }
+
+    .af-desk-gold-bar {
+        width: 32px;
+        height: 2px;
+        background: var(--gold-primary);
+        margin-top: 4px;
+        opacity: 0.85;
+    }
+
+    /* Bottom right crate badge (placed directly on the crate panel at bottom-right) */
+    .agentfactory-crate-badge {
+        position: absolute;
+        bottom: clamp(6%, 8vh, 11%);
+        right: clamp(100px, 10.5vw, 165px);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 2px;
+        z-index: 3;
+        pointer-events: none;
+    }
+
+        .agentfactory-crate-badge span {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(0.48rem, 0.62vw, 0.6rem);
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.52);
+            text-transform: uppercase;
+            text-align: right;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+        }
+
+    .af-crate-gold-bar {
+        width: 28px;
+        height: 2px;
+        background: var(--gold-primary);
+        margin-top: 4px;
+        opacity: 0.75;
+    }
+
+    /* ==========================================================================
+   RESPONSIVE — AGENT FACTORY
+   ========================================================================== */
+
+    /* Tablet (769px – 1199px) */
+    @media (min-width: 769px) and (max-width: 1199px) {
+        .agentfactory-content {
+            max-width: 380px;
+            left: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .agentfactory-vertical-text {
+            display: none;
+        }
+
+        .af-pipeline-container {
+            top: calc(var(--header-height) + 52px);
+            right: 2%;
+            gap: 6px;
+        }
+
+        .af-stage-card {
+            width: 86px;
+            min-height: 135px;
+            padding: 10px 6px 8px;
+        }
+
+        .af-card-title {
+            font-size: 0.68rem;
+        }
+
+        .af-card-list li {
+            font-size: 0.5rem;
+        }
+    }
+
+    /* Mobile (≤ 768px) */
+    @media (max-width: 768px) {
+        .agentfactory-overlay {
+            background: linear-gradient( 180deg, rgba(4, 14, 26, 0.85) 0%, rgba(4, 14, 26, 0.75) 60%, rgba(4, 14, 26, 0.90) 100% );
+        }
+
+        .agentfactory-content {
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+            max-width: 100%;
+            padding: calc(var(--header-height) + 24px) 6% 16px;
+            z-index: 3;
+        }
+
+        .agentfactory-watermark {
+            position: relative;
+            top: auto;
+            right: auto;
+            width: 100%;
+            padding: 0 6%;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            display: flex;
+        }
+
+        .af-pipeline-container {
+            position: relative;
+            top: auto;
+            right: auto;
+            width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+            padding: 14px 6%;
+            margin-top: 12px;
+            margin-bottom: 24px;
+            justify-content: flex-start;
+            gap: 8px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(80, 200, 255, 0.5) transparent;
+            z-index: 4;
+        }
+
+        .af-stage-card {
+            flex: 0 0 110px;
+            width: 110px;
+            min-height: 148px;
+        }
+
+        .agentfactory-page-section {
+            overflow-y: auto;
+        }
+
+        .agentfactory-vertical-text {
+            display: none;
+        }
+
+        .agentfactory-desk-badge,
+        .agentfactory-crate-badge {
+            position: relative;
+            bottom: auto;
+            left: auto;
+            right: auto;
+            padding: 10px 6%;
+        }
+
+        .agentfactory-btn-row {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .agentfactory-btn-primary,
+        .agentfactory-btn-secondary {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .agentfactory-headline {
+            font-size: clamp(1.8rem, 7vw, 2.4rem);
+        }
+    }
+
+    /* Small mobile (≤ 480px) */
+    @media (max-width: 480px) {
+        .agentfactory-headline {
+            font-size: 1.8rem;
+        }
+    }
+
+    /* Large desktop / Mac (≥ 1440px) */
+    @media (min-width: 1440px) {
+        .agentfactory-content {
+            max-width: 480px;
+            left: 7%;
+        }
+
+        .agentfactory-headline {
+            font-size: 3.5rem;
+        }
+    }
+
+    /* Extra Large (≥ 1920px) */
+    @media (min-width: 1920px) {
+        .agentfactory-content {
+            max-width: 520px;
+        }
+
+        .agentfactory-headline {
+            font-size: 3.8rem;
+        }
+    }
+
+    /* ==========================================================================
    RESPONSIVE NAV — Better wrapping for larger nav with Agent Factory
    ========================================================================== */
 
-@media (min-width: 1024px) and (max-width: 1280px) {
-    .center-nav .nav-item-btn {
-        font-size: 0.78rem;
-        padding: 7px 8px;
-        letter-spacing: 0.02em;
+    @media (min-width: 1024px) and (max-width: 1280px) {
+        .center-nav .nav-item-btn {
+            font-size: 0.78rem;
+            padding: 7px 8px;
+            letter-spacing: 0.02em;
+        }
+
+        .header-inner {
+            padding: 0 2%;
+        }
     }
 
-    .header-inner {
-        padding: 0 2%;
+    @media (max-width: 1023px) {
+        /* On tablet/mobile, hide center nav and show hamburger */
+        .center-nav {
+            display: none !important;
+        }
     }
-}
 
-@media (max-width: 1023px) {
-    /* On tablet/mobile, hide center nav and show hamburger */
-    .center-nav {
-        display: none !important;
+    /* Ensure page sections handle overflow properly on mobile */
+    @media (max-width: 768px) {
+        .agentfactory-page-section.active {
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
     }
-}
 
-/* Ensure page sections handle overflow properly on mobile */
-@media (max-width: 768px) {
-    .agentfactory-page-section.active {
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-}
-
-/* ==========================================================================
+    /* ==========================================================================
    RTL SUPPORT — Agent Factory
    ========================================================================== */
-[dir="rtl"] .agentfactory-content {
-    left: auto;
-    right: 6.5%;
-    text-align: right;
-}
+    @media (max-width: 768px) {
+        [dir="rtl"] .agentfactory-content {
+            text-align: right;
+        }
+    }
 
-[dir="rtl"] .agentfactory-vertical-text {
-    left: auto;
-    right: 1.8%;
-}
-
-[dir="rtl"] .agentfactory-desk-badge {
-    left: auto;
-    right: 6.5%;
-}
-
-[dir="rtl"] .agentfactory-crate-badge {
-    right: auto;
-    left: 3.5%;
-    align-items: flex-start;
-}
-
-[dir="rtl"] .agentfactory-crate-badge span {
-    text-align: left;
-}
-
-[dir="rtl"] .agentfactory-watermark {
-    right: auto;
-    left: 3.5%;
-    align-items: flex-start;
-}
-
-[dir="rtl"] .af-wm-brand {
-    align-items: flex-start;
-}
-
-[dir="rtl"] .agentfactory-btn-row {
-    flex-direction: row-reverse;
-}
-
-[dir="rtl"] .af-pipeline-container {
-    right: auto;
-    left: 3%;
-    flex-direction: row-reverse;
-}
-
-[dir="rtl"] .af-pipeline-arrow {
-    transform: rotate(180deg);
-}
-
-@media (max-width: 768px) {
-    [dir="rtl"] .agentfactory-content {
-        right: auto;
+    [dir="rtl"] .agentfactory-vertical-text {
         left: auto;
-        text-align: right;
+        right: 1.8%;
     }
-    [dir="rtl"] .agentfactory-btn-row {
-        flex-direction: column;
-        align-items: stretch;
+
+    [dir="rtl"] .agentfactory-desk-badge {
+        left: auto;
+        right: 6.5%;
     }
-}
+
+    [dir="rtl"] .agentfactory-crate-badge {
+        right: auto;
+        left: 3.5%;
+        align-items: flex-start;
+    }
+
+        [dir="rtl"] .agentfactory-crate-badge span {
+            text-align: left;
+        }
+
+    [dir="rtl"] .agentfactory-watermark {
+        right: auto;
+        left: 3.5%;
+        align-items: flex-start;
+    }
+
+    [dir="rtl"] .af-wm-brand {
+        align-items: flex-start;
+    }
+
+    @media (max-width: 768px) {
+        [dir="rtl"] .agentfactory-btn-row {
+            flex-direction: row-reverse;
+        }
+    }
+
+    [dir="rtl"] .af-pipeline-container {
+        /*right: auto;
+    left: 3%;
+    flex-direction: row-reverse;*/
+    }
+
+    [dir="rtl"] .af-pipeline-arrow {
+        transform: rotate(180deg);
+    }
+
+    @media (max-width: 768px) {
+        [dir="rtl"] .agentfactory-content {
+            right: auto;
+            left: auto;
+            text-align: right;
+        }
+
+        [dir="rtl"] .agentfactory-btn-row {
+            flex-direction: column;
+            align-items: stretch;
+        }
+    }
