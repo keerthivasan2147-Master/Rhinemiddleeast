@@ -7,7 +7,7 @@
 (function () {
     'use strict';
 
-    const order = ['home', 'how', 'agentfactory', 'about', 'industries', 'ourwork', 'insights', 'contact'];
+    const order = ['home', 'about', 'how', 'agentfactory', 'industries', 'ourwork', 'insights', 'contact'];
 
     const RhineApp = {
         init: function () {
@@ -210,7 +210,7 @@
                 industries: 'Industries',
                 ourwork: 'Our Work',
                 insights: 'Insights',
-                contact: 'Contact Us',
+                contact: 'Contact',
                 getInTouch: 'Contact Us →'
             },
             home: {

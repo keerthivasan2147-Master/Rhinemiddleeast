@@ -2759,18 +2759,19 @@ body.sidenav-open {
     transform: scale(1.02);
     transition: transform 0.8s ease;
     z-index: 0;
+    TOP: 80PX;
 }
 
-/* Soft gradient overlay: keeps left text crisp while letting right factory artwork shine */
+/* Soft gradient overlay: brighten left side, subtle vignette for readability without darkening the factory artwork */
 .agentfactory-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
         90deg,
-        rgba(4, 14, 26, 0.90) 0%,
-        rgba(4, 14, 26, 0.72) 32%,
-        rgba(4, 14, 26, 0.24) 52%,
-        rgba(4, 14, 26, 0) 70%
+        rgba(4, 14, 26, 0.45) 0%,
+        rgba(4, 14, 26, 0.28) 28%,
+        rgba(4, 14, 26, 0.10) 45%,
+        rgba(4, 14, 26, 0) 65%
     );
     z-index: 1;
     pointer-events: none;
@@ -2826,7 +2827,7 @@ body.sidenav-open {
 /* 5-Stage Agent Factory Pipeline Cards (Define, Build, Challenge, Validate, Prepare) */
 .af-pipeline-container {
     position: absolute;
-    top: calc(var(--header-height) + 64px);
+    top: calc(var(--header-height) + 100px);
     right: 3%;
     display: flex;
     align-items: center;
@@ -2917,9 +2918,9 @@ body.sidenav-open {
 /* Left vertical text */
 .agentfactory-vertical-text {
     position: absolute;
-    left: 1.8%;
-    top: 50%;
-    transform: translateY(-50%);
+    left: clamp(18px, 2.2vw, 36px);
+    top: calc(var(--header-height) + 80px);
+    transform: none;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -2930,57 +2931,59 @@ body.sidenav-open {
 
 .agentfactory-vertical-text span {
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(0.46rem, 0.65vw, 0.62rem);
+    font-size: clamp(0.46rem, 0.55vw, 0.6rem);
     font-weight: 700;
     letter-spacing: 0.22em;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.42);
     text-transform: uppercase;
     white-space: nowrap;
-    line-height: 1.3;
+    line-height: 1.35;
 }
 
 .agentfactory-vertical-line {
     width: 1px !important;
-    height: 24px !important;
-    background: rgba(204, 168, 119, 0.35) !important;
-    margin: 8px 0 !important;
+    height: 32px !important;
+    background: rgba(204, 168, 119, 0.45) !important;
+    margin: 10px 0 !important;
     letter-spacing: 0 !important;
 }
 
 /* Main left-side content block */
 .agentfactory-content {
     position: absolute;
-    top: 50%;
-    left: clamp(140px, 12vw, 180px);
-    transform: translateY(-52%);
-    max-width: 460px;
+    top: calc(var(--header-height) + 20px);
+    left: clamp(130px, 10.5vw, 175px);
+    transform: none;
+    max-width: 470px;
     z-index: 3;
 }
 
 /* Eyebrow */
 .agentfactory-eyebrow {
-    margin-bottom: 14px;
+    margin-bottom: 12px;
 }
 
 .agentfactory-eyebrow-text {
     font-family: 'Outfit', sans-serif;
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.24em;
     color: var(--gold-primary);
     text-transform: uppercase;
     opacity: 0.95;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
 }
 
 /* Headline */
 .agentfactory-headline {
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(1.85rem, 2.7vw, 2.5rem);
-    font-weight: 700;
-    line-height: 1.15;
+    font-size: clamp(2rem, 3.1vw, 2.85rem);
+    font-weight: 800;
+    line-height: 1.12;
     color: #ffffff;
-    margin: 0 0 16px;
-    letter-spacing: -0.015em;
+    margin: 0 0 18px;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8);
 }
 
 .agentfactory-headline-gold {
@@ -2993,11 +2996,13 @@ body.sidenav-open {
 /* Description */
 .agentfactory-desc {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.92rem;
+    font-size: clamp(0.86rem, 0.95vw, 0.94rem);
     font-weight: 400;
-    line-height: 1.65;
-    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.88);
     margin: 0 0 24px;
+    max-width: 420px;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
 }
 
 /* CTA Buttons */
@@ -3005,7 +3010,7 @@ body.sidenav-open {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     flex-wrap: wrap;
 }
 
@@ -3013,15 +3018,15 @@ body.sidenav-open {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 26px;
+    padding: 10px 22px;
     border: none;
     border-radius: 6px;
     background: #f2bd48;
     color: #071522;
     font-family: 'Outfit', sans-serif;
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     cursor: pointer;
     transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.18s;
     white-space: nowrap;
@@ -3037,15 +3042,15 @@ body.sidenav-open {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 11px 24px;
+    padding: 9px 20px;
     border: 1.5px solid rgba(255, 255, 255, 0.35);
     border-radius: 6px;
     background: rgba(4, 14, 26, 0.35);
     color: rgba(255, 255, 255, 0.88);
     font-family: 'Outfit', sans-serif;
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     font-weight: 600;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     cursor: pointer;
     transition: all 0.22s ease;
     white-space: nowrap;
@@ -3058,11 +3063,11 @@ body.sidenav-open {
     background: rgba(204, 168, 119, 0.12);
 }
 
-/* Bottom left desk badge */
+/* Bottom left desk badge (placed right on the control desk front panel) */
 .agentfactory-desk-badge {
     position: absolute;
-    bottom: 4%;
-    left: 6.5%;
+    bottom: clamp(9%, 13.5vh, 17%);
+    left: clamp(140px, 14.8vw, 220px);
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -3072,21 +3077,23 @@ body.sidenav-open {
 
 .af-desk-title {
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(0.55rem, 0.8vw, 0.72rem);
+    font-size: clamp(0.55rem, 0.72vw, 0.7rem);
     font-weight: 700;
     letter-spacing: 0.2em;
-    color: rgba(255, 255, 255, 0.32);
+    color: rgba(255, 255, 255, 0.55);
     text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 .af-desk-subtitle {
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(0.55rem, 0.8vw, 0.72rem);
+    font-size: clamp(0.55rem, 0.72vw, 0.7rem);
     font-weight: 800;
     letter-spacing: 0.2em;
     color: var(--gold-primary);
-    opacity: 0.75;
+    opacity: 0.92;
     text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 .af-desk-gold-bar {
@@ -3094,14 +3101,14 @@ body.sidenav-open {
     height: 2px;
     background: var(--gold-primary);
     margin-top: 4px;
-    opacity: 0.6;
+    opacity: 0.85;
 }
 
-/* Bottom right crate badge */
+/* Bottom right crate badge (placed directly on the crate panel at bottom-right) */
 .agentfactory-crate-badge {
     position: absolute;
-    bottom: 4%;
-    right: 3.5%;
+    bottom: clamp(6%, 8vh, 11%);
+    right: clamp(100px, 10.5vw, 165px);
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -3112,12 +3119,13 @@ body.sidenav-open {
 
 .agentfactory-crate-badge span {
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(0.48rem, 0.68vw, 0.62rem);
+    font-size: clamp(0.48rem, 0.62vw, 0.6rem);
     font-weight: 700;
     letter-spacing: 0.2em;
-    color: rgba(255, 255, 255, 0.28);
+    color: rgba(255, 255, 255, 0.52);
     text-transform: uppercase;
     text-align: right;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 .af-crate-gold-bar {
@@ -3125,7 +3133,7 @@ body.sidenav-open {
     height: 2px;
     background: var(--gold-primary);
     margin-top: 4px;
-    opacity: 0.5;
+    opacity: 0.75;
 }
 
 /* ==========================================================================
