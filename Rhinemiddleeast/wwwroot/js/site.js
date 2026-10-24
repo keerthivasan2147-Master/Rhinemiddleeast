@@ -215,10 +215,22 @@
             },
             home: {
                 eyebrow: 'INTELLIGENT WORKFORCES FOR A REAL WORLD',
-                title: 'People and AI<br />Working for<br /><span class="hero-gold-text">What\'s Next.</span>',
-                desc: 'We design industry-specific workforce platforms where human talent and governed AI agents work together to achieve real business outcomes.',
+                title: 'People and AI.<br />Working for <span class="hero-gold-text">What\'s Next.</span>',
+                desc: 'RHINE designs industry-specific operating platforms where human talent and governed AI agents work together as one coordinated workforce.',
                 cta: 'Build Your Company &rarr;',
-                tagline: '<span class="tagline-row">SAME PEOPLE.</span><span class="tagline-row">BIGGER POSSIBILITIES.</span>'
+                tagline: '<span class="landing-tagline-bar"></span><span class="tagline-row">SAME PEOPLE.</span><span class="tagline-row">BIGGER POSSIBILITIES.</span>'
+            },
+            agentfactory: {
+                eyebrow: 'AGENT FACTORY',
+                title: 'Where Intelligent<br />Agents Are <span class="agentfactory-headline-gold">Built.</span>',
+                desc: 'From defining business roles to preparing real deployment, RHINE transforms operational needs into high-quality AI agents through a governed multi-stage production process.',
+                ctaPrimary: 'Talk to RHINE &rarr;',
+                ctaSecondary: 'Back to Home',
+                s1Title: 'DEFINE', s1_1: 'ROLES', s1_2: 'GOALS', s1_3: 'KNOWLEDGE',
+                s2Title: 'BUILD', s2_1: 'TOOLS', s2_2: 'SKILLS', s2_3: 'CAPABILITIES',
+                s3Title: 'CHALLENGE', s3_1: 'TEST', s3_2: 'RED TEAM', s3_3: 'STRESS',
+                s4Title: 'VALIDATE', s4_1: 'QUALITY', s4_2: 'SAFETY', s4_3: 'PERFORMANCE',
+                s5Title: 'PREPARE', s5_1: 'DEPLOY', s5_2: 'MONITOR', s5_3: 'SCALE'
             },
             about: {
                 eyebrow: 'ABOUT RHINE',
@@ -321,9 +333,21 @@
             home: {
                 eyebrow: 'قوى عاملة ذكية لعالم حقيقي',
                 title: 'كوادر بشرية وذكاء اصطناعي<br />يعملان لصناعة<br /><span class="hero-gold-text">المستقبل.</span>',
-                desc: 'نصمم منصات قوى عاملة متخصصة لكل قطاع، تجمع بين الكفاءات البشرية ووكلاء الذكاء الاصطناعي الخاضعين للحوكمة لتحقيق نتائج أعمال حقيقية.',
+                desc: 'تصمم راين منصات تشغيل متخصصة لكل قطاع حيث تعمل الكفاءات البشرية ووكلاء الذكاء الاصطناعي معاً كقوة عاملة متكاملة ومحكومة.',
                 cta: 'ابدأ بناء شركتك &larr;',
-                tagline: '<span class="tagline-row">نفس الكفاءات.</span><span class="tagline-row">آفاق أوسع.</span>'
+                tagline: '<span class="landing-tagline-bar"></span><span class="tagline-row">نفس الكفاءات.</span><span class="tagline-row">آفاق أوسع.</span>'
+            },
+            agentfactory: {
+                eyebrow: 'مصنع الوكلاء',
+                title: 'حيث يُبنى<br />وكلاء <span class="agentfactory-headline-gold">المستقبل.</span>',
+                desc: 'من تحديد الأدوار التشغيلية إلى الجاهزية للنشر الفعلي، تحول راين متطلبات أعمالك إلى وكلاء ذكاء اصطناعي فائقين عبر مراحل إنتاج محكومة.',
+                ctaPrimary: 'تحدث مع راين &larr;',
+                ctaSecondary: 'العودة للرئيسية',
+                s1Title: 'تحديد', s1_1: 'الأدوار', s1_2: 'الأهداف', s1_3: 'المعرفة',
+                s2Title: 'بناء', s2_1: 'الأدوات', s2_2: 'المهارات', s2_3: 'القدرات',
+                s3Title: 'تحدي', s3_1: 'الاختبار', s3_2: 'الفريق الأحمر', s3_3: 'الإجهاد',
+                s4Title: 'تحقق', s4_1: 'الجودة', s4_2: 'الأمان', s4_3: 'الأداء',
+                s5Title: 'جاهزية', s5_1: 'النشر', s5_2: 'المراقبة', s5_3: 'التوسع'
             },
             about: {
                 eyebrow: 'عن راين',
@@ -462,6 +486,35 @@
             setText('#home .landing-desc-text', dict.home.desc);
             setHtml('#home .btn-gold-hero span', dict.home.cta);
             setHtml('#home .landing-bottom-tagline', dict.home.tagline);
+
+            // 4b. Agent Factory Section
+            if (dict.agentfactory) {
+                setText('#agentfactory .agentfactory-eyebrow-text', dict.agentfactory.eyebrow);
+                setHtml('#agentfactory .agentfactory-headline', dict.agentfactory.title);
+                setText('#agentfactory .agentfactory-desc', dict.agentfactory.desc);
+                setText('#agentfactory .agentfactory-btn-primary span', dict.agentfactory.ctaPrimary);
+                setText('#agentfactory .agentfactory-btn-secondary span', dict.agentfactory.ctaSecondary);
+                setText('#agentfactory .af-stage-card:nth-of-type(1) .af-card-title', dict.agentfactory.s1Title);
+                setText('#agentfactory .af-stage-card:nth-of-type(1) .af-card-list li:nth-child(1)', dict.agentfactory.s1_1);
+                setText('#agentfactory .af-stage-card:nth-of-type(1) .af-card-list li:nth-child(2)', dict.agentfactory.s1_2);
+                setText('#agentfactory .af-stage-card:nth-of-type(1) .af-card-list li:nth-child(3)', dict.agentfactory.s1_3);
+                setText('#agentfactory .af-stage-card:nth-of-type(2) .af-card-title', dict.agentfactory.s2Title);
+                setText('#agentfactory .af-stage-card:nth-of-type(2) .af-card-list li:nth-child(1)', dict.agentfactory.s2_1);
+                setText('#agentfactory .af-stage-card:nth-of-type(2) .af-card-list li:nth-child(2)', dict.agentfactory.s2_2);
+                setText('#agentfactory .af-stage-card:nth-of-type(2) .af-card-list li:nth-child(3)', dict.agentfactory.s2_3);
+                setText('#agentfactory .af-stage-card:nth-of-type(3) .af-card-title', dict.agentfactory.s3Title);
+                setText('#agentfactory .af-stage-card:nth-of-type(3) .af-card-list li:nth-child(1)', dict.agentfactory.s3_1);
+                setText('#agentfactory .af-stage-card:nth-of-type(3) .af-card-list li:nth-child(2)', dict.agentfactory.s3_2);
+                setText('#agentfactory .af-stage-card:nth-of-type(3) .af-card-list li:nth-child(3)', dict.agentfactory.s3_3);
+                setText('#agentfactory .af-stage-card:nth-of-type(4) .af-card-title', dict.agentfactory.s4Title);
+                setText('#agentfactory .af-stage-card:nth-of-type(4) .af-card-list li:nth-child(1)', dict.agentfactory.s4_1);
+                setText('#agentfactory .af-stage-card:nth-of-type(4) .af-card-list li:nth-child(2)', dict.agentfactory.s4_2);
+                setText('#agentfactory .af-stage-card:nth-of-type(4) .af-card-list li:nth-child(3)', dict.agentfactory.s4_3);
+                setText('#agentfactory .af-stage-card:nth-of-type(5) .af-card-title', dict.agentfactory.s5Title);
+                setText('#agentfactory .af-stage-card:nth-of-type(5) .af-card-list li:nth-child(1)', dict.agentfactory.s5_1);
+                setText('#agentfactory .af-stage-card:nth-of-type(5) .af-card-list li:nth-child(2)', dict.agentfactory.s5_2);
+                setText('#agentfactory .af-stage-card:nth-of-type(5) .af-card-list li:nth-child(3)', dict.agentfactory.s5_3);
+            }
 
             // 5. About Section
             setText('#about .about-eyebrow-text', dict.about.eyebrow);
