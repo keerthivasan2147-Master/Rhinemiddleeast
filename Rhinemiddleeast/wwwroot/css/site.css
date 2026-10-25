@@ -928,8 +928,9 @@ html, body {
     background-image: url('/images/insights-bg.png');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center top;
+    background-position: center bottom;
     filter: brightness(1.16) contrast(1.12);
+    transform: translateY(40px);
 }
 
 /* Atmospheric lighting & readability overlays */
@@ -1111,8 +1112,8 @@ html, body {
 }
 
 .insights-card {
-    background: #cb780663;
-    backdrop-filter: blur(10px);
+    /*background: #cb780663;*/
+    backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 12px;
@@ -1125,8 +1126,47 @@ html, body {
     text-align: left;
 }
 
+
+/* Industries content - mobile only */
+@media screen and (max-width: 768px) {
+    .industries-content {
+        left: auto !important;
+        right: auto !important;
+        text-align: left !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    .industries-headline,
+    .industries-desc,
+    .industries-eyebrow {
+        text-align: left !important;
+    }
+
+    .industries-headline-bar {
+        margin-left: 0 !important;
+        margin-right: auto !important;
+    }
+
+    .industries-tagline {
+        direction: ltr !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        text-align: left !important;
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+    }
+}
+
+
 .insights-card:hover {
-    background: rgba(14, 28, 48, 0.88);
+    /*background: rgba(14, 28, 48, 0.88);*/
     border-color: rgba(204, 168, 119, 0.5);
     transform: translateY(-3px);
     box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
@@ -1232,15 +1272,27 @@ html, body {
     background-position: center top;
    /* transform: translateY(-10px);*/
 }
+/*```css*/
+/* Our Work - Desktop background */
+@media screen and (min-width: 1024px) {
+    .ourwork-bg-wrap {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background-image: url('/images/ourwork-bg.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center 65%;
+    }
+}
 
+```
 /* Atmospheric lighting & readability overlays */
 .ourwork-overlay {
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.25) 28%, transparent 58%),
-        linear-gradient(to bottom, rgba(7, 21, 34, 0.45) 0%, transparent 20%, transparent 75%, rgba(0, 0, 0, 0.25) 100%);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.25) 28%, transparent 58%), linear-gradient(to bottom, rgba(7, 21, 34, 0.45) 0%, transparent 20%, transparent 75%, rgba(0, 0, 0, 0.25) 100%);
     pointer-events: none;
 }
 
@@ -1837,13 +1889,25 @@ html, body {
     background-position: center top;*/
     transform: translateY(40px);
     background-size: 100% 100%;
-    background-position: center center;
+    /*background-position: center center;*/
 }
 @media (max-width: 768px) {
     .industries-bg-wrap {
         transform: none;
         background-size: auto 100%;
         background-position: center center;
+    }
+}
+@media screen and (min-width: 1024px) {
+    .industries-bg-wrap {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background-image: url('/images/industries-bg.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        transform: translateY(40px);
     }
 }
 
@@ -2483,8 +2547,8 @@ html, body {
         }
 
         .insights-card {
-            background: #cd984f63 !important;
-            backdrop-filter: blur(14px) !important;
+            /*background: #cd984f63 !important;*/
+            backdrop-filter: blur(3px) !important;
             -webkit-backdrop-filter: blur(14px) !important;
             border: 1px solid rgba(255, 255, 255, 0.12) !important;
             border-radius: 10px !important;
@@ -2876,7 +2940,7 @@ html, body {
         [dir="rtl"] .insights-content {
             text-align: left !important;
             direction: ltr !important;
-            left: clamp(40px, 7.5vw, 110px) !important;
+            /*left: clamp(40px, 7.5vw, 110px) !important;*/
             right: auto !important;
         }
 
@@ -2884,9 +2948,9 @@ html, body {
         [dir="rtl"] .agentfactory-content {
             text-align: left !important;
             direction: ltr !important;
-            left: clamp(140px, 11vw, 185px) !important;
+            /*left: clamp(140px, 11vw, 185px) !important;*/
             right: auto !important;
-            top: calc(var(--header-height) + 24px) !important;
+            /*top: calc(var(--header-height) + 24px) !important;*/
             max-width: 480px !important;
         }
 
@@ -2894,7 +2958,7 @@ html, body {
         [dir="rtl"] .how-content {
             text-align: left !important;
             direction: ltr !important;
-            left: clamp(145px, 12vw, 190px) !important;
+            /*left: clamp(145px, 12vw, 190px) !important;*/
             right: auto !important;
             top: calc(var(--header-height) + 36px) !important;
             max-width: 490px !important;
@@ -2904,7 +2968,7 @@ html, body {
         [dir="rtl"] .contact-content {
             text-align: left !important;
             direction: ltr !important;
-            left: clamp(40px, 6vw, 90px) !important;
+            /*left: clamp(40px, 6vw, 90px) !important;*/
             right: auto !important;
             width: 44% !important;
             max-width: 500px !important;
@@ -3297,22 +3361,40 @@ html, body {
         z-index: 4;
     }
 
-    .af-stage-card {
-        width: clamp(92px, 8.4vw, 132px);
-        min-height: clamp(142px, 17vh, 184px);
-        background: rgba(6, 26, 44, 0.72);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border: 1.5px solid rgba(80, 200, 255, 0.42);
-        border-radius: 10px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(56, 189, 248, 0.22);
-        padding: clamp(12px, 1.3vw, 16px) clamp(8px, 0.9vw, 12px) clamp(10px, 1.1vw, 14px);
+/* Mac screens only */
+@media screen and (min-width: 1440px) {
+    .af-pipeline-container {
+        position: absolute;
+        top: calc(var(--header-height) + 200px);
+        right: 9%;
         display: flex;
-        flex-direction: column;
         align-items: center;
-        text-align: center;
-        transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+        gap: 18px;
+        z-index: 4;
     }
+}
+
+.af-stage-card {
+    width: clamp(92px, 8.4vw, 132px);
+    min-height: clamp(142px, 17vh, 184px);
+    background: rgba(6, 26, 44, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1.5px solid rgba(80, 200, 255, 0.42);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(56, 189, 248, 0.22);
+    padding: clamp(12px, 1.3vw, 16px) clamp(8px, 0.9vw, 12px) clamp(10px, 1.1vw, 14px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+    width: clamp(80px, 8vw, 110px);
+    min-height: 120px;
+    padding: 10px 8px;
+    gap: 6px;
+    border-radius: 8px;
+}
 
         .af-stage-card:hover {
             transform: translateY(-4px);
