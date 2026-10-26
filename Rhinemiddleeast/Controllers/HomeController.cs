@@ -15,7 +15,41 @@ namespace Rhinemiddleeast.Controllers
 
         public IActionResult Index()
         {
+            var initialGreeting = GetInitialGreeting();
+            ViewData["InitialGreeting"] = initialGreeting;
             return View();
+        }
+
+        /// <summary>
+        /// Provides a unique initial greeting on homepage initial load or page refresh.
+        /// Generates a unique greeting instance ID (GreetingId) to prevent duplicate greeting requests and repeated speech.
+        /// </summary>
+        public InitialGreetingModel GetInitialGreeting(string? lang = "en")
+        {
+            var isAr = lang?.ToLower().StartsWith("ar") == true;
+
+            var timeOfDay = DateTime.UtcNow.Hour switch
+            {
+                >= 4 and < 12 => "morning",
+                >= 12 and < 17 => "afternoon",
+                >= 17 and < 22 => "evening",
+                _ => "night"
+            };
+
+            var greetingEn = "Hi there, welcome to RHINE ! I’m your AI Assistant. Are you looking to build something new, improve your existing business, or automate your operations? I’m here to help.";
+            var greetingAr = "مرحباً بك في RHINE! أنا مساعدك الذكي. هل تتطلع لبناء مشروع جديد، أو تطوير أعمالك القائمة، أو أتمتة عملياتك التشغيلية؟ أنا هنا لمساعدتك.";
+
+            var uniqueGreetingId = "greet_" + Guid.NewGuid().ToString("N")[..12];
+
+            return new InitialGreetingModel
+            {
+                ShouldGreet = true,
+                GreetingEn = greetingEn,
+                GreetingAr = greetingAr,
+                GreetingText = isAr ? greetingAr : greetingEn,
+                GreetingId = uniqueGreetingId,
+                Timestamp = DateTime.UtcNow.ToString("o")
+            };
         }
 
         // Sub-page actions that support both Direct Full Page navigation and AJAX Partial Loading

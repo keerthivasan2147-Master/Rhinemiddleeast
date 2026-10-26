@@ -129,6 +129,31 @@ namespace RhineAgent.TestWeb.Controllers
         }
 
         /// <summary>
+        /// Provides a unique initial greeting for RHINE AI Assistant on initial page load,
+        /// generating a unique greeting ID to prevent duplicate requests.
+        /// </summary>
+        [HttpGet("initial-greeting")]
+        [Produces("application/json")]
+        public IActionResult GetInitialGreeting([FromQuery] string? lang = "en")
+        {
+            var isAr = lang?.ToLower().StartsWith("ar") == true;
+
+            var greetingEn = "Hi there, welcome to RHINE ! I’m your AI Assistant. Are you looking to build something new, improve your existing business, or automate your operations? I’m here to help.";
+            var greetingAr = "مرحباً بك في RHINE! أنا مساعدك الذكي. هل تتطلع لبناء مشروع جديد، أو تطوير أعمالك القائمة، أو أتمتة عملياتك التشغيلية؟ أنا هنا لمساعدتك.";
+            var uniqueGreetingId = "greet_" + Guid.NewGuid().ToString("N")[..12];
+
+            return Ok(new
+            {
+                shouldGreet = true,
+                greeting = isAr ? greetingAr : greetingEn,
+                greetingEn = greetingEn,
+                greetingAr = greetingAr,
+                greetingId = uniqueGreetingId,
+                language = isAr ? "ar" : "en"
+            });
+        }
+
+        /// <summary>
         /// Provides high-quality Arabic and multilingual audio speech stream
         /// </summary>
         [HttpGet("tts")]

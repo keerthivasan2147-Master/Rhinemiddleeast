@@ -1,6 +1,14 @@
+@using Rhinemiddleeast.Models
 @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
 @{
     var requestToken = Antiforgery.GetAndStoreTokens(Context).RequestToken;
+    var initialGreeting = ViewData["InitialGreeting"] as InitialGreetingModel ?? new InitialGreetingModel
+    {
+        ShouldGreet = true,
+        GreetingEn = "Hi there, welcome to RHINE ! I’m your AI Assistant. Are you looking to build something new, improve your existing business, or automate your operations? I’m here to help.",
+        GreetingAr = "مرحباً بك في RHINE! أنا مساعدك الذكي. هل تتطلع لبناء مشروع جديد، أو تطوير أعمالك القائمة، أو أتمتة عملياتك التشغيلية؟ أنا هنا لمساعدتك."
+    };
+    var greetingJson = System.Text.Json.JsonSerializer.Serialize(initialGreeting);
 }
 
 <!-- Rhine AI Avatar Widget Integration -->
@@ -11,6 +19,8 @@
 <div id="rhineBackdrop" class="rhine-backdrop" aria-hidden="true"></div>
 
 <script>
+    var rhineServerGreeting = @Html.Raw(greetingJson);
+
     function initRhineAvatar() {
         if (!window.RhineAvatarWidget || window.rhineAvatar) return;
 
@@ -23,6 +33,11 @@
         var isAr = (savedLang === 'AR') || (!savedLang && browserIsAr) || docLang.startsWith('ar') || docDir === 'rtl';
         var initialLang = isAr ? "ar" : "en";
 
+        var hasVisitedBefore = false;
+        try {
+            hasVisitedBefore = localStorage.getItem('rhine_visited_before') === 'true';
+        } catch(e) {}
+
         var path = (window.location.pathname || "/").toLowerCase();
         var hash = (window.location.hash || "").replace("#", "").trim().toLowerCase();
         var hostname = (window.location.hostname || "").toLowerCase();
@@ -31,6 +46,11 @@
         var isHomePath = (path === "/" || path === "" || path === "/home" || path === "/home/index" || path === "/index");
         var isRenderHost = hostname.includes("rhine-middle-east.onrender.com") || href.includes("rhine-middle-east.onrender.com");
         var isHomePage = (isHomePath && (!hash || hash === "home")) || (isRenderHost && isHomePath);
+
+        // Auto-open popup on every homepage visit (new and returning visitors)
+        // isNewVisitor controls whether to show browser mic permission prompt
+        var isNewVisitor = !hasVisitedBefore;
+        var shouldAutoOpen = isHomePage;
 
         window.rhineAvatar = new window.RhineAvatarWidget({
             endpoint: "/api/agent/chat",
@@ -42,7 +62,9 @@
             language: initialLang,
             antiForgeryHeader: "RequestVerificationToken",
             antiForgeryToken: "@requestToken",
-            autoOpen: isHomePage
+            serverGreeting: rhineServerGreeting,
+            autoOpen: shouldAutoOpen,
+            isNewVisitor: isNewVisitor
         });
     }
 
@@ -51,4 +73,11 @@
     } else {
         initRhineAvatar();
     }
+
+    // Fallback: ensure widget initializes if DOMContentLoaded already passed
+    window.addEventListener("load", function () {
+        if (!window.rhineAvatar) {
+            initRhineAvatar();
+        }
+    });
 </script>
