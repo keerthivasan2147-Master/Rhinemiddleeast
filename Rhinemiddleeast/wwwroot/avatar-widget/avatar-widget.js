@@ -419,7 +419,7 @@
       }
 
       if (this.options.autoOpen) {
-        this.open(true);
+        this.refreshGreeting();
       } else {
         this.close();
         const kb = RHINE_KNOWLEDGE[this.options.language] || RHINE_KNOWLEDGE.en;
@@ -966,11 +966,33 @@
         if (this.isSpeaking) {
           this.videoEl.currentTime = 0;
           this.videoEl.play().catch(() => { });
+        } else {
+          this.videoEl.pause();
+          try { this.videoEl.currentTime = 0; } catch { }
         }
       });
       this.videoEl.addEventListener("pause", () => {
         if (this.isSpeaking && !this._videoIntentionallyPaused) {
           this.videoEl.play().catch(() => { });
+        }
+      });
+      // Strict lip-sync guards: video MUST remain paused at 00:00 when audio is not actively playing
+      this.videoEl.addEventListener("play", () => {
+        if (!this.isSpeaking) {
+          this.videoEl.pause();
+          try { this.videoEl.currentTime = 0; } catch { }
+        }
+      });
+      this.videoEl.addEventListener("timeupdate", () => {
+        if (!this.isSpeaking && this.videoEl.currentTime > 0) {
+          this.videoEl.pause();
+          try { this.videoEl.currentTime = 0; } catch { }
+        }
+      });
+      this.videoEl.addEventListener("loadedmetadata", () => {
+        if (!this.isSpeaking) {
+          this.videoEl.pause();
+          try { this.videoEl.currentTime = 0; } catch { }
         }
       });
 
@@ -1293,7 +1315,7 @@
           if (this._audioCtx.state === 'suspended') {
             this._audioCtx.resume().catch(() => { });
           }
-          // Play a silent buffer — this is the only reliable way to unlock audio in incognito
+          // Play a silent buffer — unlocks audio in incognito & strict autoplay policies
           const buf = this._audioCtx.createBuffer(1, 1, 22050);
           const src = this._audioCtx.createBufferSource();
           src.buffer = buf;
@@ -1307,16 +1329,19 @@
           if (window.speechSynthesis.paused) {
             window.speechSynthesis.resume();
           }
-          // Cancel any stuck utterances (Chromium bug in incognito)
-          if (!window.speechSynthesis.speaking && !window.speechSynthesis.pending) {
+          if (!window.speechSynthesis.speaking) {
             window.speechSynthesis.cancel();
           }
         } catch { }
       }
     }
 
-    speakWelcomeOnHome() {
-      // Check if we are on Home page (path is / or /Home or hash is #home or empty)
+    /**
+     * Trigger / refresh greeting on homepage initial visit or reload.
+     * Guarantees greeting triggers only once per initial load/session.
+     * If the visitor navigates back to the homepage within the same session, does not greet again.
+     */
+    refreshGreeting() {
       const path = (window.location.pathname || "/").toLowerCase();
       const hash = (window.location.hash || "").replace("#", "").trim().toLowerCase();
       const hostname = (window.location.hostname || "").toLowerCase();
@@ -1325,90 +1350,118 @@
       const isHomePath = (path === "/" || path === "" || path === "/home" || path === "/home/index" || path === "/index");
       const isRenderHost = hostname.includes("rhine-middle-east.onrender.com") || href.includes("rhine-middle-east.onrender.com");
       const isHome = (isHomePath && (!hash || hash === "home")) || (isRenderHost && isHomePath);
-      if (!isHome || this._homeGreetingSpoken) return;
+      if (!isHome) return;
+
+      // Detect if this is a fresh reload of the page
+      let isReload = false;
+      try {
+        const navEntries = typeof performance !== "undefined" && performance.getEntriesByType && performance.getEntriesByType("navigation");
+        if (navEntries && navEntries.length > 0) {
+          isReload = navEntries[0].type === "reload";
+        } else if (typeof performance !== "undefined" && performance.navigation) {
+          isReload = performance.navigation.type === 1;
+        }
+      } catch { }
+
+      let sessionGreeted = false;
+      try {
+        sessionGreeted = sessionStorage.getItem("rhine_home_greeted") === "true";
+      } catch { }
+
+      // If already greeted in this session and NOT a reload: do not greet again
+      if (sessionGreeted && !isReload && this._greetingHasPlayed) {
+        return;
+      }
+
+      // Mark session as greeted
+      try {
+        sessionStorage.setItem("rhine_home_greeted", "true");
+      } catch { }
+
+      // Reset flags for fresh initial visit or reload trigger
+      this._greetingSpoken = false;
+      this._greetingHasPlayed = false;
+      this._hasActuallySpoken = false;
 
       this.open(true);
     }
 
+    speakWelcomeOnHome() {
+      this.refreshGreeting();
+    }
+
     _autoEnableSoundAndSpeak(greetingText) {
       if (this.isSpeechMuted) return;
-      if (this._greetingHasPlayed) return;
-      if (this._autoSpeakListenersActive) return;
+      if (this._hasActuallySpoken || this._greetingHasPlayed) return;
 
-      // Ensure button is permanently hidden — sound enables automatically
+      // Ensure pill button is permanently hidden
       if (this.enableSoundPill) {
         this.enableSoundPill.style.display = "none";
       }
 
       this._unlockSpeaker();
 
-      // Immediately attempt direct speech
+      // 1. Immediately attempt direct speech (will play without interaction if browser policy allows)
       this.speak(greetingText);
 
-      // AUTOPLAY POLICY UNLOCK:
-      // Chrome requires a "user activation" before audio can play.
-      // In incognito (MEI=0), even normal windows may block on first visit.
-      // mousemove, pointerdown, scroll, wheel, touchstart, click, keydown
-      // all qualify as user activation gestures in Chrome.
-      // A visitor WILL move their mouse almost instantly upon landing on the page,
-      // so adding mousemove makes the greeting fire nearly immediately.
-      this._autoSpeakListenersActive = true;
-
+      // 2. Real user interaction gestures (W3C User Activation compliant)
       const activationEvents = [
-        'mousemove', 'pointerdown', 'pointerup', 'touchstart', 'touchend',
-        'click', 'keydown', 'scroll', 'wheel', 'mouseover'
+        'pointerdown', 'touchstart', 'touchend', 'click', 'keydown', 'mousedown', 'focus'
       ];
 
-      const onUserActivation = () => {
-        // Immediately remove ALL listeners — NEVER fires twice
+      const cleanup = () => {
         activationEvents.forEach(evt => {
           window.removeEventListener(evt, onUserActivation, { capture: true });
           document.removeEventListener(evt, onUserActivation, { capture: true });
         });
-        this._autoSpeakListenersActive = false;
-
-        // Stop the periodic retry timer
         if (this._greetingRetryTimer) {
           clearInterval(this._greetingRetryTimer);
           this._greetingRetryTimer = null;
         }
+        this._autoSpeakListenersActive = false;
+      };
 
-        // Unlock AudioContext with silent buffer on the gesture
+      const onUserActivation = () => {
+        // Unlock audio context and SpeechSynthesis synchronously within the gesture call stack
         this._unlockSpeaker();
 
-        // Resume speechSynthesis (Chromium bug — stays paused in incognito)
-        if ("speechSynthesis" in window) {
-          try { window.speechSynthesis.resume(); } catch { }
+        // If audio has already actually started playing, cleanup and exit
+        if (this._hasActuallySpoken || this._greetingHasPlayed) {
+          cleanup();
+          return;
         }
 
-        // Only retry greeting if it has not actually started playing yet
-        if (!this._hasActuallySpoken && !this._greetingHasPlayed) {
-          this.stopSpeech();
-          setTimeout(() => {
-            if (!this._hasActuallySpoken && !this._greetingHasPlayed && !this.isSpeaking) {
-              this.speak(greetingText);
-            }
-          }, 50);
+        // Must run synchronously within the gesture event handler (no setTimeout) to satisfy Chrome
+        if (!this.isSpeaking) {
+          this.speak(greetingText);
         }
       };
 
-      activationEvents.forEach(evt => {
-        window.addEventListener(evt, onUserActivation, { capture: true, passive: true });
-        document.addEventListener(evt, onUserActivation, { capture: true, passive: true });
-      });
+      if (!this._autoSpeakListenersActive) {
+        this._autoSpeakListenersActive = true;
+        activationEvents.forEach(evt => {
+          window.addEventListener(evt, onUserActivation, { capture: true, passive: true });
+          document.addEventListener(evt, onUserActivation, { capture: true, passive: true });
+        });
+      }
 
-      // PERIODIC RETRY: Some browsers silently unlock audio after page gains focus
-      // or after internal MEI threshold is reached. Retry every 500ms for 10 seconds.
-      let retryCount = 0;
+      // 3. Watchdog: Automatically clean up listeners once audio starts playing; resume if paused
+      if (this._greetingRetryTimer) clearInterval(this._greetingRetryTimer);
+      let attempts = 0;
       this._greetingRetryTimer = setInterval(() => {
-        retryCount++;
-        if (this._hasActuallySpoken || this._greetingHasPlayed || this.isSpeaking || retryCount > 20) {
-          clearInterval(this._greetingRetryTimer);
-          this._greetingRetryTimer = null;
+        attempts++;
+        if (this._hasActuallySpoken || this._greetingHasPlayed) {
+          cleanup();
           return;
         }
-        this._unlockSpeaker();
-        this.speak(greetingText);
+        if (attempts > 30) {
+          cleanup();
+          return;
+        }
+        // In Chromium, if speech was queued but engine stayed paused, unpause it
+        if ("speechSynthesis" in window && window.speechSynthesis.speaking && window.speechSynthesis.paused) {
+          try { window.speechSynthesis.resume(); } catch { }
+        }
       }, 500);
     }
 
@@ -1433,7 +1486,7 @@
       this.lastCaption = greetingText;
 
       // Automatically speak welcome greeting when opened
-      if (speakGreeting && !this.isSpeechMuted && !this._greetingSpoken) {
+      if (speakGreeting && !this.isSpeechMuted && !this._greetingHasPlayed) {
         this._greetingSpoken = true;
         this._homeGreetingSpoken = true;
         this.setCaptionAndSpeak(greetingText, false, null, "greeting");
@@ -1910,11 +1963,12 @@
             }
           };
           window.speechSynthesis.addEventListener("voiceschanged", onVoicesChanged, { once: true });
+          try { window.speechSynthesis.onvoiceschanged = onVoicesChanged; } catch { }
           setTimeout(() => {
             if (this._speechSessionId === currentSessionId && !this._hasActuallySpoken && !this.isSpeaking) {
               _doSpeak();
             }
-          }, 150);
+          }, 250);
         } else {
           _doSpeak();
         }
@@ -1953,10 +2007,11 @@
       }
       this.isSpeaking = false;
       this._setVideoActive(false);
+      this._setStatus("Active");
     }
 
     _setVideoActive(active) {
-      if (active) {
+      if (active && this.isSpeaking) {
         this._videoIntentionallyPaused = false;
         this.widgetEl.classList.add("rhine-speaking");
         if (this.launcherEl) this.launcherEl.classList.add("rhine-speaking");
@@ -1974,7 +2029,7 @@
         if (this.videoEl) {
           try {
             this.videoEl.pause();
-            this.videoEl.currentTime = 0; // Reset to frame 0 so avatar mouth is closed
+            this.videoEl.currentTime = 0; // Strict: Reset to frame 0 so avatar lips remain closed
           } catch { }
         }
       }
