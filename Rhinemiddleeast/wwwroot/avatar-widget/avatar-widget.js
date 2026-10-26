@@ -100,7 +100,7 @@
       pillars: "RHINE does not simply deliver isolated AI agents. An AI agent is one component of a complete business solution. RHINE's wider purpose is to build the operating environment in which people, technology, professional knowledge, and governed AI agents work together effectively. The result is a structured operating capability designed around your real business.",
       qualification: "Which situation best describes you? 1. I have a business idea and want to turn it into an operating company. 2. I already have a company and want to transform or automate it. 3. I need a business platform or professional website. 4. I want AI agents for specific business roles. 5. I want to understand the complete RHINE solution. Tell me your choice, and I will guide you.",
       contact: "Every company starts from a different point. RHINE designs the journey from that starting point to a structured, intelligent and operational business. Contact RHINE Middle East FZE directly: Phone +971 4 8818618, Email info@rhineme.com, JAFZA One, Office No: FZJOBB1609, Jebel Ali Freezone, Dubai, UAE (P.O. Box: 215142). We invite you to arrange a consultation.",
-      hours: "RHINE Middle East FZE operates Monday to Friday, 8:00 AM to 5:00 PM Gulf Standard Time in JAFZA One, Jebel Ali Freezone, Dubai, UAE. For urgent enquiries please email info@rhineme.com.",
+      hours: "RHINE Middle East FZE operates Monday to Friday, 8:00 AM to 5:00 PM UAE Standard Time in JAFZA One, Jebel Ali Freezone, Dubai, UAE. For urgent enquiries please email info@rhineme.com.",
       pricing: "RHINE project development is tailored to your business scope and operating requirements. Contact us at +971 4 8818618 or info@rhineme.com to discuss your project and arrange an exploratory consultation.",
       website_info: "This platform is the RHINE AI Assistant. It features voice interaction, live captions on demand, curated business architecture knowledge, and interactive qualification to help turn your ideas into operations.",
       business_concept: "A business concept is the foundation of everything RHINE builds. It defines what your company does, who it serves, how it creates value, and how it operates. RHINE works with entrepreneurs and organisations to design clear, practical business concepts — covering your commercial model, core services or products, target market, and the structure needed to bring it to life. A well-designed concept becomes the blueprint for your entire operating company.",
@@ -375,7 +375,10 @@
       this.lastCaption = "";
       this._voicesReady = false;
       this._greetingSpoken = false; // Track if greeting has been spoken this session
+      this._greetingStarted = false; // Prevent duplicate async greeting starts
       this._hasActuallySpoken = false; // Track if audio/speech has actually begun playing
+      this._speechBaseText = ""; // Holds confirmed text between continuous sessions
+      this._videoWatchdog = null; // Watchdog timer to keep video in sync with audio
 
       this._init();
     }
@@ -432,82 +435,44 @@
 
       const isHome = this._isHomePage();
 
-      if (this.options.autoOpen && isHome && this.options.isNewVisitor) {
-        // New visitor initial visit on homepage: open centered popup with mouth closed, trigger permission prompt as per screenshot
-        this.open(false);
-        this._requestInitialPermissionAndGreet();
-      } else if (this.options.autoOpen && isHome) {
-        // Refresh or return to homepage: popup and speak greeting!
+      if (this.options.autoOpen && isHome) {
+        // Single canonical source for all initial greetings and refreshes
         this.refreshGreeting();
       } else {
-        // Returning visitor on non-homepage: keep popup closed
+        // Non-homepage: keep popup closed
         this.close();
         const kb = RHINE_KNOWLEDGE[this.options.language] || RHINE_KNOWLEDGE.en;
+        this.lastCaption = kb.greeting;
         this.setCaptionAndSpeak(kb.greeting, false, null, "greeting");
       }
     }
 
-    _requestInitialPermissionAndGreet() {
-      const isAr = this.options.language === "ar";
-      this._setStatus(isAr ? "يرجى السماح بصلاحية الميكروفون للبدء..." : "Please allow microphone to start...");
-
-      let greetingStarted = false;
-      const triggerGreetingSpeech = () => {
-        if (greetingStarted) return;
-        greetingStarted = true;
-        try { localStorage.setItem("rhine_visited_before", "true"); } catch(e) {}
-        this._hasActuallySpoken = false;
-        this._greetingHasPlayed = false;
-        this._pendingGreetingText = null;
-        this._unlockSpeaker();
-
-        const sg = this.options.serverGreeting;
-        const lang = this.options.language;
-        let greetingText;
-        if (sg && sg.GreetingEn) {
-          greetingText = (lang === "ar" && sg.GreetingAr) ? sg.GreetingAr : sg.GreetingEn;
-        } else {
-          const kb = RHINE_KNOWLEDGE[lang] || RHINE_KNOWLEDGE.en;
-          greetingText = kb.greeting;
-        }
-
-        this.lastCaption = greetingText;
-        this.setCaptionAndSpeak(greetingText, false, null, "greeting");
-        this._setStatus(isAr ? "المساعد يتحدث..." : "AI Assistant speaking...");
-
-        // 1. Immediately play video with mouth moving
-        this.isSpeaking = true;
-        this._setVideoActive(true);
-
-        // 2. Play greeting audio with fallback listeners
-        this._autoEnableSoundAndSpeak(greetingText);
-      };
+    _prepareMicrophone() {
+      if (this._micPermissionChecked) return Promise.resolve(this._micPermissionGranted === true);
+      this._micPermissionChecked = true;
 
       if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === "function") {
-        navigator.mediaDevices.getUserMedia({ audio: true })
+        return navigator.mediaDevices.getUserMedia({ audio: true })
           .then((stream) => {
-            console.log("[RHINE AI] Microphone permission accepted. Starting unique greeting speech and video...");
+            this._micPermissionGranted = true;
             try {
-              if (this._audioCtx && this._audioCtx.state === 'suspended') {
+              if (this._audioCtx && this._audioCtx.state === "suspended") {
                 this._audioCtx.resume().catch(() => {});
               }
             } catch (e) { }
-
-            // Release mic hardware after brief activation delay to keep audio context hot
             setTimeout(() => {
               try { stream.getTracks().forEach(t => t.stop()); } catch (e) { }
-            }, 1000);
-
-            triggerGreetingSpeech();
+            }, 500);
+            return true;
           })
           .catch((err) => {
-            console.warn("[RHINE AI] Microphone permission dismissed or blocked:", err);
-            try { localStorage.setItem("rhine_visited_before", "true"); } catch(e) {}
-            triggerGreetingSpeech();
+            console.warn("[RHINE AI] Microphone permission dismissed or blocked:", err.name);
+            this._micPermissionGranted = false;
+            return false;
           });
-      } else {
-        triggerGreetingSpeech();
       }
+
+      return Promise.resolve(false);
     }
 
     _extractAntiforgeryToken() {
@@ -581,7 +546,10 @@
         <!-- Full-Height Background Video & Fallback -->
         <div class="rhine-video-stage">
           <video id="rhineVideo"
+                 autoplay
                  playsinline
+                 webkit-playsinline
+                 x5-playsinline
                  muted
                  loop
                  preload="auto"
@@ -702,7 +670,7 @@
                    id="rhineChatInput"
                    placeholder="${isAr ? 'تحدث أو اكتب سؤالك...' : 'Speak or type your question...'}"
                    autocomplete="off" />
-            <button type="button" class="rhine-chat-mic" id="rhineChatMic" title="Voice Input">
+            <button type="button" class="rhine-chat-mic" id="rhineChatMic" title="Voice Input" style="display: none !important;">
               <span id="rhineMicBtnIcon">${ICONS.mic}</span>
             </button>
             <button type="submit" class="rhine-chat-send" id="rhineChatSend" title="Send">
@@ -719,6 +687,17 @@
       // Cache elements
       this.videoEl = this.widgetEl.querySelector("#rhineVideo");
       this.videoFallbackEl = this.widgetEl.querySelector("#rhineVideoFallback");
+      if (this.videoEl) {
+        this.videoEl.muted = true;
+        this.videoEl.defaultMuted = true;
+        this.videoEl.playsInline = true;
+        try {
+          this.videoEl.setAttribute("muted", "");
+          this.videoEl.setAttribute("playsinline", "");
+          this.videoEl.setAttribute("webkit-playsinline", "");
+          this.videoEl.setAttribute("x5-playsinline", "");
+        } catch { }
+      }
       this.topTitleEl = this.widgetEl.querySelector("#rhineTopTitle");
       this.captionOverlay = this.widgetEl.querySelector("#rhineCaptionOverlay");
       this.captionContent = this.widgetEl.querySelector("#rhineCaptionContent");
@@ -1048,9 +1027,30 @@
         this.ask(text);
       });
 
-      // Video error fallback & loop watchdog (prevents video freeze during speech)
+      // Video buffer readiness listeners: guarantee video plays when audio is speaking
+      const ensureVideoPlayingIfSpeaking = () => {
+        if (this.isSpeaking && !this._videoIntentionallyPaused && this.videoEl) {
+          if (this.videoFallbackEl) this.videoFallbackEl.classList.remove("visible");
+          this.videoEl.muted = true;
+          this.videoEl.defaultMuted = true;
+          this.videoEl.loop = true;
+          const p = this.videoEl.play();
+          if (p !== undefined) p.catch(() => { });
+        }
+      };
+
+      this.videoEl.addEventListener("canplay", ensureVideoPlayingIfSpeaking);
+      this.videoEl.addEventListener("canplaythrough", ensureVideoPlayingIfSpeaking);
+      this.videoEl.addEventListener("loadeddata", ensureVideoPlayingIfSpeaking);
+      this.videoEl.addEventListener("playing", () => {
+        if (this.videoFallbackEl) this.videoFallbackEl.classList.remove("visible");
+      });
+
+      // Video error fallback: only trigger fallback if source is completely unavailable
       this.videoEl.addEventListener("error", () => {
-        this.videoFallbackEl.classList.add("visible");
+        if (this.videoEl && this.videoEl.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) {
+          if (this.videoFallbackEl) this.videoFallbackEl.classList.add("visible");
+        }
       });
       this.videoEl.addEventListener("ended", () => {
         if (this.isSpeaking) {
@@ -1068,19 +1068,19 @@
       });
       // Strict lip-sync guards: video MUST remain paused at 00:00 when audio is not actively playing
       this.videoEl.addEventListener("play", () => {
-        if (!this.isSpeaking) {
+        if (!this.isSpeaking && this._videoIntentionallyPaused) {
           this.videoEl.pause();
           try { this.videoEl.currentTime = 0; } catch { }
         }
       });
       this.videoEl.addEventListener("timeupdate", () => {
-        if (!this.isSpeaking && this.videoEl.currentTime > 0) {
+        if (!this.isSpeaking && this._videoIntentionallyPaused && this.videoEl.currentTime > 0) {
           this.videoEl.pause();
           try { this.videoEl.currentTime = 0; } catch { }
         }
       });
       this.videoEl.addEventListener("loadedmetadata", () => {
-        if (!this.isSpeaking) {
+        if (!this.isSpeaking && this._videoIntentionallyPaused) {
           this.videoEl.pause();
           try { this.videoEl.currentTime = 0; } catch { }
         }
@@ -1092,10 +1092,14 @@
       // Click backdrop: if greeting is pending due to autoplay block, first click satisfies user gesture and starts speech!
       if (this.backdropEl) {
         this.backdropEl.addEventListener("click", (e) => {
-          if (this._pendingGreetingText && !this._hasActuallySpoken) {
+          if (this.isOpen && this._pendingGreetingText && !this._hasActuallySpoken) {
             e.preventDefault();
             e.stopPropagation();
-            this._playPendingGreeting();
+            // Satisfy user gesture: unlock audio and speak the pending greeting
+            const t = this._pendingGreetingText;
+            this._pendingGreetingText = null;
+            this._unlockSpeaker();
+            this.speak(t);
             return;
           }
           this.close();
@@ -1111,27 +1115,36 @@
         this._stopListening();
         return;
       }
-
       this.stopSpeech();
-      this.capturedVoiceText = "";
-      this._recognitionRestarts = 0;
+      this._startListening();
+    }
+
+    _startListening() {
+      if (this.isListening || this.isSpeaking || !this.isOpen) return;
 
       const isAr = this.options.language === "ar";
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
       if (!SpeechRecognition) {
-        this._setStatus(isAr ? "الصوت غير مدعوم في هذا المتصفح" : "Voice not supported in this browser");
+        if (this.chatInput) {
+          this.chatInput.placeholder = isAr ? "اكتب سؤالك هنا..." : "Type your question here...";
+        }
         return;
       }
 
-      // 1. Show listening UI directly on AI Assistant page (overlay screen kept hidden)
       this.isListening = true;
+      this.capturedVoiceText = "";
+      this._speechBaseText = "";
+      this._recognitionRestarts = 0;
+
       if (this.chatMic) this.chatMic.classList.add("listening");
       if (this.micBtnIcon) this.micBtnIcon.innerHTML = ICONS.micOff;
       if (this.micOverlay) this.micOverlay.style.display = "none";
       const lbl = isAr ? "جارٍ الاستماع... تكلّم بسؤالك الآن" : "Listening... Speak your question now";
-      this.chatInput.placeholder = lbl;
-      this.chatInput.focus();
+      if (this.chatInput) {
+        this.chatInput.placeholder = lbl;
+        this.chatInput.focus();
+      }
       this._setStatus(isAr ? "جارٍ الاستماع..." : "Listening...");
 
       // 2. Inject live waveform animation & countdown into overlay if not already present
@@ -1150,18 +1163,39 @@
         this._updateCountdown();
         if (this._listenSecondsLeft <= 0) {
           clearInterval(this._countdownInterval);
-          const q = (this.capturedVoiceText || this.chatInput.value).trim();
+          const q = (this.capturedVoiceText || (this.chatInput ? this.chatInput.value : "")).trim();
           this._stopListening();
           if (q) {
             this.ask(q);
           } else {
-            this._setStatus(isAr ? "انتهى وقت الاستماع. انقر تكلّم الآن أو اختر سؤالاً:" : "Listening time ended. Click Speak Now or choose a question below:");
+            this._setStatus("Active");
+            if (this.chatInput) {
+              this.chatInput.placeholder = isAr ? "تحدث أو اكتب سؤالك..." : "Speak or type your question...";
+            }
           }
         }
       }, 1000);
 
       // 5. Start SpeechRecognition session directly (without getUserMedia hardware lock contention)
       this._startRecognitionSession(SpeechRecognition, isAr);
+    }
+
+
+    _deduplicateSpeech(text) {
+      if (!text) return "";
+      let clean = text.trim();
+      clean = clean.replace(/\s+/g, " ");
+
+      // 1. Remove consecutive identical words (e.g. "tell tell me me" -> "tell me", "مرحبا مرحبا" -> "مرحبا")
+      clean = clean.replace(/(?:^|\s)([^\s]+)(?:\s+\1)+(?=\s|$)/giu, " $1").trim();
+
+      // 2. Remove consecutive duplicate 2-word phrases (e.g. "tell me tell me" -> "tell me")
+      clean = clean.replace(/(?:^|\s)([^\s]+\s+[^\s]+)(?:\s+\1)+(?=\s|$)/giu, " $1").trim();
+
+      // 3. Remove consecutive duplicate 3-word phrases
+      clean = clean.replace(/(?:^|\s)([^\s]+\s+[^\s]+\s+[^\s]+)(?:\s+\1)+(?=\s|$)/giu, " $1").trim();
+
+      return clean.trim();
     }
 
     _startRecognitionSession(SpeechRecognition, isAr) {
@@ -1176,8 +1210,10 @@
           this.activeRecognition = null;
         }
 
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent || "");
         const rec = new SpeechRecognition();
-        rec.continuous = true;
+        // On mobile devices, continuous=true causes Android Chrome to duplicate utterances and loop results
+        rec.continuous = !isMobile;
         rec.interimResults = true;
         rec.maxAlternatives = 1;
         rec.lang = isAr ? "ar-SA" : "en-US";
@@ -1190,7 +1226,7 @@
         };
 
         rec.onresult = (e) => {
-          // Unique listening: never transcribe or process while the avatar is speaking
+          // Never transcribe or process while the avatar is speaking
           if (this.isSpeaking) {
             return;
           }
@@ -1199,24 +1235,50 @@
           this._listenSecondsLeft = 60;
           this._updateCountdown();
 
-          let finalTranscript = "";
-          let interimTranscript = "";
-          for (let i = e.resultIndex; i < e.results.length; i++) {
-            const t = e.results[i][0].transcript;
-            if (e.results[i].isFinal) finalTranscript += t;
-            else interimTranscript += t;
+          let sessionFinal = "";
+          let sessionInterim = "";
+
+          // Extract final and interim transcripts freshly from e.results
+          // On mobile Android, e.resultIndex can be 0 repeatedly with cumulative items.
+          // By aggregating across results, we eliminate repetition caused by naive string concatenation.
+          for (let i = 0; i < e.results.length; i++) {
+            const res = e.results[i];
+            if (!res || !res[0]) continue;
+            const t = (res[0].transcript || "").trim();
+            if (!t) continue;
+            if (res.isFinal) {
+              sessionFinal += (sessionFinal ? " " : "") + t;
+            } else {
+              sessionInterim += (sessionInterim ? " " : "") + t;
+            }
           }
 
-          if (finalTranscript) {
-            this.capturedVoiceText = ((this.capturedVoiceText || "") + " " + finalTranscript).trim();
+          sessionFinal = this._deduplicateSpeech(sessionFinal);
+          sessionInterim = this._deduplicateSpeech(sessionInterim);
+
+          let fullFinal = (this._speechBaseText ? this._speechBaseText + " " : "") + sessionFinal;
+          fullFinal = this._deduplicateSpeech(fullFinal);
+
+          if (fullFinal) {
+            this.capturedVoiceText = fullFinal.trim();
           }
-          const displayText = this.capturedVoiceText || (interimTranscript ? interimTranscript.trim() : "");
+
+          let displayText = this.capturedVoiceText;
+          if (!displayText && sessionInterim) {
+            displayText = sessionInterim;
+          } else if (displayText && sessionInterim) {
+            const cleanInterim = this._deduplicateSpeech(sessionInterim);
+            if (!displayText.toLowerCase().endsWith(cleanInterim.toLowerCase())) {
+              displayText = (displayText + " " + cleanInterim).trim();
+            }
+          }
+          displayText = this._deduplicateSpeech(displayText);
 
           if (displayText) {
             if (this.micInterim) {
               this.micInterim.innerHTML = this.capturedVoiceText
                 ? `<strong>"${this._escapeHtml(this.capturedVoiceText)}"</strong>`
-                + (interimTranscript ? ` <em style="opacity:.6">${this._escapeHtml(interimTranscript.trim())}</em>` : "")
+                + (sessionInterim ? ` <em style="opacity:.6">${this._escapeHtml(sessionInterim)}</em>` : "")
                 : `<em>"${this._escapeHtml(displayText)}"</em>`;
             }
             this.chatInput.value = displayText;
@@ -1231,13 +1293,16 @@
           }
 
           // Debounce auto-submit: responsive speech detection without long delay
-          if (finalTranscript && this.capturedVoiceText) {
+          if (sessionFinal && this.capturedVoiceText) {
             if (this._micDebounceTimer) clearTimeout(this._micDebounceTimer);
             const wordCount = this.capturedVoiceText.trim().split(/\s+/).length;
             const delay = wordCount >= 3 ? 1200 : 1500;
             this._micDebounceTimer = setTimeout(() => {
               const q = this.capturedVoiceText.trim();
               if (q && this.isListening) {
+                // Clear base text to prevent stale accumulation on next listening session
+                this._speechBaseText = "";
+                this.capturedVoiceText = "";
                 this._showAnalyzing(isAr);
                 setTimeout(() => {
                   this._stopListening();
@@ -1275,6 +1340,11 @@
         };
 
         rec.onend = () => {
+          // On mobile, if a single-turn session ended with captured text, store it as base for next utterance
+          if (this.capturedVoiceText) {
+            this._speechBaseText = this.capturedVoiceText;
+          }
+
           // If still listening and no submission is in progress, restart seamlessly
           if (this.isListening && !this._micDebounceTimer) {
             if (this._recRestartTimer) clearTimeout(this._recRestartTimer);
@@ -1352,6 +1422,7 @@
 
     _stopListening() {
       this.isListening = false;
+      this._speechBaseText = "";
       this._micDebounceTimer = null;
       if (this._micSilenceTimeout) { clearTimeout(this._micSilenceTimeout); this._micSilenceTimeout = null; }
       if (this._countdownInterval) { clearInterval(this._countdownInterval); this._countdownInterval = null; }
@@ -1440,136 +1511,31 @@
     }
 
     /**
-     * Trigger / refresh greeting on homepage initial visit or reload.
-     * Guarantees greeting triggers only for homepage and prevents duplicate voices or listening.
+     * Single source for initial greetings and page refresh responses.
+     * Prevents duplicate greetings, overlapping audio, and repeated initializations.
      */
     refreshGreeting() {
       if (!this._isHomePage()) return;
+      if (this._greetingStarted) return;
+      this._greetingStarted = true;
 
-      // Stop any existing speech or listening to prevent duplicates
+      const now = Date.now();
+      if (this._lastGreetingTrigger && (now - this._lastGreetingTrigger) < 1200) {
+        return;
+      }
+      this._lastGreetingTrigger = now;
+
+      // 1. Stop any ongoing speech, audio, and listening immediately
       this.stopSpeech();
       this._stopListening();
 
-      // Reset state for new greeting instance
-      this._greetingSpoken = false;
-      this._greetingHasPlayed = false;
-      this._hasActuallySpoken = false;
-      this._pendingGreetingText = null;
+      // 2. Open centered popup with video strictly paused at 00:00
+      this.open(false);
 
-      // Automatically open the assistant popup and trigger greeting speech
-      this.open(true);
-    }
+      // 3. Mark visited in localStorage
+      try { localStorage.setItem("rhine_visited_before", "true"); } catch (e) { }
 
-    speakWelcomeOnHome() {
-      this.refreshGreeting();
-    }
-
-    _playPendingGreeting() {
-      if (!this._pendingGreetingText || this._hasActuallySpoken || this._greetingHasPlayed) return;
-      const textToSpeak = this._pendingGreetingText;
-      this._pendingGreetingText = null;
-
-      this._unlockSpeaker();
-
-      this.stopSpeech();
-      this.speak(textToSpeak);
-    }
-
-    _autoEnableSoundAndSpeak(greetingText) {
-      if (this.isSpeechMuted) return;
-      if (this._hasActuallySpoken || this._greetingHasPlayed) return;
-
-      this._pendingGreetingText = greetingText;
-
-      // Ensure pill button is permanently hidden
-      if (this.enableSoundPill) {
-        this.enableSoundPill.style.display = "none";
-      }
-
-      this._unlockSpeaker();
-
-      // 1. Immediately attempt direct speech (will play without interaction if browser policy allows)
-      this.speak(greetingText);
-
-      // Re-assert "speaking" status badge
-      const isAr = this.options.language === "ar";
-      this._setStatus(isAr ? "المساعد يتحدث..." : "AI Assistant speaking...");
-
-      // 2. Real user interaction gestures across window & document
-      const activationEvents = ['pointerdown', 'mousedown', 'touchstart', 'keydown'];
-
-      const cleanup = () => {
-        activationEvents.forEach(evt => {
-          window.removeEventListener(evt, onUserActivation, { capture: true });
-          document.removeEventListener(evt, onUserActivation, { capture: true });
-        });
-        if (this._greetingRetryTimer) {
-          clearInterval(this._greetingRetryTimer);
-          this._greetingRetryTimer = null;
-        }
-        this._autoSpeakListenersActive = false;
-      };
-
-      const onUserActivation = (e) => {
-        if (this._hasActuallySpoken || this._greetingHasPlayed) {
-          cleanup();
-          return;
-        }
-
-        cleanup();
-
-        // If launcher or close button was clicked, let their specific handlers execute
-        if (e && e.target && (this.launcherEl.contains(e.target) || this.closeBtn.contains(e.target))) {
-          return;
-        }
-
-        this._playPendingGreeting();
-      };
-
-      if (!this._autoSpeakListenersActive) {
-        this._autoSpeakListenersActive = true;
-        activationEvents.forEach(evt => {
-          window.addEventListener(evt, onUserActivation, { capture: true, passive: true });
-          document.addEventListener(evt, onUserActivation, { capture: true, passive: true });
-        });
-      }
-
-      // 3. Watchdog: check if audio started
-      if (this._greetingRetryTimer) clearInterval(this._greetingRetryTimer);
-      let attempts = 0;
-      this._greetingRetryTimer = setInterval(() => {
-        attempts++;
-        if (this._hasActuallySpoken || this._greetingHasPlayed) {
-          cleanup();
-          return;
-        }
-        if (attempts > 30) {
-          cleanup();
-        }
-      }, 500);
-    }
-
-    open(speakGreeting = true) {
-      console.log("[RHINE AI] open() called. speakGreeting=" + speakGreeting);
-
-      // Step 1: Initialize the popup first and display in center
-      this.isOpen = true;
-      this.widgetEl.classList.remove("rhine-hidden");
-      this.launcherEl.style.display = "none";
-      if (this.backdropEl) {
-        this.backdropEl.classList.add("active");
-      }
-      this._setStatus("Active");
-      setTimeout(() => this.chatInput.focus(), 150);
-
-      // Keep video paused until speech starts
-      if (!this.isSpeaking) {
-        this._setVideoActive(false);
-      }
-
-      this._unlockSpeaker();
-
-      // Step 2: Initialize greeting text
+      // 4. Resolve greeting text
       const sg = this.options.serverGreeting;
       const lang = this.options.language;
       let greetingText;
@@ -1579,36 +1545,77 @@
         const kb = RHINE_KNOWLEDGE[lang] || RHINE_KNOWLEDGE.en;
         greetingText = kb.greeting;
       }
+
       this.lastCaption = greetingText;
-
-      // Populate caption text into DOM (hidden by default on initial load; shown when user clicks CC)
       this.setCaptionAndSpeak(greetingText, false, null, "greeting");
-      if (this.captionOverlay) {
-        this.captionOverlay.classList.add("rhine-caption-hidden");
-        this.isCaptionsVisible = false;
-        if (this.ccBtn) {
-          this.ccBtn.classList.remove("active");
-          this.ccBtn.title = "Toggle Captions";
+
+      // 5. Ask for microphone permission before starting hands-free greeting.
+      // This keeps the automatic greeting inside the popup/user media lifecycle.
+      this._greetingSpoken = true;
+      this._homeGreetingSpoken = true;
+      this._prepareMicrophone().then(() => {
+        if (this.isOpen && !this.isSpeechMuted) {
+          // 6. Speak the greeting through the same TTS pipeline as all responses.
+          this.speak(greetingText);
         }
+      });
+    }
+
+    speakWelcomeOnHome() {
+      this.refreshGreeting();
+    }
+
+    _handleAutoplayBlocked(textToSpeak) {
+      if (this._hasActuallySpoken || !textToSpeak) return;
+      this._pendingGreetingText = textToSpeak;
+      const isAr = this.options.language === "ar";
+      this._setStatus(isAr ? "انقر في أي مكان لتفعيل الصوت..." : "Click anywhere to enable voice...");
+
+      const unlockOnce = () => {
+        window.removeEventListener("pointerdown", unlockOnce, { capture: true });
+        window.removeEventListener("keydown", unlockOnce, { capture: true });
+        if (this.isOpen && this._pendingGreetingText && !this._hasActuallySpoken) {
+          const t = this._pendingGreetingText;
+          this._pendingGreetingText = null;
+          this._unlockSpeaker();
+          this.speak(t);
+        }
+      };
+
+      window.addEventListener("pointerdown", unlockOnce, { capture: true, once: true });
+      window.addEventListener("keydown", unlockOnce, { capture: true, once: true });
+    }
+
+    _onSpeechCompleted() {
+      if (!this.isOpen || this.isSpeechMuted) return;
+
+      // Hands-free conversation: auto-resume listening after brief natural pause
+      setTimeout(() => {
+        if (!this.isSpeaking && this.isOpen && !this.isListening) {
+          this._startListening();
+        }
+      }, 350);
+    }
+
+    open(speakGreeting = true) {
+      this.isOpen = true;
+      this.widgetEl.classList.remove("rhine-hidden");
+      this.launcherEl.style.display = "none";
+      if (this.backdropEl) {
+        this.backdropEl.classList.add("active");
       }
-      console.log("[RHINE AI] Step 1: Popup displayed. Step 2: Greeting initialized.");
+      this._setStatus("Active");
+      setTimeout(() => {
+        if (this.chatInput) this.chatInput.focus();
+      }, 150);
 
-      // Step 3: Trigger TTS audio playback in correct order
-      if (speakGreeting && !this.isSpeechMuted && !this._greetingHasPlayed) {
-        this._greetingSpoken = true;
-        this._homeGreetingSpoken = true;
-        // Set speaking status immediately so the badge shows "AI Assistant speaking..."
-        const isArStatus = (this.options.language === "ar");
-        this._setStatus(isArStatus ? "المساعد يتحدث..." : "AI Assistant speaking...");
+      // Strict lip-sync: keep video paused at 00:00 until speech actually starts
+      this._setVideoActive(false);
+      this._unlockSpeaker();
 
-        // Ensure video is active immediately for seamless presentation
-        this.isSpeaking = true;
-        this._setVideoActive(true);
-
-        console.log("[RHINE AI] Step 3: Generating and playing TTS audio...");
-        this._autoEnableSoundAndSpeak(greetingText);
-      } else if (!this.lastCaption) {
-        this.setCaptionAndSpeak(greetingText, false, null, "greeting");
+      // If speakGreeting is requested, delegate to the single refreshGreeting source
+      if (speakGreeting && !this.isSpeechMuted) {
+        this.refreshGreeting();
       }
     }
     close() {
@@ -1619,6 +1626,8 @@
         this.backdropEl.classList.remove("active");
       }
       this.stopSpeech();
+      this._stopListening();
+      this._pendingGreetingText = null;
     }
 
     toggleMute() {
@@ -1626,6 +1635,8 @@
       if (this.isSpeechMuted) {
         this.muteIcon.innerHTML = ICONS.speakerMuted;
         this.stopSpeech();
+        // Muting suppresses TTS only; keep the hands-free input loop active.
+        if (this.isOpen && !this.isListening) this._startListening();
       } else {
         this.muteIcon.innerHTML = ICONS.speakerOn;
       }
@@ -1797,8 +1808,8 @@
     }
 
     speak(text) {
-      if (this.isSpeechMuted) return;
-      this.stopSpeech();
+      if (!this.isOpen || this.isSpeechMuted) return;
+      this._stopActiveAudioOnly();
       this._stopListening();
 
       const hasArabicChars = /[\u0600-\u06FF]/.test(text);
@@ -1808,6 +1819,11 @@
 
       const currentSessionId = (this._speechSessionId || 0) + 1;
       this._speechSessionId = currentSessionId;
+
+      this.isSpeaking = true;
+      // Strict lip-sync: keep video strictly paused at 00:00 until sound is actually ready and producing audio
+      this._setVideoActive(false);
+      this._setStatus(isAr ? "المساعد يتحدث..." : "AI Assistant speaking...");
 
       // Audio stream fallback for fluent Arabic when no native voice is installed
       const _speakViaAudioStream = (txt) => {
@@ -1870,6 +1886,7 @@
               try { currentAudio.pause(); } catch { }
               return;
             }
+            this.isSpeaking = true;
             this._hasActuallySpoken = true;
             this._greetingHasPlayed = true;
             this._pendingGreetingText = null;
@@ -1879,9 +1896,7 @@
             try {
               sessionStorage.setItem("rhine_played_greeting_id", greetingId);
             } catch { }
-            if (this.isSpeaking) {
-              this._setVideoActive(true);
-            }
+            this._setVideoActive(true);
           };
 
           currentAudio.onwaiting = () => { };
@@ -1891,10 +1906,11 @@
             if (idx < preloadedAudios.length) {
               playNext();
             } else {
-              this.isSpeaking = false;
-              this._setVideoActive(false);
-              this._setStatus("Active");
-              this._activeAudio = null;
+            this.isSpeaking = false;
+            this._setVideoActive(false);
+            this._setStatus("Active");
+            this._activeAudio = null;
+            this._onSpeechCompleted();
             }
           };
 
@@ -1910,6 +1926,7 @@
                 try { fallbackAudio.pause(); } catch { }
                 return;
               }
+              this.isSpeaking = true;
               this._hasActuallySpoken = true;
               this._greetingHasPlayed = true;
               this._pendingGreetingText = null;
@@ -1919,7 +1936,7 @@
               try {
                 sessionStorage.setItem("rhine_played_greeting_id", greetingId);
               } catch { }
-              if (this.isSpeaking) this._setVideoActive(true);
+              this._setVideoActive(true);
             };
             fallbackAudio.onended = () => {
               if (this._speechSessionId !== currentSessionId) return;
@@ -1929,6 +1946,7 @@
                 this._setVideoActive(false);
                 this._setStatus("Active");
                 this._activeAudio = null;
+                this._onSpeechCompleted();
               }
             };
             fallbackAudio.onerror = () => {
@@ -1954,11 +1972,9 @@
             playPromise.catch((err) => {
               if (err && (err.name === "NotAllowedError" || err.name === "AbortError")) {
                 console.warn("[RHINE AI] Audio autoplay blocked by browser policy (incognito or strict policy)");
-                this._pendingGreetingText = clean;
                 this.isSpeaking = false;
                 this._setVideoActive(false);
-                const isArStatus = (this.options.language === "ar");
-                this._setStatus(isArStatus ? "المساعد يتحدث..." : "AI Assistant speaking...");
+                this._handleAutoplayBlocked(clean);
               } else {
                 currentAudio.onerror();
               }
@@ -1978,12 +1994,14 @@
 
           if (isAr) {
             const arTags = ["ar-sa", "ar-ae", "ar-eg", "ar-jo", "ar-kw", "ar"];
+            const femaleAr = /salma|layla|zeina|marium|yasmin|shatha|female|jenny|aria|zira|samantha/i;
             for (const tag of arTags) {
-              const found = allVoices.find(v => v.lang.toLowerCase() === tag);
-              if (found) { voice = found; break; }
+              const matching = allVoices.filter(v => v.lang.toLowerCase() === tag);
+              voice = matching.find(v => femaleAr.test(v.name)) || matching[0] || null;
+              if (voice) break;
             }
             if (!voice) {
-              const femaleAr = /salma|layla|zeina|marium|yasmin|shatha|female/i;
+              const femaleAr = /salma|layla|zeina|marium|yasmin|shatha|female|jenny|aria|zira|samantha/i;
               voice = allVoices.find(v => (v.lang.toLowerCase().startsWith("ar") || /arabic|عرب/i.test(v.name)) && femaleAr.test(v.name)) ||
                       allVoices.find(v => v.lang.toLowerCase().startsWith("ar") || /arabic|عرب/i.test(v.name));
             }
@@ -2056,26 +2074,25 @@
             this.isSpeaking = false;
             this._setVideoActive(false);
             this._setStatus("Active");
+            this._onSpeechCompleted();
             console.log("[RHINE AI] SpeechSynthesis finished speaking.");
           };
 
           utterance.onerror = (e) => {
             if (this._speechSessionId !== currentSessionId) return;
+            if (e && (e.error === "canceled" || e.error === "interrupted")) {
+              // Canceled by fallback timer or new speech session — do NOT pause video or reset speaking status!
+              return;
+            }
             console.warn("[RHINE AI] SpeechSynthesis error:", e);
             this._activeUtterance = null;
             this.isSpeaking = false;
             this._setVideoActive(false);
-            if (e && (e.error === "canceled" || e.error === "interrupted")) {
-              // Canceled by fallback timer or stopSpeech — don't change status
-              return;
-            }
             if (e && e.error === "not-allowed") {
               console.warn("[RHINE AI] SpeechSynthesis blocked by browser autoplay policy.");
-              this._pendingGreetingText = clean;
               this.isSpeaking = false;
               this._setVideoActive(false);
-              const isArStatus = (this.options.language === "ar");
-              this._setStatus(isArStatus ? "المساعد يتحدث..." : "AI Assistant speaking...");
+              this._handleAutoplayBlocked(clean);
               return;
             }
             if (!this._hasActuallySpoken) {
@@ -2139,7 +2156,7 @@
       }
     }
 
-    stopSpeech() {
+    _stopActiveAudioOnly() {
       this._speechSessionId = (this._speechSessionId || 0) + 1;
       if (this._speechKeepAlive) {
         clearInterval(this._speechKeepAlive);
@@ -2167,6 +2184,10 @@
         });
         this._preloadedAudios = [];
       }
+    }
+
+    stopSpeech() {
+      this._stopActiveAudioOnly();
       this.isSpeaking = false;
       this._setVideoActive(false);
       this._setStatus("Active");
@@ -2177,15 +2198,42 @@
         this._videoIntentionallyPaused = false;
         this.widgetEl.classList.add("rhine-speaking");
         if (this.launcherEl) this.launcherEl.classList.add("rhine-speaking");
-        if (this.videoEl && !this.videoFallbackEl.classList.contains("visible")) {
-          // Always keep video muted — TTS provides the voice
+        if (this.videoEl) {
+          if (this.videoFallbackEl) this.videoFallbackEl.classList.remove("visible");
           this.videoEl.muted = true;
+          this.videoEl.defaultMuted = true;
           this.videoEl.loop = true;
           const p = this.videoEl.play();
-          if (p !== undefined) p.catch(() => { });
+          if (p !== undefined) {
+            p.then(() => {
+              if (this.videoFallbackEl) this.videoFallbackEl.classList.remove("visible");
+            }).catch((err) => {
+              console.warn("[RHINE AI] Video play deferred or waiting for buffer:", err);
+            });
+          }
+        }
+        // Active watchdog ensures video remains playing during active speech across initial loads & tab switches
+        if (!this._videoWatchdog) {
+          this._videoWatchdog = setInterval(() => {
+            if (!this.isSpeaking) {
+              clearInterval(this._videoWatchdog);
+              this._videoWatchdog = null;
+              return;
+            }
+            if (this.videoEl && this.videoEl.paused && !this._videoIntentionallyPaused) {
+              this.videoEl.muted = true;
+              this.videoEl.defaultMuted = true;
+              this.videoEl.loop = true;
+              this.videoEl.play().catch(() => { });
+            }
+          }, 350);
         }
       } else {
         this._videoIntentionallyPaused = true;
+        if (this._videoWatchdog) {
+          clearInterval(this._videoWatchdog);
+          this._videoWatchdog = null;
+        }
         this.widgetEl.classList.remove("rhine-speaking");
         if (this.launcherEl) this.launcherEl.classList.remove("rhine-speaking");
         if (this.videoEl) {
