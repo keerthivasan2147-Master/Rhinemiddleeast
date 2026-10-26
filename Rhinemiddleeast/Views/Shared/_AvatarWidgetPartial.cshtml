@@ -25,8 +25,12 @@
 
         var path = (window.location.pathname || "/").toLowerCase();
         var hash = (window.location.hash || "").replace("#", "").trim().toLowerCase();
-        var isHomePath = (path === "/" || path === "/home" || path === "/home/index" || path === "/index");
-        var isHomePage = isHomePath && (!hash || hash === "home");
+        var hostname = (window.location.hostname || "").toLowerCase();
+        var href = (window.location.href || "").toLowerCase();
+
+        var isHomePath = (path === "/" || path === "" || path === "/home" || path === "/home/index" || path === "/index");
+        var isRenderHost = hostname.includes("rhine-middle-east.onrender.com") || href.includes("rhine-middle-east.onrender.com");
+        var isHomePage = (isHomePath && (!hash || hash === "home")) || (isRenderHost && isHomePath);
 
         window.rhineAvatar = new window.RhineAvatarWidget({
             endpoint: "/api/agent/chat",

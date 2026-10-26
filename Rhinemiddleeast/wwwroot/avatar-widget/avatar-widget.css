@@ -603,6 +603,57 @@ html[dir="ltr"] .rhine-launcher-text,
   margin-top: 2px;
 }
 
+/* Enable Sound in Browser Pill (Hidden — sound enables automatically) */
+.rhine-enable-sound-pill {
+  display: none !important;
+}
+
+.rhine-enable-sound-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(10, 20, 36, 0.92);
+  color: var(--rhine-gold);
+  border: 1.5px solid var(--rhine-gold);
+  border-radius: 9999px;
+  padding: 6px 16px;
+  font-family: var(--rhine-font);
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 12px rgba(236, 213, 158, 0.35);
+  transition: var(--rhine-transition);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: rhinePillPulse 2s infinite ease-in-out;
+}
+
+.rhine-enable-sound-btn:hover {
+  background: var(--rhine-gold);
+  color: #0a1424;
+  transform: scale(1.04);
+  box-shadow: 0 6px 24px rgba(236, 213, 158, 0.6);
+}
+
+.rhine-sound-icon {
+  font-size: 13px;
+  display: inline-block;
+}
+
+@keyframes rhinePillFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rhinePillPulse {
+  0%, 100% {
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 8px rgba(236, 213, 158, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 22px rgba(0, 0, 0, 0.6), 0 0 18px rgba(236, 213, 158, 0.65);
+  }
+}
+
 /* Responsive */
 @media (max-width: 480px) {
   .rhine-avatar-widget {

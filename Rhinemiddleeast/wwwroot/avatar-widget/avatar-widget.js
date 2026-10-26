@@ -203,6 +203,18 @@
             const digits = clean.replace(/\D/g, "");
             return (digits.length >= 7 && digits.length <= 16) ? null : "Please enter a valid phone number with country code (e.g. +971 4 8818618).";
           }
+        },
+        {
+          key: "meetingDiscussion",
+          label: "Meeting Discussion",
+          prompt: "What would you like to discuss with the RHINE team?\n\nYou may describe your business idea, existing company, required platform, website, AI agents, operational challenges or any other relevant requirements.\n\nI will include your complete message in the meeting request.",
+          validate: (v) => v.trim().length >= 5 ? null : "Please describe what you would like to discuss so the RHINE team can prepare for the meeting."
+        },
+        {
+          key: "meetingTime",
+          label: "Preferred Meeting Time",
+          prompt: "What date and time would be most convenient for you?\n\nPlease also confirm your time zone (e.g. UAE — GMT+4, UK — GMT+0, USA Eastern — GMT-5).",
+          validate: (v) => v.trim().length >= 3 ? null : "Please provide your preferred meeting date, time and time zone."
         }
       ],
       reviewTitle: "Please confirm that these details are correct. Use Confirm & Sent Request button to send your meeting request to the RHINE team? otherwise use Edit information button",
@@ -266,6 +278,18 @@
             const digits = clean.replace(/\D/g, "");
             return (digits.length >= 7 && digits.length <= 16) ? null : "الرجاء إدخال رقم هاتف صحيح متضمناً رمز الدولة (مثال: ‎+971 4 8818618).";
           }
+        },
+        {
+          key: "meetingDiscussion",
+          label: "موضوع الاجتماع",
+          prompt: "ماذا تودّ مناقشته مع فريق RHINE؟\n\nيمكنك وصف فكرة عملك، أو شركتك القائمة، أو المنصة المطلوبة، أو الموقع الإلكتروني، أو وكلاء الذكاء الاصطناعي، أو التحديات التشغيلية أو أي متطلبات أخرى ذات صلة.\n\nسأضمّن رسالتك الكاملة في طلب الاجتماع.",
+          validate: (v) => v.trim().length >= 5 ? null : "الرجاء وصف ما تودّ مناقشته حتى يتمكن فريق RHINE من الاستعداد للاجتماع."
+        },
+        {
+          key: "meetingTime",
+          label: "وقت الاجتماع المفضّل",
+          prompt: "ما التاريخ والوقت الأنسب لك؟\n\nيرجى أيضاً تحديد منطقتك الزمنية (مثال: الإمارات — GMT+4، المملكة المتحدة — GMT+0، الولايات المتحدة الشرقية — GMT-5).",
+          validate: (v) => v.trim().length >= 3 ? null : "الرجاء تحديد التاريخ والوقت والمنطقة الزمنية المفضّلة."
         }
       ],
       reviewTitle: "يرجى التأكيد على صحة هذه التفاصيل. استخدم زر تأكيد وإرسال الطلب لإرسال طلب الاجتماع إلى فريق RHINE، أو استخدم زر تعديل المعلومات.",
@@ -350,6 +374,7 @@
       this.lastCaption = "";
       this._voicesReady = false;
       this._greetingSpoken = false; // Track if greeting has been spoken this session
+      this._hasActuallySpoken = false; // Track if audio/speech has actually begun playing
 
       this._init();
     }
@@ -383,28 +408,23 @@
         this.videoEl.load();
       }
 
-      // Show greeting caption (no auto-speak on load — speak only when user opens widget)
-      const greet = () => {
-        const kb = RHINE_KNOWLEDGE[this.options.language] || RHINE_KNOWLEDGE.en;
-        this.setCaptionAndSpeak(kb.greeting, false, null, "greeting");
-      };
+      // Ensure video starts strictly paused with mouth closed before speech
+      this._setVideoActive(false);
 
+      // Prepare voices
       if (window.speechSynthesis && window.speechSynthesis.getVoices().length === 0) {
-        window.speechSynthesis.addEventListener('voiceschanged', () => { this._voicesReady = true; greet(); }, { once: true });
-        setTimeout(() => { if (!this._voicesReady) greet(); }, 1500);
+        window.speechSynthesis.addEventListener('voiceschanged', () => { this._voicesReady = true; }, { once: true });
       } else {
         this._voicesReady = true;
-        greet();
       }
 
       if (this.options.autoOpen) {
         this.open(true);
       } else {
         this.close();
+        const kb = RHINE_KNOWLEDGE[this.options.language] || RHINE_KNOWLEDGE.en;
+        this.setCaptionAndSpeak(kb.greeting, false, null, "greeting");
       }
-
-      // Speak initial welcome message on Home page load/refresh
-      this.speakWelcomeOnHome();
     }
 
     _extractAntiforgeryToken() {
@@ -583,6 +603,14 @@
             ${this._renderQuickChips(isAr)}
           </div>
 
+          <!-- Enable Sound Option in Browser (Hidden — sound enabled automatically) -->
+          <div class="rhine-enable-sound-pill" id="rhineEnableSoundPill" style="display: none !important;">
+            <button type="button" class="rhine-enable-sound-btn" id="rhineEnableSoundBtn" style="display: none !important;">
+              <span class="rhine-sound-icon">🔊</span>
+              <span id="rhineEnableSoundText">${isAr ? 'انقر لتفعيل الصوت والترحيب' : 'Click to Enable Sound & Greeting'}</span>
+            </button>
+          </div>
+
           <!-- Transparent Chat Textbox with Microphone -->
           <form class="rhine-chat-form" id="rhineChatForm">
             <input type="text"
@@ -611,6 +639,9 @@
       this.captionOverlay = this.widgetEl.querySelector("#rhineCaptionOverlay");
       this.captionContent = this.widgetEl.querySelector("#rhineCaptionContent");
       this.captionBadgeText = this.widgetEl.querySelector("#rhineCaptionBadgeText");
+      this.enableSoundPill = this.widgetEl.querySelector("#rhineEnableSoundPill");
+      this.enableSoundBtn = this.widgetEl.querySelector("#rhineEnableSoundBtn");
+      this.enableSoundText = this.widgetEl.querySelector("#rhineEnableSoundText");
       this.chatForm = this.widgetEl.querySelector("#rhineChatForm");
       this.chatInput = this.widgetEl.querySelector("#rhineChatInput");
       this.chatMic = this.widgetEl.querySelector("#rhineChatMic");
@@ -720,7 +751,9 @@
       if (this.activeRecognition) {
         this.activeRecognition.lang = isAr ? "ar-SA" : "en-US";
       }
-
+      if (this.enableSoundText) {
+        this.enableSoundText.textContent = isAr ? "انقر لتفعيل الصوت والترحيب" : "Click to Enable Sound & Greeting";
+      }
     }
 
     _makeLauncherDraggable() {
@@ -1007,7 +1040,7 @@
         }
       }, 1000);
 
-      // 5. Start SpeechRecognition session exclusively (avoids getUserMedia mic contention)
+      // 5. Start SpeechRecognition session directly (without getUserMedia hardware lock contention)
       this._startRecognitionSession(SpeechRecognition, isAr);
     }
 
@@ -1016,6 +1049,9 @@
 
       try {
         if (this.activeRecognition) {
+          this.activeRecognition.onresult = null;
+          this.activeRecognition.onerror = null;
+          this.activeRecognition.onend = null;
           try { this.activeRecognition.abort(); } catch { }
           this.activeRecognition = null;
         }
@@ -1026,6 +1062,12 @@
         rec.maxAlternatives = 1;
         rec.lang = isAr ? "ar-SA" : "en-US";
         this.activeRecognition = rec;
+
+        rec.onstart = () => {
+          if (this.isListening) {
+            this._setStatus(isAr ? "جارٍ الاستماع..." : "Listening...");
+          }
+        };
 
         rec.onresult = (e) => {
           // Reset countdown to 60s on any speech activity
@@ -1082,11 +1124,29 @@
         };
 
         rec.onerror = (e) => {
-          if (e.error === "not-allowed") {
+          if (e.error === "not-allowed" || e.error === "service-not-allowed") {
             this._stopListening();
-            this._setStatus(isAr ? "تم حظر الميكروفون. اسمح به أو اكتب سؤالك:" : "Mic blocked. Please allow microphone access.");
+            this._setStatus(isAr ? "تم حظر الميكروفون. يرجى السماح بصلاحية الميكروفون في المتصفح." : "Mic blocked. Please allow microphone in browser.");
+            return;
           }
-          // Do not abort on 'no-speech' or 'aborted' or 'network', let onend restart seamlessly
+          if (e.error === "network") {
+            this._stopListening();
+            this._setStatus(isAr ? "خطأ في الاتصال بالشبكة لخدمة الصوت." : "Speech recognition network error.");
+            return;
+          }
+          if (e.error === "audio-capture") {
+            // Audio hardware momentarily busy — retry cleanly after brief pause
+            if (this.isListening && !this._micDebounceTimer) {
+              if (this._recRestartTimer) clearTimeout(this._recRestartTimer);
+              this._recRestartTimer = setTimeout(() => {
+                if (this.isListening && !this._micDebounceTimer) {
+                  this._startRecognitionSession(SpeechRecognition, isAr);
+                }
+              }, 400);
+            }
+            return;
+          }
+          // Do not abort on 'no-speech' or 'aborted', let onend restart smoothly
         };
 
         rec.onend = () => {
@@ -1097,7 +1157,7 @@
               if (this.isListening && !this._micDebounceTimer) {
                 this._startRecognitionSession(SpeechRecognition, isAr);
               }
-            }, 200);
+            }, 180);
           }
         };
 
@@ -1186,6 +1246,9 @@
         this.activeAudioCtx = null;
       }
       if (this.activeRecognition) {
+        this.activeRecognition.onresult = null;
+        this.activeRecognition.onerror = null;
+        this.activeRecognition.onend = null;
         try { this.activeRecognition.abort(); } catch { }
         this.activeRecognition = null;
       }
@@ -1208,7 +1271,11 @@
 
     _setupSpeechRecognition() {
       if (this.chatMic) {
-        this.chatMic.addEventListener("click", () => this._triggerMic());
+        this.chatMic.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          this._triggerMic();
+        });
       }
     }
 
@@ -1216,84 +1283,133 @@
       if (this.statusText) this.statusText.textContent = text;
     }
 
+    _unlockSpeaker() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtx) {
+          if (!this._audioCtx || this._audioCtx.state === 'closed') {
+            this._audioCtx = new AudioCtx();
+          }
+          if (this._audioCtx.state === 'suspended') {
+            this._audioCtx.resume().catch(() => { });
+          }
+          // Play a silent buffer — this is the only reliable way to unlock audio in incognito
+          const buf = this._audioCtx.createBuffer(1, 1, 22050);
+          const src = this._audioCtx.createBufferSource();
+          src.buffer = buf;
+          src.connect(this._audioCtx.destination);
+          src.start(0);
+        }
+      } catch { }
+
+      if ("speechSynthesis" in window) {
+        try {
+          if (window.speechSynthesis.paused) {
+            window.speechSynthesis.resume();
+          }
+          // Cancel any stuck utterances (Chromium bug in incognito)
+          if (!window.speechSynthesis.speaking && !window.speechSynthesis.pending) {
+            window.speechSynthesis.cancel();
+          }
+        } catch { }
+      }
+    }
+
     speakWelcomeOnHome() {
       // Check if we are on Home page (path is / or /Home or hash is #home or empty)
       const path = (window.location.pathname || "/").toLowerCase();
       const hash = (window.location.hash || "").replace("#", "").trim().toLowerCase();
-      const isHomePath = (path === "/" || path === "/home" || path === "/home/index" || path === "/index");
-      const isHome = isHomePath && (!hash || hash === "home");
+      const hostname = (window.location.hostname || "").toLowerCase();
+      const href = (window.location.href || "").toLowerCase();
+
+      const isHomePath = (path === "/" || path === "" || path === "/home" || path === "/home/index" || path === "/index");
+      const isRenderHost = hostname.includes("rhine-middle-east.onrender.com") || href.includes("rhine-middle-east.onrender.com");
+      const isHome = (isHomePath && (!hash || hash === "home")) || (isRenderHost && isHomePath);
       if (!isHome || this._homeGreetingSpoken) return;
 
-      const kb = RHINE_KNOWLEDGE[this.options.language] || RHINE_KNOWLEDGE.en;
-      const greetingText = kb.greeting;
-      this.lastCaption = greetingText;
-
-      // Automatically speak initial welcome message
-      this._homeGreetingSpoken = true;
-      this._greetingSpoken = true;
-
-      // 1. Direct speech playback
-      if (window.speechSynthesis && window.speechSynthesis.paused) {
-        try { window.speechSynthesis.resume(); } catch { }
-      }
-      this.setCaptionAndSpeak(greetingText, true, null, "greeting");
-
-      // 2. Default browser permission prompt (shows native browser dialog if needed)
-      if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === "function") {
-        navigator.mediaDevices.getUserMedia({ audio: true })
-          .then((stream) => {
-            stream.getTracks().forEach((t) => t.stop());
-            if (window.speechSynthesis && window.speechSynthesis.paused) {
-              try { window.speechSynthesis.resume(); } catch { }
-            }
-            if (!this.isSpeaking && !this.isSpeechMuted) {
-              this.speak(greetingText);
-            }
-          })
-          .catch(() => {
-            // Dismissed or denied, fallback gesture below handles speech
-          });
-      }
-
-      // 3. Fallback: on any user gesture (click/touch/key anywhere on screen), immediately resume/speak
-      this._ensureInitialGreetingSpeaks(greetingText);
+      this.open(true);
     }
 
-    _ensureInitialGreetingSpeaks(text) {
+    _autoEnableSoundAndSpeak(greetingText) {
       if (this.isSpeechMuted) return;
+      if (this._greetingHasPlayed) return;
+      if (this._autoSpeakListenersActive) return;
 
-      const triggerSpeech = () => {
-        window.removeEventListener("pointerdown", triggerSpeech, true);
-        window.removeEventListener("click", triggerSpeech, true);
-        window.removeEventListener("keydown", triggerSpeech, true);
-        window.removeEventListener("touchstart", triggerSpeech, true);
+      // Ensure button is permanently hidden — sound enables automatically
+      if (this.enableSoundPill) {
+        this.enableSoundPill.style.display = "none";
+      }
 
-        if (window.speechSynthesis && window.speechSynthesis.paused) {
+      this._unlockSpeaker();
+
+      // Immediately attempt direct speech
+      this.speak(greetingText);
+
+      // AUTOPLAY POLICY UNLOCK:
+      // Chrome requires a "user activation" before audio can play.
+      // In incognito (MEI=0), even normal windows may block on first visit.
+      // mousemove, pointerdown, scroll, wheel, touchstart, click, keydown
+      // all qualify as user activation gestures in Chrome.
+      // A visitor WILL move their mouse almost instantly upon landing on the page,
+      // so adding mousemove makes the greeting fire nearly immediately.
+      this._autoSpeakListenersActive = true;
+
+      const activationEvents = [
+        'mousemove', 'pointerdown', 'pointerup', 'touchstart', 'touchend',
+        'click', 'keydown', 'scroll', 'wheel', 'mouseover'
+      ];
+
+      const onUserActivation = () => {
+        // Immediately remove ALL listeners — NEVER fires twice
+        activationEvents.forEach(evt => {
+          window.removeEventListener(evt, onUserActivation, { capture: true });
+          document.removeEventListener(evt, onUserActivation, { capture: true });
+        });
+        this._autoSpeakListenersActive = false;
+
+        // Stop the periodic retry timer
+        if (this._greetingRetryTimer) {
+          clearInterval(this._greetingRetryTimer);
+          this._greetingRetryTimer = null;
+        }
+
+        // Unlock AudioContext with silent buffer on the gesture
+        this._unlockSpeaker();
+
+        // Resume speechSynthesis (Chromium bug — stays paused in incognito)
+        if ("speechSynthesis" in window) {
           try { window.speechSynthesis.resume(); } catch { }
         }
 
-        if (!this.isSpeaking && this.isOpen && !this.isSpeechMuted) {
-          this.speak(text);
+        // Only retry greeting if it has not actually started playing yet
+        if (!this._hasActuallySpoken && !this._greetingHasPlayed) {
+          this.stopSpeech();
+          setTimeout(() => {
+            if (!this._hasActuallySpoken && !this._greetingHasPlayed && !this.isSpeaking) {
+              this.speak(greetingText);
+            }
+          }, 50);
         }
       };
 
-      // Set up on window to capture the very first user interaction
-      window.addEventListener("pointerdown", triggerSpeech, { once: true, capture: true });
-      window.addEventListener("click", triggerSpeech, { once: true, capture: true });
-      window.addEventListener("keydown", triggerSpeech, { once: true, capture: true });
-      window.addEventListener("touchstart", triggerSpeech, { once: true, capture: true });
+      activationEvents.forEach(evt => {
+        window.addEventListener(evt, onUserActivation, { capture: true, passive: true });
+        document.addEventListener(evt, onUserActivation, { capture: true, passive: true });
+      });
 
-      // If speech starts successfully, remove the listeners
-      const checkInterval = setInterval(() => {
-        if (this.isSpeaking) {
-          clearInterval(checkInterval);
-          window.removeEventListener("pointerdown", triggerSpeech, true);
-          window.removeEventListener("click", triggerSpeech, true);
-          window.removeEventListener("keydown", triggerSpeech, true);
-          window.removeEventListener("touchstart", triggerSpeech, true);
+      // PERIODIC RETRY: Some browsers silently unlock audio after page gains focus
+      // or after internal MEI threshold is reached. Retry every 500ms for 10 seconds.
+      let retryCount = 0;
+      this._greetingRetryTimer = setInterval(() => {
+        retryCount++;
+        if (this._hasActuallySpoken || this._greetingHasPlayed || this.isSpeaking || retryCount > 20) {
+          clearInterval(this._greetingRetryTimer);
+          this._greetingRetryTimer = null;
+          return;
         }
-      }, 300);
-      setTimeout(() => clearInterval(checkInterval), 10000);
+        this._unlockSpeaker();
+        this.speak(greetingText);
+      }, 500);
     }
 
     open(speakGreeting = true) {
@@ -1305,21 +1421,25 @@
       }
       setTimeout(() => this.chatInput.focus(), 150);
 
-      if (window.speechSynthesis && window.speechSynthesis.paused) {
-        try { window.speechSynthesis.resume(); } catch { }
+      // Keep video paused until speech starts
+      if (!this.isSpeaking) {
+        this._setVideoActive(false);
       }
 
+      this._unlockSpeaker();
+
+      const kb = RHINE_KNOWLEDGE[this.options.language] || RHINE_KNOWLEDGE.en;
+      const greetingText = kb.greeting;
+      this.lastCaption = greetingText;
+
       // Automatically speak welcome greeting when opened
-      if (speakGreeting && !this.isSpeechMuted && !this._greetingSpoken && !this._homeGreetingSpoken) {
+      if (speakGreeting && !this.isSpeechMuted && !this._greetingSpoken) {
         this._greetingSpoken = true;
         this._homeGreetingSpoken = true;
-        const kb = RHINE_KNOWLEDGE[this.options.language] || RHINE_KNOWLEDGE.en;
-        const greetingText = kb.greeting;
-        this.setCaptionAndSpeak(greetingText, true, null, "greeting");
-        this._ensureInitialGreetingSpeaks(greetingText);
+        this.setCaptionAndSpeak(greetingText, false, null, "greeting");
+        this._autoEnableSoundAndSpeak(greetingText);
       } else if (!this.lastCaption) {
-        const kb = RHINE_KNOWLEDGE[this.options.language] || RHINE_KNOWLEDGE.en;
-        this.setCaptionAndSpeak(kb.greeting, false, null, "greeting");
+        this.setCaptionAndSpeak(greetingText, false, null, "greeting");
       }
     }
     close() {
@@ -1516,8 +1636,13 @@
       const clean = text.replace(/[*_#`~\[\]•]/g, " ").replace(/\n/g, ". ").trim();
       if (!clean) return;
 
+      const currentSessionId = (this._speechSessionId || 0) + 1;
+      this._speechSessionId = currentSessionId;
+
       // Audio stream fallback for fluent Arabic when no native voice is installed
       const _speakViaAudioStream = (txt) => {
+        if (this._speechSessionId !== currentSessionId) return;
+
         const cleanTxt = txt
           .replace(/[\u064B-\u065F\u0670\u0640]/g, "")
           .replace(/[*_#`~\[\]•]/g, " ")
@@ -1543,27 +1668,25 @@
         this.isSpeaking = true;
         this._setStatus(isAr ? "المساعد يتحدث..." : "AI Assistant speaking...");
 
-        // Pre-warm video: start it immediately (muted) so it's buffered before audio hits
-        // This eliminates the lag where audio starts but video is still loading
-        this._setVideoActive(true);
-
         // Preload queue of Audio objects for seamless playback with 0ms gap
-        // Preload all chunks immediately before playing any, to minimise inter-chunk gaps
         const preloadedAudios = chunks.map((c) => {
           const audio = new Audio();
           audio.preload = "auto";
           audio.crossOrigin = "anonymous";
           audio.src = "/api/agent/tts?text=" + encodeURIComponent(c) + "&lang=" + (isAr ? "ar" : "en");
-          audio.load(); // Trigger browser fetch immediately
+          audio.load();
           return audio;
         });
+        this._preloadedAudios = preloadedAudios;
 
         const playNext = () => {
-          if (!this.isSpeaking || idx >= preloadedAudios.length) {
-            this.isSpeaking = false;
-            this._setVideoActive(false);
-            this._setStatus("Active");
-            this._activeAudio = null;
+          if (this._speechSessionId !== currentSessionId || !this.isSpeaking || idx >= preloadedAudios.length) {
+            if (this._speechSessionId === currentSessionId) {
+              this.isSpeaking = false;
+              this._setVideoActive(false);
+              this._setStatus("Active");
+              this._activeAudio = null;
+            }
             return;
           }
 
@@ -1572,20 +1695,22 @@
           idx++;
           this._activeAudio = currentAudio;
 
-          // Video was pre-warmed; keep it running during normal playback.
-          // Only briefly pause video during buffering waits between chunks.
           currentAudio.onplaying = () => {
+            if (this._speechSessionId !== currentSessionId) {
+              try { currentAudio.pause(); } catch { }
+              return;
+            }
+            this._hasActuallySpoken = true;
+            this._greetingHasPlayed = true;
             if (this.isSpeaking) {
               this._setVideoActive(true);
             }
           };
 
-          // During buffering pauses, keep video running (better UX than stop-start)
-          currentAudio.onwaiting = () => {
-            // Keep video alive during short network buffering — don't pause
-          };
+          currentAudio.onwaiting = () => { };
 
           currentAudio.onended = () => {
+            if (this._speechSessionId !== currentSessionId) return;
             if (idx < preloadedAudios.length) {
               playNext();
             } else {
@@ -1597,15 +1722,23 @@
           };
 
           currentAudio.onerror = () => {
-            const directUrl = "https://translate.google.com/translate_tts?ie=UTF-8&q=" + encodeURIComponent(currentChunk) + "&tl=ar&client=tw-ob";
+            if (this._speechSessionId !== currentSessionId) return;
+            const directUrl = "https://translate.google.com/translate_tts?ie=UTF-8&q=" + encodeURIComponent(currentChunk) + "&tl=" + (isAr ? "ar" : "en") + "&client=tw-ob";
             const fallbackAudio = new Audio();
             fallbackAudio.src = directUrl;
             this._activeAudio = fallbackAudio;
 
             fallbackAudio.onplaying = () => {
+              if (this._speechSessionId !== currentSessionId) {
+                try { fallbackAudio.pause(); } catch { }
+                return;
+              }
+              this._hasActuallySpoken = true;
+              this._greetingHasPlayed = true;
               if (this.isSpeaking) this._setVideoActive(true);
             };
             fallbackAudio.onended = () => {
+              if (this._speechSessionId !== currentSessionId) return;
               if (idx < preloadedAudios.length) playNext();
               else {
                 this.isSpeaking = false;
@@ -1615,47 +1748,19 @@
               }
             };
             fallbackAudio.onerror = () => {
-              try {
-                const u = new SpeechSynthesisUtterance(currentChunk);
-                u.lang = isAr ? "ar-SA" : "en-US";
-                u.rate = 0.92;
-                u.onstart = () => { if (this.isSpeaking) this._setVideoActive(true); };
-                u.onend = () => {
-                  if (idx < preloadedAudios.length) playNext();
-                  else {
-                    this.isSpeaking = false;
-                    this._setVideoActive(false);
-                    this._setStatus("Active");
-                  }
-                };
-                u.onerror = () => {
-                  if (idx < preloadedAudios.length) playNext();
-                  else {
-                    this.isSpeaking = false;
-                    this._setVideoActive(false);
-                    this._setStatus("Active");
-                  }
-                };
-                this._activeUtterance = u;
-                window.speechSynthesis.speak(u);
-              } catch {
-                if (idx < preloadedAudios.length) playNext();
-                else {
-                  this.isSpeaking = false;
-                  this._setVideoActive(false);
-                  this._setStatus("Active");
-                }
+              if (this._speechSessionId !== currentSessionId) return;
+              if (idx < preloadedAudios.length) playNext();
+              else {
+                this.isSpeaking = false;
+                this._setVideoActive(false);
+                this._setStatus("Active");
               }
             };
 
             const p = fallbackAudio.play();
             if (p !== undefined) {
-              p.catch((err) => {
-                if (err && err.name === "NotAllowedError") {
-                  this._ensureInitialGreetingSpeaks(this.lastCaption || clean);
-                } else {
-                  fallbackAudio.onerror();
-                }
+              p.catch(() => {
+                fallbackAudio.onerror();
               });
             }
           };
@@ -1664,7 +1769,11 @@
           if (playPromise !== undefined) {
             playPromise.catch((err) => {
               if (err && err.name === "NotAllowedError") {
-                this._ensureInitialGreetingSpeaks(this.lastCaption || clean);
+                // Browser blocked audio — reset speaking state so activation-listener retry works
+                console.warn("Audio autoplay blocked by browser policy (incognito or strict policy)");
+                this.isSpeaking = false;
+                this._setVideoActive(false);
+                this._setStatus("Active");
               } else {
                 currentAudio.onerror();
               }
@@ -1678,6 +1787,7 @@
       // Native SpeechSynthesis check
       if ("speechSynthesis" in window) {
         const _doSpeak = () => {
+          if (this._speechSessionId !== currentSessionId) return;
           const allVoices = window.speechSynthesis.getVoices();
           let voice = null;
 
@@ -1688,20 +1798,30 @@
               if (found) { voice = found; break; }
             }
             if (!voice) {
-              voice = allVoices.find(v => v.lang.toLowerCase().startsWith("ar") || /arabic|عرب|salma|tariq|maged|layla|zeina/i.test(v.name));
+              const femaleAr = /salma|layla|zeina|marium|yasmin|shatha|female/i;
+              voice = allVoices.find(v => (v.lang.toLowerCase().startsWith("ar") || /arabic|عرب/i.test(v.name)) && femaleAr.test(v.name)) ||
+                      allVoices.find(v => v.lang.toLowerCase().startsWith("ar") || /arabic|عرب/i.test(v.name));
             }
 
-            // CRITICAL: If no Arabic voice found on Windows/browser, stream authentic Arabic audio via Google TTS
+            // If no Arabic voice found on Windows/browser, stream authentic Arabic audio via Google TTS
             if (!voice) {
               _speakViaAudioStream(clean);
               return;
             }
           } else {
             const enVoices = allVoices.filter(v => v.lang.toLowerCase().startsWith("en"));
+            const localEn = enVoices.filter(v => v.localService === true);
+            const femalePattern = /zira|samantha|karen|victoria|jenny|aria|female|ava|allison|serena|stephanie|susan|catherine|linda|natural.*female/i;
+            const malePattern = /david|mark|george|male|guy|richard|james|paul/i;
+
             voice =
-              enVoices.find(v => /samantha|zira|karen|moira|susan|natural|online/i.test(v.name)) ||
-              enVoices.find(v => /female/i.test(v.name)) ||
-              enVoices[0] || null;
+              (localEn.length > 0 ? localEn.find(v => femalePattern.test(v.name)) : null) ||
+              enVoices.find(v => femalePattern.test(v.name)) ||
+              (localEn.length > 0 ? localEn.find(v => !malePattern.test(v.name)) : null) ||
+              enVoices.find(v => !malePattern.test(v.name)) ||
+              (localEn.length > 0 ? localEn[0] : null) ||
+              enVoices[0] ||
+              null;
           }
 
           const utterance = new SpeechSynthesisUtterance(clean.slice(0, 600));
@@ -1714,7 +1834,13 @@
           this._activeUtterance = utterance;
 
           utterance.onstart = () => {
+            if (this._speechSessionId !== currentSessionId) {
+              try { window.speechSynthesis.cancel(); } catch { }
+              return;
+            }
             this.isSpeaking = true;
+            this._hasActuallySpoken = true;
+            this._greetingHasPlayed = true;
             this._setVideoActive(true);
             this._setStatus(isAr ? "المساعد يتحدث..." : "AI Assistant speaking...");
           };
@@ -1728,6 +1854,7 @@
           };
 
           utterance.onend = () => {
+            if (this._speechSessionId !== currentSessionId) return;
             this._activeUtterance = null;
             this.isSpeaking = false;
             this._setVideoActive(false);
@@ -1735,12 +1862,24 @@
           };
 
           utterance.onerror = (e) => {
+            if (this._speechSessionId !== currentSessionId) return;
             console.warn("TTS error:", e);
             this._activeUtterance = null;
             this.isSpeaking = false;
             this._setVideoActive(false);
             this._setStatus("Active");
-            if (isAr) _speakViaAudioStream(clean);
+            // Do NOT fall back to audio stream if speech was intentionally canceled or interrupted
+            if (e && (e.error === "canceled" || e.error === "interrupted")) {
+              return;
+            }
+            // 'not-allowed' = browser autoplay policy blocked speechSynthesis (incognito).
+            // The _autoEnableSoundAndSpeak activation listener will retry on first gesture.
+            if (e && e.error === "not-allowed") {
+              return;
+            }
+            if (!this._hasActuallySpoken) {
+              _speakViaAudioStream(clean);
+            }
           };
 
           // Chromium SpeechSynthesis keep-alive timer
@@ -1759,22 +1898,33 @@
             window.speechSynthesis.speak(utterance);
           } catch (e) {
             console.warn("Speech synthesis speak error:", e);
-            if (isAr) _speakViaAudioStream(clean);
+            _speakViaAudioStream(clean);
           }
         };
 
         const voices = window.speechSynthesis.getVoices();
         if (voices.length === 0) {
-          window.speechSynthesis.addEventListener("voiceschanged", _doSpeak, { once: true });
+          const onVoicesChanged = () => {
+            if (this._speechSessionId === currentSessionId && !this._hasActuallySpoken && !this.isSpeaking) {
+              _doSpeak();
+            }
+          };
+          window.speechSynthesis.addEventListener("voiceschanged", onVoicesChanged, { once: true });
+          setTimeout(() => {
+            if (this._speechSessionId === currentSessionId && !this._hasActuallySpoken && !this.isSpeaking) {
+              _doSpeak();
+            }
+          }, 150);
         } else {
-          setTimeout(_doSpeak, 50);
+          _doSpeak();
         }
-      } else if (isAr) {
+      } else {
         _speakViaAudioStream(clean);
       }
     }
 
     stopSpeech() {
+      this._speechSessionId = (this._speechSessionId || 0) + 1;
       if (this._speechKeepAlive) {
         clearInterval(this._speechKeepAlive);
         this._speechKeepAlive = null;
@@ -1787,8 +1937,19 @@
         try {
           this._activeAudio.pause();
           this._activeAudio.currentTime = 0;
+          this._activeAudio.src = "";
         } catch { }
         this._activeAudio = null;
+      }
+      if (this._preloadedAudios && Array.isArray(this._preloadedAudios)) {
+        this._preloadedAudios.forEach(a => {
+          try {
+            a.pause();
+            a.currentTime = 0;
+            a.src = "";
+          } catch { }
+        });
+        this._preloadedAudios = [];
       }
       this.isSpeaking = false;
       this._setVideoActive(false);
