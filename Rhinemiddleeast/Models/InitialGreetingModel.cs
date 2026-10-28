@@ -5,6 +5,8 @@ namespace Rhinemiddleeast.Models
         public bool ShouldGreet { get; set; } = true;
         public string GreetingEn { get; set; } = string.Empty;
         public string GreetingAr { get; set; } = string.Empty;
+        public string GreetingFa { get; set; } = string.Empty;
+        public string GreetingZh { get; set; } = string.Empty;
         public string GreetingText { get; set; } = string.Empty;
         public string GreetingId { get; set; } = string.Empty;
         public string Timestamp { get; set; } = string.Empty;

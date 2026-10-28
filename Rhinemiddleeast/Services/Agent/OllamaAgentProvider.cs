@@ -43,6 +43,20 @@ namespace RhineAgent.TestWeb.Services.Agent
                 });
             }
 
+            var responseLanguage = request.Language?.ToLowerInvariant() switch
+            {
+                "ar" or "ar-sa" => "Arabic",
+                "fa" or "fa-ir" => "Persian (Farsi)",
+                "zh" or "zh-cn" => "Simplified Chinese",
+                _ => "English"
+            };
+
+            messages.Add(new OllamaChatMessage
+            {
+                Role = "system",
+                Content = $"Answer the user in {responseLanguage}. Keep the response natural, concise, and consistent with the selected language."
+            });
+
             // Include history if provided (limit to last 10 messages for speed and context limits)
             if (request.History != null && request.History.Count > 0)
             {

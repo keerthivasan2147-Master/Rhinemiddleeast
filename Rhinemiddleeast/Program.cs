@@ -46,6 +46,9 @@ app.UseSession();
 
 app.UseAuthorization();
 
+// Required for the AI assistant's attribute-routed /api/agent endpoints.
+app.MapControllers();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

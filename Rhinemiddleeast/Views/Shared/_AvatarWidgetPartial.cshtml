@@ -6,7 +6,9 @@
     {
         ShouldGreet = true,
         GreetingEn = "Hi there, welcome to RHINE ! I’m your AI Assistant. Are you looking to build something new, improve your existing business, or automate your operations? I’m here to help.",
-        GreetingAr = "مرحباً بك في RHINE! أنا مساعدك الذكي. هل تتطلع لبناء مشروع جديد، أو تطوير أعمالك القائمة، أو أتمتة عملياتك التشغيلية؟ أنا هنا لمساعدتك."
+        GreetingAr = "مرحباً بك في RHINE! أنا مساعدك الذكي. هل تتطلع لبناء مشروع جديد، أو تطوير أعمالك القائمة، أو أتمتة عملياتك التشغيلية؟ أنا هنا لمساعدتك.",
+        GreetingFa = "سلام، به RHINE خوش آمدید! من دستیار هوشمند شما هستم. آیا به دنبال ساخت کسب‌وکاری جدید، توسعه کسب‌وکار موجود یا خودکارسازی عملیات خود هستید؟ من آماده کمکم.",
+        GreetingZh = "您好，欢迎来到 RHINE！我是您的人工智能助手。您是想构建新项目、改善现有业务，还是实现自动化运营？我随时为您提供帮助。"
     };
     var greetingJson = System.Text.Json.JsonSerializer.Serialize(initialGreeting);
 }
@@ -24,14 +26,17 @@
     function initRhineAvatar() {
         if (!window.RhineAvatarWidget || window.rhineAvatar) return;
 
-        var savedLang = localStorage.getItem('rhine_lang');
-        var browserIsAr = (typeof navigator !== 'undefined' && navigator.languages)
-            ? Array.from(navigator.languages).some(function(l) { return l.toLowerCase().startsWith('ar'); })
-            : (typeof navigator !== 'undefined' && navigator.language && navigator.language.toLowerCase().startsWith('ar'));
+        var savedLang = (localStorage.getItem('rhine_lang') || '').toLowerCase();
+        var browserLangs = (typeof navigator !== 'undefined' && navigator.languages) ? Array.from(navigator.languages) : [(navigator.language || '')];
         var docLang = (document.documentElement.getAttribute("lang") || "").toLowerCase();
         var docDir = (document.documentElement.getAttribute("dir") || "").toLowerCase();
-        var isAr = (savedLang === 'AR') || (!savedLang && browserIsAr) || docLang.startsWith('ar') || docDir === 'rtl';
-        var initialLang = isAr ? "ar" : "en";
+
+        var initialLang = "en";
+        if (savedLang === 'ar' || savedLang === 'en') {
+            initialLang = savedLang;
+        } else if (browserLangs.some(function(l) { return l.toLowerCase().startsWith('ar'); }) || docLang.startsWith('ar') || docDir === 'rtl') {
+            initialLang = "ar";
+        }
 
         var hasVisitedBefore = false;
         try {
@@ -52,13 +57,17 @@
         var isNewVisitor = !hasVisitedBefore;
         var shouldAutoOpen = isHomePage;
 
+        var title = (initialLang === 'ar') ? "مساعد راين الذكي" :
+                    (initialLang === 'fa') ? "دستیار هوشمند راین" :
+                    (initialLang === 'zh') ? "RHINE 智能助手" : "RHINE AI Assistant";
+
         window.rhineAvatar = new window.RhineAvatarWidget({
             endpoint: "/api/agent/chat",
             statusEndpoint: "/api/agent/status",
             videoSrc: "/avatar-widget/assets/presenter.mp4",
             posterSrc: "/avatar-widget/assets/presenter-ai.png",
             kbUrl: null,
-            title: isAr ? "مساعد راين الذكي" : "RHINE AI Assistant",
+            title: title,
             language: initialLang,
             antiForgeryHeader: "RequestVerificationToken",
             antiForgeryToken: "@requestToken",

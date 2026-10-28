@@ -48,6 +48,12 @@
       off_topic: "RHINE Company Scope",
       fallback: "RHINE Platform Guidance"
     },
+    fa: {
+      greeting: "سلام، به RHINE خوش آمدید! من دستیار هوشمند شما هستم. چگونه می‌توانم کمک کنم؟", who_are_you: "من دستیار هوشمند RHINE هستم.", company: "درباره RHINE Middle East", process: "از ایده تا عملیات", idea_to_company: "تبدیل ایده به شرکت", transform_company: "توسعه کسب‌وکار موجود", platform_website: "پلتفرم و وب‌سایت", what_we_build: "توانمندی‌های RHINE", ai_agents: "عامل‌های دیجیتال کنترل‌شده", complete_solution: "راهکار کامل RHINE", solutions: "خدمات RHINE", pillars: "توان عملیاتی", qualification: "شناخت کسب‌وکار", business_concept: "مفهوم کسب‌وکار", team_join: "همکاری با RHINE", contact: "تماس و مشاوره", hours: "ساعات کاری", pricing: "برآورد پروژه", website_info: "راهنمای پلتفرم", off_topic: "حوزه فعالیت RHINE", fallback: "می‌توانم درباره خدمات و پلتفرم‌های RHINE راهنمایی کنم."
+    },
+    zh: {
+      greeting: "您好，欢迎来到 RHINE！我是您的人工智能助手。今天我可以怎样帮助您？", who_are_you: "我是 RHINE 人工智能助手。", company: "关于 RHINE Middle East", process: "从创意到运营", idea_to_company: "将创意转化为公司", transform_company: "改造现有企业", platform_website: "平台与网站", what_we_build: "RHINE 能构建什么", ai_agents: "受治理的数字员工", complete_solution: "RHINE 完整方案", solutions: "RHINE 服务", pillars: "运营能力", qualification: "了解业务需求", business_concept: "业务概念", team_join: "加入 RHINE 团队", contact: "联系与咨询", hours: "营业时间", pricing: "项目评估", website_info: "平台指南", off_topic: "RHINE 服务范围", fallback: "我可以介绍 RHINE 的服务和平台。"
+    },
     ar: {
       morning_greeting: "مرحباً بك في RHINE",
       afternoon_greeting: "مرحباً بك في RHINE",
@@ -107,6 +113,14 @@
       team_join: "RHINE brings together professionals from business strategy, technology, and organisational design. If you are looking to collaborate, partner, or explore opportunities with RHINE, we encourage you to get in touch. You can reach the RHINE team by email at info@rhineme.com or by phone at +971 4 8818618. We are always open to conversations with talented and motivated people who share our vision of building better businesses.",
       off_topic: "That topic falls outside what I can help with directly. I specialise in RHINE's business platform guidance — including business concepts, operating models, digital platforms, AI agents, and company transformation. For full information, contact us at info@rhineme.com or call +971 4 8818618.",
       fallback: "I don't have information on that type of question. I can only provide company details and platform guidance for RHINE Middle East FZE. For full information, please contact us at info@rhineme.com or call +971 4 8818618. You can also ask about RHINE's business platforms and services."
+    },
+    fa: {
+      morning_greeting: "صبح بخیر! به RHINE خوش آمدید. من دستیار هوشمند شما هستم. چگونه می‌توانم کمک کنم؟", afternoon_greeting: "عصر بخیر! به RHINE خوش آمدید. من دستیار هوشمند شما هستم. چگونه می‌توانم کمک کنم؟", evening_greeting: "عصر بخیر! به RHINE خوش آمدید. من دستیار هوشمند شما هستم. چگونه می‌توانم کمک کنم؟", night_greeting: "شب بخیر! به RHINE خوش آمدید. من دستیار هوشمند شما هستم. چگونه می‌توانم کمک کنم؟",
+      greeting: "سلام، به RHINE خوش آمدید! من دستیار هوشمند شما هستم. آیا به دنبال ساخت کسب‌وکاری جدید، توسعه کسب‌وکار موجود یا خودکارسازی عملیات خود هستید؟ من آماده کمکم.", who_are_you: "من دستیار هوشمند RHINE هستم.", company: "RHINE به طراحی کسب‌وکار، فرایندها، پلتفرم‌های دیجیتال و عامل‌های هوش مصنوعی کنترل‌شده کمک می‌کند.", solutions: "RHINE مدل کسب‌وکار، ساختار سازمانی، فرایند، پلتفرم و عامل دیجیتال طراحی می‌کند.", what_we_build: "RHINE مفاهیم کسب‌وکار، پلتفرم‌ها، وب‌سایت‌ها و عامل‌های دیجیتال می‌سازد.", process: "مسیر RHINE پنج مرحله دارد: درک، سازمان‌دهی، طراحی، آماده‌سازی و عملیات و بهبود.", idea_to_company: "RHINE به شما کمک می‌کند ایده را به یک شرکت عملیاتی تبدیل کنید.", transform_company: "RHINE شرکت‌های موجود را با خودکارسازی و حاکمیت بهتر متحول می‌کند.", platform_website: "RHINE پلتفرم‌های دیجیتال و وب‌سایت‌های حرفه‌ای می‌سازد.", ai_agents: "عامل‌های دیجیتال RHINE برای نقش‌های حرفه‌ای مشخص و کنترل‌شده طراحی می‌شوند.", complete_solution: "راهکار کامل RHINE طراحی کسب‌وکار، فرایند، پلتفرم و عامل دیجیتال را یکپارچه می‌کند.", pillars: "RHINE محیطی برای همکاری افراد، فناوری و عامل‌های دیجیتال می‌سازد.", qualification: "آیا ایده، شرکت موجود، نیاز پلتفرم، وب‌سایت یا عامل دیجیتال دارید؟", business_concept: "مفهوم کسب‌وکار، ارزش، مشتری و روش عملیات شرکت را مشخص می‌کند.", team_join: "برای همکاری با RHINE با info@rhineme.com تماس بگیرید.", contact: "برای مشاوره با RHINE با +971 4 8818618 یا info@rhineme.com تماس بگیرید.", hours: "RHINE دوشنبه تا جمعه، ۸ صبح تا ۵ عصر به وقت امارات فعال است.", pricing: "هزینه پروژه بر اساس دامنه و نیازهای شما تعیین می‌شود.", website_info: "این پلتفرم دستیار هوشمند RHINE با تعامل صوتی و راهنمایی کسب‌وکار است.", off_topic: "این موضوع خارج از حوزه RHINE است.", fallback: "می‌توانم درباره خدمات و پلتفرم‌های RHINE راهنمایی کنم."
+    },
+    zh: {
+      morning_greeting: "早上好！欢迎来到 RHINE。今天我可以怎样帮助您？", afternoon_greeting: "下午好！欢迎来到 RHINE。今天我可以怎样帮助您？", evening_greeting: "晚上好！欢迎来到 RHINE。我可以怎样帮助您？", night_greeting: "晚安！欢迎来到 RHINE。我可以怎样帮助您？",
+      greeting: "您好，欢迎来到 RHINE！我是您的人工智能助手。今天我可以怎样帮助您？", who_are_you: "我是 RHINE 人工智能助手。", company: "RHINE 通过业务设计、流程、数字平台和受治理的人工智能员工帮助企业发展。", solutions: "RHINE 设计业务模式、组织结构、流程、平台和数字员工。", what_we_build: "RHINE 构建业务概念、平台、网站和数字员工。", process: "RHINE 的五阶段路径是理解、组织、设计、准备，以及运营与改进。", idea_to_company: "RHINE 帮助您把创意发展为可运营的公司。", transform_company: "RHINE 通过自动化和治理改造现有企业。", platform_website: "RHINE 构建数字平台和专业企业网站。", ai_agents: "RHINE 数字员工服务于明确且受治理的专业角色。", complete_solution: "RHINE 完整方案整合业务设计、流程、平台和数字员工。", pillars: "RHINE 建立让人员、技术和数字员工协作的运营环境。", qualification: "您有业务创意、现有企业、平台、网站或数字员工需求吗？", business_concept: "业务概念定义公司的价值、客户和运营方式。", team_join: "如需与 RHINE 合作，请联系 info@rhineme.com。", contact: "请联系 RHINE 获取咨询：+971 4 8818618 或 info@rhineme.com。", hours: "RHINE 周一至周五，阿联酋时间上午 8 点至下午 5 点办公。", pricing: "项目费用根据您的范围和需求确定。", website_info: "这是提供语音互动和业务指导的 RHINE 人工智能助手平台。", off_topic: "这个问题超出 RHINE 的服务范围。", fallback: "我可以介绍 RHINE 的服务和平台。"
     },
     ar: {
       morning_greeting: "صباح الخير! مرحباً بك في RHINE. نحن نساعد في تحويل أفكار الأعمال والتحديات القائمة إلى عمليات تشغيلية منظمة ومدعومة بالتقنية — من تصميم الأعمال والمنصات الرقمية إلى تنسيق القوى العاملة البشرية والذكاء الاصطناعي. كيف يمكنني مساعدتك اليوم؟",
@@ -311,34 +325,77 @@
     }
   };
 
+  MEETING_TEXT.fa = {
+    offerQ: "آیا مایلید برای گفتگو درباره نیازهای کسب‌وکارتان جلسه‌ای با تیم RHINE تنظیم کنیم؟",
+    offerYes: "تنظیم جلسه",
+    offerNo: "فعلاً نه",
+    steps: [
+      { key: "companyName", label: "نام شرکت", prompt: "نام شرکت شما چیست؟", validate: (v) => v.trim().length >= 1 ? null : "لطفاً نام شرکت خود را وارد کنید." },
+      { key: "website", label: "وب‌سایت شرکت", prompt: "وب‌سایت شرکت شما چیست؟ اگر وب‌سایت ندارید، دکمه «وب‌سایت ندارم» را انتخاب کنید.", validate: () => null, optional: true },
+      { key: "fullName", label: "نام کامل", prompt: "نام کامل شخص مسئول این درخواست چیست؟", validate: (v) => v.trim().length >= 2 ? null : "لطفاً نام کامل خود را وارد کنید." },
+      { key: "email", label: "نشانی ایمیل", prompt: "برای تماس با شما از چه ایمیلی استفاده کنیم؟", normalize: (v) => normalizeSpokenEmail(v), validate: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizeSpokenEmail(v)) ? null : "لطفاً یک نشانی ایمیل معتبر وارد کنید؛ مانند name@company.com." },
+      { key: "telephone", label: "شماره تلفن", prompt: "برای تماس با شما از چه شماره تلفنی استفاده کنیم؟", normalize: (v) => normalizePhoneNumber(v), validate: (v) => { const digits = normalizePhoneNumber(v).replace(/\D/g, ""); return (digits.length >= 7 && digits.length <= 16) ? null : "لطفاً شماره تلفن معتبر همراه با کد کشور وارد کنید؛ مانند +971 4 8818618."; } },
+      { key: "meetingDiscussion", label: "موضوع جلسه", prompt: "دوست دارید با تیم RHINE درباره چه موضوعی گفتگو کنید؟\n\nمی‌توانید ایده کسب‌وکار، شرکت فعلی، پلتفرم یا وب‌سایت موردنیاز، عامل‌های هوش مصنوعی، چالش‌های عملیاتی یا دیگر نیازهای مرتبط را توضیح دهید.\n\nپیام کامل شما در درخواست جلسه ثبت می‌شود.", validate: (v) => v.trim().length >= 5 ? null : "لطفاً موضوع موردنظر را توضیح دهید تا تیم RHINE برای جلسه آماده شود." },
+      { key: "meetingTime", label: "زمان پیشنهادی جلسه", prompt: "چه تاریخ و ساعتی برای شما مناسب‌تر است؟\n\nلطفاً منطقه زمانی خود را نیز مشخص کنید؛ مانند امارات — GMT+4، بریتانیا — GMT+0 یا شرق آمریکا — GMT-5.", validate: (v) => v.trim().length >= 3 ? null : "لطفاً تاریخ، ساعت و منطقه زمانی پیشنهادی خود را وارد کنید." }
+    ],
+    reviewTitle: "لطفاً درستی این اطلاعات را تأیید کنید. برای ارسال درخواست از دکمه «تأیید و ارسال درخواست» و برای تغییر آن از «ویرایش اطلاعات» استفاده کنید.",
+    confirmBtn: "تأیید و ارسال درخواست", editBtn: "ویرایش اطلاعات", cancelBtn: "لغو",
+    submitting: "درخواست جلسه شما برای تیم RHINE در حال ارسال است...", successTitle: "درخواست جلسه ارسال شد",
+    successMsg: (name) => "متشکریم، " + name + ". درخواست جلسه شما برای تیم RHINE ارسال شد. یکی از اعضای تیم به‌زودی با شما تماس می‌گیرد.",
+    failTitle: "ارسال ناموفق بود", failMsg: "در حال حاضر نتوانستیم درخواست جلسه شما را ارسال کنیم. لطفاً دوباره تلاش کنید یا مستقیماً از طریق info@rhineme.com یا +971 4 8818618 با ما تماس بگیرید.",
+    retryBtn: "تلاش دوباره", closeBtn: "بستن", noWebsite: "وب‌سایت ندارم", validationError: (msg) => "⚠ " + msg + "\n\nلطفاً دوباره تلاش کنید:",
+    editFormTitle: "ویرایش اطلاعات", editSaveBtn: "ذخیره تغییرات", editCancelBtn: "بازگشت به بررسی"
+  };
+  MEETING_TEXT.zh = {
+    offerQ: "您希望安排与 RHINE 团队的会议来讨论您的业务需求吗？",
+    offerYes: "安排会议",
+    offerNo: "暂时不要",
+    steps: [
+      { key: "companyName", label: "公司名称", prompt: "您的公司名称是什么？", validate: (v) => v.trim().length >= 1 ? null : "请输入您的公司名称。" },
+      { key: "website", label: "公司网站", prompt: "您的公司网站是什么？如果没有网站，请选择“没有网站”按钮。", validate: () => null, optional: true },
+      { key: "fullName", label: "姓名", prompt: "负责此次咨询的人员全名是什么？", validate: (v) => v.trim().length >= 2 ? null : "请输入您的姓名。" },
+      { key: "email", label: "电子邮箱", prompt: "我们应通过哪个电子邮箱联系您？", normalize: (v) => normalizeSpokenEmail(v), validate: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizeSpokenEmail(v)) ? null : "请输入有效的电子邮箱，例如 name@company.com。" },
+      { key: "telephone", label: "电话号码", prompt: "我们应通过哪个电话号码联系您？", normalize: (v) => normalizePhoneNumber(v), validate: (v) => { const digits = normalizePhoneNumber(v).replace(/\D/g, ""); return (digits.length >= 7 && digits.length <= 16) ? null : "请输入包含国家代码的有效电话号码，例如 +971 4 8818618。"; } },
+      { key: "meetingDiscussion", label: "会议讨论内容", prompt: "您希望与 RHINE 团队讨论什么？\n\n您可以说明业务创意、现有企业、所需平台或网站、人工智能员工、运营挑战或其他相关需求。\n\n您的完整信息将纳入会议申请。", validate: (v) => v.trim().length >= 5 ? null : "请说明您希望讨论的内容，以便 RHINE 团队为会议做好准备。" },
+      { key: "meetingTime", label: "首选会议时间", prompt: "哪一天和什么时间最方便？\n\n请同时确认您的时区，例如阿联酋 — GMT+4、英国 — GMT+0 或美国东部 — GMT-5。", validate: (v) => v.trim().length >= 3 ? null : "请提供您首选的会议日期、时间和时区。" }
+    ],
+    reviewTitle: "请确认这些信息是否正确。使用“确认并发送请求”提交会议申请，或使用“编辑信息”进行修改。",
+    confirmBtn: "确认并发送请求", editBtn: "编辑信息", cancelBtn: "取消",
+    submitting: "正在将您的会议申请发送给 RHINE 团队...", successTitle: "会议申请已发送",
+    successMsg: (name) => "谢谢您，" + name + "。您的会议申请已发送给 RHINE 团队，团队成员将很快与您联系。",
+    failTitle: "发送失败", failMsg: "目前无法发送您的会议申请。请重试，或通过 info@rhineme.com 或 +971 4 8818618 直接联系我们。",
+    retryBtn: "重试", closeBtn: "关闭", noWebsite: "没有网站", validationError: (msg) => "⚠ " + msg + "\n\n请重试：",
+    editFormTitle: "编辑信息", editSaveBtn: "保存更改", editCancelBtn: "返回审核"
+  };
+
   // Intent rules: keywords map to knowledge topic keys
   // Arabic notes: keys use base forms; matching normalises alef/hamza variants and strips punctuation.
   const INTENT_RULES = [
-    { keys: ["qualify", "describe", "situation", "option", "choice", "من انا", "خيارات", "اي الحالات", "تصنيف", "تحديد الاحتياج"], topic: "qualification" },
-    { keys: ["complete solution", "all services", "full rhine", "option 5", "choice 5", "situation 5", "حلول متكاملة", "الحل الكامل", "الخيار الخامس", "الخيار 5", "الحالة 5"], topic: "complete_solution" },
-    { keys: ["turn an idea into a company", "turn idea into company", "turn idea into a company", "turn idea", "launch company", "start company", "from scratch", "venture", "option 1", "choice 1", "situation 1", "تحويل فكرة الى شركة", "تحويل فكرة لشركة", "تحويل فكرة الى شركة عاملة", "تاسيس شركة من الصفر", "تأسيس شركة من الصفر", "بدء شركة جديدة", "الخيار الاول", "الخيار 1", "الحالة 1"], topic: "idea_to_company" },
-    { keys: ["from idea to operation", "from idea to operations", "5 stages", "five stages", "roadmap", "journey", "understand organize design", "stages", "مراحل", "طريقة العمل", "من الفكرة الى التشغيل", "من الفكرة للتشغيل", "كيف تعملون", "كيف تعمل rhine", "الرحلة", "المراحل الخمس"], topic: "process" },
-    { keys: ["transform", "automate", "existing company", "existing business", "improve business", "option 2", "choice 2", "situation 2", "تطوير شركة", "اتمتة", "أتمتة", "تطوير مؤسسة", "شركة قائمة", "تحسين الشركة", "الخيار الثاني", "الخيار 2", "الحالة 2"], topic: "transform_company" },
-    { keys: ["platform", "website", "build website", "build platform", "guidance", "option 3", "choice 3", "situation 3", "منصة", "موقع", "بناء موقع", "منصة رقمية", "موقع الكتروني", "إرشادات المنصة", "ارشادات المنصة", "الخيار الثالث", "الخيار 3", "الحالة 3"], topic: "platform_website" },
-    { keys: ["what can you build", "what rhine can build", "build", "develop", "ماذا يمكن", "ماذا تبنون", "ماذا تصممون", "ماذا تبني", "ماذا تنشئون"], topic: "what_we_build" },
-    { keys: ["positioning", "why rhine", "isolated", "wider purpose", "not simply", "لماذا راين", "بيئة عمل", "فلسفة", "الركائز", "الهدف"], topic: "pillars" },
-    { keys: ["solution", "service", "provide", "offer", "what do you do", "what does rhine do", "help", "حلول", "خدمات", "خدماتكم", "ماذا تقدم", "ماذا تفعل", "مساعدة", "ما هي خدماتكم"], topic: "solutions" },
-    { keys: ["ai agent", "digital worker", "governed agent", "digital workforce", "option 4", "choice 4", "situation 4", "وكيل", "عامل رقمي", "وكلاء ذكاء", "وكلاء الذكاء", "مساعد ذكي", "وكلاء محكومين", "قوى عاملة رقمية", "الخيار الرابع", "الخيار 4", "الحالة 4"], topic: "ai_agents" },
-    { keys: ["contact", "phone", "email", "call", "reach", "address", "location", "office", "headquarter", "number", "consultation", "jafza", "jebel ali", "تواصل", "تواصلوا", "هاتف", "ايميل", "بريد", "عنوان", "مقر", "رقم", "استشارة", "كيف اتواصل", "جافزا", "جبل علي"], topic: "contact" },
-    { keys: ["hour", "open", "timing", "schedule", "working hour", "available", "ساعات", "وقت", "توقيت", "متاح", "اوقات", "أوقات", "دوام"], topic: "hours" },
-    { keys: ["price", "cost", "fee", "quote", "pricing", "how much", "سعر", "تكلفة", "رسوم", "عرض سعر", "تسعير", "كم يكلف"], topic: "pricing" },
-    { keys: ["website info", "assistant", "advisor", "app", "موقع", "المساعد", "المستشار"], topic: "website_info" },
-    { keys: ["who are you", "what are you", "introduce yourself", "tell me about yourself", "من أنت", "من انت", "عرّف نفسك", "عرف نفسك", "من انتم"], topic: "who_are_you" },
-    { keys: ["business concept", "concept", "business idea concept", "tell me about the business concept", "about the business concept", "explain the business concept", "conceptualize", "value proposition", "commercial model", "business model", "مفهوم العمل", "مفهوم الأعمال", "مفهوم", "فكرة العمل", "قيمة مقترحة", "نموذج العمل"], topic: "business_concept" },
-    { keys: ["join team", "join in a team", "join a team", "join the team", "join in the team", "join in team", "joining a team", "guide me to join", "guide to join", "how to join", "join rhine", "work with rhine", "career", "careers", "join us", "become part", "collaborate", "partner with rhine", "employment", "hire", "hiring", "work for rhine", "الانضمام", "انضم إلى الفريق", "انضم لفريق", "انضم لـ rhine", "العمل مع rhine", "وظائف", "وظيفة", "فرصة عمل", "تعاون", "شراكة", "مسيرة مهنية"], topic: "team_join" },
-    { keys: ["good morning", "morning", "صباح الخير", "صباح النور"], topic: "time_greeting" },
-    { keys: ["good afternoon", "مساء الخير", "طاب مساؤك"], topic: "time_greeting" },
-    { keys: ["good evening", "evening", "مساء النور"], topic: "time_greeting" },
-    { keys: ["good night", "goodnight", "night", "تصبح على خير", "طابت ليلتك", "ليلة سعيدة"], topic: "time_greeting" },
-    { keys: ["hello", "hi ", "hey", "greet", "مرحبا", "مرحباً", "أهلا", "اهلا", "السلام عليكم"], topic: "greeting" },
-    { keys: ["arrange meeting", "book meeting", "schedule meeting", "schedule a meeting", "arrange a meeting", "book a meeting", "set a meeting", "set up a meeting", "request meeting", "meeting with rhine", "meeting", "meet", "book appointment", "schedule appointment", "arrange appointment", "appointment", "want to meet", "speak to team", "talk to team", "contact team", "طلب اجتماع", "ترتيب اجتماع", "حجز اجتماع", "اجتماع", "موعد", "حجز موعد", "موعد مع rhine", "اريد اجتماع", "أريد اجتماع", "التحدث مع الفريق", "التواصل مع الفريق"], topic: "__meeting__" },
-    { keys: ["do you know", "do you have", "what is ai", "define ai", "tell me about ai", "general knowledge", "who is", "what is the capital", "tell joke", "joke", "weather", "football", "soccer", "recipe", "game", "movie", "song", "crypto", "bitcoin", "politics", "president", "capital of", "هل تعرف", "ما هو الذكاء", "ما معنى الذكاء", "ما هو ai", "معلومات عامة", "نكتة", "الطقس", "كرة القدم", "مباراة", "فيلم", "اغنية", "طبخ", "وصفة", "لعبة", "عملات", "سياسة", "عاصمة"], topic: "off_topic" },
-    { keys: ["rhine", "company", "about rhine", "who is rhine", "راين", "شركة", "من هي", "ما هي شركة", "عن راين"], topic: "company" }
+    { keys: ["qualify", "describe", "situation", "option", "choice", "من انا", "خيارات", "اي الحالات", "تصنيف", "تحديد الاحتياج", "شناخت نیاز", "تعیین وضعیت", "ارزیابی", "业务评估", "需求评估", "选择情况"], topic: "qualification" },
+    { keys: ["complete solution", "all services", "full rhine", "option 5", "choice 5", "situation 5", "حلول متكاملة", "الحل الكامل", "الخيار الخامس", "الخيار 5", "الحالة 5", "راهکار کامل", "راه حل جامع", "خدمات کامل", "完整方案", "全部服务"], topic: "complete_solution" },
+    { keys: ["turn an idea into a company", "turn idea into company", "turn idea into a company", "turn idea", "launch company", "start company", "from scratch", "venture", "option 1", "choice 1", "situation 1", "تحويل فكرة الى شركة", "تحويل فكرة لشركة", "تحويل فكرة الى شركة عاملة", "تاسيس شركة من الصفر", "تأسيس شركة من الصفر", "بدء شركة جديدة", "الخيار الاول", "الخيار 1", "الحالة 1", "تبدیل ایده به شرکت", "ساخت شرکت از ایده", "شروع شرکت", "تاسیس شرکت", "创意转公司", "从想法到公司", "创立公司"], topic: "idea_to_company" },
+    { keys: ["from idea to operation", "from idea to operations", "5 stages", "five stages", "roadmap", "journey", "understand organize design", "stages", "مراحل", "طريقة العمل", "من الفكرة الى التشغيل", "من الفكرة للتشغيل", "كيف تعملون", "كيف تعمل rhine", "الرحلة", "المراحل الخمس", "از ایده تا عملیات", "مراحل کار", "پنج مرحله", "مسیر کار", "从创意到运营", "五个阶段", "实施步骤", "流程"], topic: "process" },
+    { keys: ["transform", "automate", "existing company", "existing business", "improve business", "option 2", "choice 2", "situation 2", "تطوير شركة", "اتمتة", "أتمتة", "تطوير مؤسسة", "شركة قائمة", "تحسين الشركة", "الخيار الثاني", "الخيار 2", "الحالة 2", "توسعه شرکت", "خودکارسازی شرکت", "تحول کسب و کار", "بهبود شرکت", "改造企业", "企业自动化", "业务升级"], topic: "transform_company" },
+    { keys: ["platform", "website", "build website", "build platform", "guidance", "option 3", "choice 3", "situation 3", "منصة", "موقع", "بناء موقع", "منصة رقمية", "موقع الكتروني", "إرشادات المنصة", "ارشادات المنصة", "الخيار الثالث", "الخيار 3", "الحالة 3", "پلتفرم", "وبسایت", "طراحی سایت", "طراحی پلتفرم", "数字平台", "企业网站", "做网站", "平台建设"], topic: "platform_website" },
+    { keys: ["what can you build", "what rhine can build", "build", "develop", "ماذا يمكن", "ماذا تبنون", "ماذا تصممون", "ماذا تبني", "ماذا تنشئون", "چه چیزی میسازید", "توانایی ساخت", "راین چه میسازد", "构建什么", "开发什么", "你们能做什么"], topic: "what_we_build" },
+    { keys: ["positioning", "why rhine", "isolated", "wider purpose", "not simply", "لماذا راين", "بيئة عمل", "فلسفة", "الركائز", "الهدف", "ستون ها", "ارکان", "چرا راین", "محیط عملیاتی", "核心支柱", "为什么选择rhine"], topic: "pillars" },
+    { keys: ["solution", "service", "provide", "offer", "what do you do", "what does rhine do", "help", "حلول", "خدمات", "خدماتكم", "ماذا تقدم", "ماذا تفعل", "مساعدة", "ما هي خدماتكم", "راهکارها", "خدمات راین", "چه خدماتی", "服务", "解决方案", "提供什么"], topic: "solutions" },
+    { keys: ["ai agent", "digital worker", "governed agent", "digital workforce", "option 4", "choice 4", "situation 4", "وكيل", "عامل رقمي", "وكلاء ذكاء", "وكلاء الذكاء", "مساعد ذكي", "وكلاء محكومين", "قوى عاملة رقمية", "الخيار الرابع", "الخيار 4", "الحالة 4", "عامل هوش مصنوعی", "عامل دیجیتال", "نیروی کار دیجیتال", "هوش مصنوعی", "人工智能员工", "数字员工", "智能体"], topic: "ai_agents" },
+    { keys: ["contact", "phone", "email", "call", "reach", "address", "location", "office", "headquarter", "number", "consultation", "jafza", "jebel ali", "تواصل", "تواصلوا", "هاتف", "ايميل", "بريد", "عنوان", "مقر", "رقم", "استشارة", "كيف اتواصل", "جافزا", "جبل علي", "تماس", "شماره", "ایمیل", "آدرس", "دفتر", "مشاوره", "联系方式", "电话", "邮箱", "地址", "咨询"], topic: "contact" },
+    { keys: ["hour", "open", "timing", "schedule", "working hour", "available", "ساعات", "وقت", "توقيت", "متاح", "اوقات", "أوقات", "دوام", "ساعات کاری", "زمان کار", "ساعت کار", "营业时间", "工作时间", "上班时间"], topic: "hours" },
+    { keys: ["price", "cost", "fee", "quote", "pricing", "how much", "سعر", "تكلفة", "رسوم", "عرض سعر", "تسعير", "كم يكلف", "قیمت", "هزینه", "تعرفه", "برآورد هزینه", "价格", "费用", "收费", "多少钱"], topic: "pricing" },
+    { keys: ["website info", "assistant", "advisor", "app", "موقع", "المساعد", "المستشار", "اطلاعات دستیار", "راهنمای سایت", "این دستیار", "网站信息", "助手介绍"], topic: "website_info" },
+    { keys: ["who are you", "what are you", "introduce yourself", "tell me about yourself", "من أنت", "من انت", "عرّف نفسك", "عرف نفسك", "من انتم", "کی هستی", "شما کی هستید", "خودت را معرفی کن", "معرفی", "你是谁", "自我介绍", "介绍一下自己"], topic: "who_are_you" },
+    { keys: ["business concept", "concept", "business idea concept", "tell me about the business concept", "about the business concept", "explain the business concept", "conceptualize", "value proposition", "commercial model", "business model", "مفهوم العمل", "مفهوم الأعمال", "مفهوم", "فكرة العمل", "قيمة مقترحة", "نموذج العمل", "مفهوم کسب و کار", "مدل تجاری", "ایده کسب و کار", "商业概念", "业务概念", "商业模式"], topic: "business_concept" },
+    { keys: ["join team", "join in a team", "join a team", "join the team", "join in the team", "join in team", "joining a team", "guide me to join", "guide to join", "how to join", "join rhine", "work with rhine", "career", "careers", "join us", "become part", "collaborate", "partner with rhine", "employment", "hire", "hiring", "work for rhine", "الانضمام", "انضم إلى الفريق", "انضم لفريق", "انضم لـ rhine", "العمل مع rhine", "وظائف", "وظيفة", "فرصة عمل", "تعاون", "شراكة", "مسيرة مهنية", "همکاری با راین", "استخدام", "پیوستن به تیم", "فرصت شغلی", "加入团队", "招聘", "加入rhine", "合作"], topic: "team_join" },
+    { keys: ["good morning", "morning", "صباح الخير", "صباح النور", "صبح بخیر", "روز بخیر", "早上好", "早安"], topic: "time_greeting" },
+    { keys: ["good afternoon", "مساء الخير", "طاب مساؤك", "عصر بخیر", "下午好"], topic: "time_greeting" },
+    { keys: ["good evening", "evening", "مساء النور", "غروب بخیر", "晚上好"], topic: "time_greeting" },
+    { keys: ["good night", "goodnight", "night", "تصبح على خير", "طابت ليلتك", "ليلة سعيدة", "شب بخیر", "晚安"], topic: "time_greeting" },
+    { keys: ["hello", "hi ", "hey", "greet", "مرحبا", "مرحباً", "أهلا", "اهلا", "السلام عليكم", "سلام", "درود", "سلام علیکم", "سلامتی", "你好", "您好", "嗨"], topic: "greeting" },
+    { keys: ["arrange meeting", "book meeting", "schedule meeting", "schedule a meeting", "arrange a meeting", "book a meeting", "set a meeting", "set up a meeting", "request meeting", "meeting with rhine", "meeting", "meet", "book appointment", "schedule appointment", "arrange appointment", "appointment", "want to meet", "speak to team", "talk to team", "contact team", "طلب اجتماع", "ترتيب اجتماع", "حجز اجتماع", "اجتماع", "موعد", "حجز موعد", "موعد مع rhine", "اريد اجتماع", "أريد اجتماع", "التحدث مع الفريق", "التواصل مع الفريق", "تنظیم جلسه", "رزرو جلسه", "درخواست جلسه", "جلسه", "وقت ملاقات", "جلسه حضوری", "预约会议", "安排会议", "开会", "预约"], topic: "__meeting__" },
+    { keys: ["do you know", "do you have", "what is ai", "define ai", "tell me about ai", "general knowledge", "who is", "what is the capital", "tell joke", "joke", "weather", "football", "soccer", "recipe", "game", "movie", "song", "crypto", "bitcoin", "politics", "president", "capital of", "هل تعرف", "ما هو الذكاء", "ما معنى الذكاء", "ما هو ai", "معلومات عامة", "نكتة", "الطقس", "كرة القدم", "مباراة", "فيلم", "اغنية", "طبخ", "وصفة", "لعبة", "عملات", "سياسة", "عاصمة", "فوتبال", "آب و هوا", "جوک", "آهنگ", "فیلم", "天气", "足球", "笑话", "电影"], topic: "off_topic" },
+    { keys: ["rhine", "company", "about rhine", "who is rhine", "راين", "شركة", "من هي", "ما هي شركة", "عن راين", "درباره راین", "شرکت راین", "راین چیست", "معرفی شرکت", "关于rhine", "公司介绍", "关于中东"], topic: "company" }
   ];
 
   class RhineAvatarWidget {
@@ -365,6 +422,10 @@
         antiForgeryToken: null
       }, options);
 
+      if (this.options.language === "fa" || this.options.language === "zh") {
+        this.options.language = detectedLang;
+      }
+
       this.isOpen = false;
       this.isSpeaking = false;
       this.isSpeechMuted = false;
@@ -387,6 +448,10 @@
     // Morning: 5:00 AM–11:59 AM
     // Afternoon: 12:00 PM–4:59 PM
     // Evening: 5:00 PM–4:59 AM
+    _getSpeechLanguage() {
+      return ({ en: "en-US", ar: "ar-SA", fa: "fa-IR", zh: "zh-CN" })[this.options.language] || "en-US";
+    }
+
     _getTimeGreetingKey() {
       const hour = new Date().getHours();
       if (hour >= 5 && hour < 12) return "morning_greeting";
@@ -415,6 +480,7 @@
       this._extractAntiforgeryToken();
       this._buildDOM();
       this._bindEvents();
+      this.setLanguage(this.options.language);
       await this._loadKnowledgeBase();
 
       // Preload the video silently so it's ready to play without lag when speech starts
@@ -577,10 +643,13 @@
             </div>
           </div>
           <div class="rhine-top-actions">
-            <!-- Language Toggle (EN / AR) -->
-            <button type="button" class="rhine-lang-btn" id="rhineLangToggle">
-              ${isAr ? "English" : "العربية"}
-            </button>
+            <!-- Language selector -->
+            <select class="rhine-lang-btn" id="rhineLangToggle" aria-label="Assistant language">
+              <option value="en"${this.options.language === "en" ? " selected" : ""}>English</option>
+              <option value="ar"${this.options.language === "ar" ? " selected" : ""}>العربية</option>
+              <option value="fa" disabled hidden style="display:none;"${this.options.language === "fa" ? " selected" : ""}>فارسی</option>
+              <option value="zh" disabled hidden style="display:none;"${this.options.language === "zh" ? " selected" : ""}>中文</option>
+            </select>
 
             <!-- Transparent Caption Button (CC) -->
             <button type="button" class="rhine-btn-icon rhine-cc-btn" id="rhineCcBtn" title="Toggle Captions">
@@ -620,7 +689,7 @@
           <div class="rhine-mic-chips" id="rhineMicChips">
             <div class="rhine-mic-hint">${isAr ? 'أو انقر للتحدث فوراً:' : 'Or tap a question to speak:'}</div>
             <div class="rhine-mic-chip-list">
-              ${this._renderQuickChips(isAr)}
+              ${this._renderQuickChips(this.options.language)}
             </div>
           </div>
         </div>
@@ -652,7 +721,7 @@
 
           <!-- Customer Quick Question Chips (Hidden as requested) -->
           <div class="rhine-quick-questions" id="rhineQuickQuestions" style="display: none !important;">
-            ${this._renderQuickChips(isAr)}
+            ${this._renderQuickChips(this.options.language)}
           </div>
 
           <!-- Enable Sound Option in Browser (Hidden — sound enabled automatically) -->
@@ -716,6 +785,7 @@
       this.closeBtn = this.widgetEl.querySelector("#rhineCloseBtn");
       this.replayBtn = this.widgetEl.querySelector("#rhineReplayBtn");
       this.langToggleBtn = this.widgetEl.querySelector("#rhineLangToggle");
+      if (this.langToggleBtn) this.langToggleBtn.value = this.options.language;
       this.micOverlay = this.widgetEl.querySelector("#rhineMicOverlay");
       this.micClose = this.widgetEl.querySelector("#rhineMicClose");
       this.micPulseBtn = this.widgetEl.querySelector("#rhineMicPulseBtn");
@@ -728,26 +798,58 @@
       this.quickQuestionsEl = this.widgetEl.querySelector("#rhineQuickQuestions");
     }
 
-    _renderQuickChips(isAr) {
-      const q1 = isAr ? "ماذا يمكن لـ RHINE بناؤه؟" : "What can RHINE build?";
-      const meetingLabel = isAr ? "📅 حجز اجتماع مع RHINE" : "📅 Schedule a Meeting";
-      const remainingQuestions = isAr ? [
-        "من الفكرة إلى التشغيل الفعلي",
-        "تحويل فكرة إلى شركة عاملة",
-        "تطوير وأتمتة شركة قائمة",
-        "بناء منصة أعمال أو موقع",
-        "وكلاء ذكاء اصطناعي لأدوار محددة"
-      ] : [
-        "From Idea to Operations",
-        "Turn an idea into a company",
-        "Transform or automate a company",
-        "Need a platform or website",
-        "AI agents for business roles"
-      ];
-
-      const chip1 = `<button type="button" class="rhine-chip" data-question="${this._escapeHtml(q1)}">${this._escapeHtml(q1)}</button>`;
-      const meetingChip = `<button type="button" class="rhine-chip rhine-chip-meeting" data-action="schedule-meeting">${this._escapeHtml(meetingLabel)}</button>`;
-      const remainingChips = remainingQuestions.map(q => `
+    _renderQuickChips(lang) {
+      if (typeof lang === "boolean") lang = lang ? "ar" : "en";
+      const chipsData = {
+        en: {
+          q1: "What can RHINE build?",
+          meeting: "📅 Schedule a Meeting",
+          remaining: [
+            "From Idea to Operations",
+            "Turn an idea into a company",
+            "Transform or automate a company",
+            "Need a platform or website",
+            "AI agents for business roles"
+          ]
+        },
+        ar: {
+          q1: "ماذا يمكن لـ RHINE بناؤه؟",
+          meeting: "📅 حجز اجتماع مع RHINE",
+          remaining: [
+            "من الفكرة إلى التشغيل الفعلي",
+            "تحويل فكرة إلى شركة عاملة",
+            "تطوير وأتمتة شركة قائمة",
+            "بناء منصة أعمال أو موقع",
+            "وكلاء ذكاء اصطناعي لأدوار محددة"
+          ]
+        },
+        fa: {
+          q1: "RHINE چه چیزهایی می‌تواند بسازد؟",
+          meeting: "📅 تنظیم جلسه با RHINE",
+          remaining: [
+            "از ایده تا عملیات واقعی",
+            "تبدیل ایده به شرکت فعال",
+            "توسعه یا خودکارسازی کسب‌وکار",
+            "نیاز به پلتفرم یا وب‌سایت",
+            "عامل‌های هوش مصنوعی برای نقش‌های کاری"
+          ]
+        },
+        zh: {
+          q1: "RHINE 能构建什么？",
+          meeting: "📅 预约与 RHINE 的会议",
+          remaining: [
+            "从创意到实际运营",
+            "将想法转化为实体公司",
+            "改造或自动化现有企业",
+            "需要数字平台或网站",
+            "针对业务角色的人工智能数字员工"
+          ]
+        }
+      };
+      const data = chipsData[lang] || chipsData.en;
+      const chip1 = `<button type="button" class="rhine-chip" data-question="${this._escapeHtml(data.q1)}">${this._escapeHtml(data.q1)}</button>`;
+      const meetingChip = `<button type="button" class="rhine-chip rhine-chip-meeting" data-action="schedule-meeting">${this._escapeHtml(data.meeting)}</button>`;
+      const remainingChips = data.remaining.map(q => `
         <button type="button" class="rhine-chip" data-question="${this._escapeHtml(q)}">
           ${this._escapeHtml(q)}
         </button>
@@ -759,15 +861,35 @@
     setLanguage(lang) {
       if (!lang) lang = "en";
       this.options.language = lang;
+      try { localStorage.setItem('rhine_lang', lang); } catch (e) { }
       const isAr = lang === "ar";
+      const isRtl = isAr || lang === "fa";
 
       if (this.launcherEl) {
-        this.launcherEl.setAttribute("dir", isAr ? "rtl" : "ltr");
-        this.launcherEl.setAttribute("aria-label", isAr ? "فتح المساعد الذكي" : "Open AI Assistant");
+        this.launcherEl.setAttribute("dir", isRtl ? "rtl" : "ltr");
+        const ariaLabels = {
+          en: "Open AI Assistant",
+          ar: "فتح المساعد الذكي",
+          fa: "باز کردن دستیار هوشمند",
+          zh: "打开人工智能助手"
+        };
+        this.launcherEl.setAttribute("aria-label", ariaLabels[lang] || ariaLabels.en);
         const lTitle = this.launcherEl.querySelector(".rhine-launcher-title");
         const lSub = this.launcherEl.querySelector(".rhine-launcher-subtitle");
-        if (lTitle) lTitle.textContent = isAr ? "مساعد راين الذكي" : (this.options.title || "RHINE AI Assistant");
-        if (lSub) lSub.textContent = isAr ? "راين الشرق الأوسط ش.م.ح" : "RHINE Middle East FZE";
+        const titles = {
+          en: this.options.title || "RHINE AI Assistant",
+          ar: "مساعد راين الذكي",
+          fa: "دستیار هوشمند راین",
+          zh: "RHINE 人工智能助手"
+        };
+        const subs = {
+          en: "RHINE Middle East FZE",
+          ar: "راين الشرق الأوسط ش.م.ح",
+          fa: "راین خاورمیانه FZE",
+          zh: "RHINE 中东 FZE"
+        };
+        if (lTitle) lTitle.textContent = titles[lang] || titles.en;
+        if (lSub) lSub.textContent = subs[lang] || subs.en;
 
         if (!this._hasCustomPos) {
           this.launcherEl.style.left = "";
@@ -778,44 +900,107 @@
       }
 
       if (this.langToggleBtn) {
-        this.langToggleBtn.textContent = isAr ? "English" : "العربية";
+        this.langToggleBtn.value = lang;
       }
       if (this.widgetEl) {
-        this.widgetEl.setAttribute("dir", isAr ? "rtl" : "ltr");
+        this.widgetEl.setAttribute("dir", isRtl ? "rtl" : "ltr");
       }
       if (this.topTitleEl) {
-        this.topTitleEl.textContent = isAr ? "مساعد راين الذكي" : (this.options.title || "RHINE AI Assistant");
+        const topTitles = {
+          en: this.options.title || "RHINE AI Assistant",
+          ar: "مساعد راين الذكي",
+          fa: "دستیار هوشمند راین",
+          zh: "RHINE 人工智能助手"
+        };
+        this.topTitleEl.textContent = topTitles[lang] || topTitles.en;
       }
       if (this.captionBadgeText) {
-        this.captionBadgeText.textContent = isAr ? "إرشادات المنصة" : "PLATFORM GUIDANCE";
+        const badgeMap = {
+          en: "PLATFORM GUIDANCE",
+          ar: "إرشادات المنصة",
+          fa: "راهنمای پلتفرم",
+          zh: "平台指南"
+        };
+        this.captionBadgeText.textContent = badgeMap[lang] || badgeMap.en;
       }
       if (this.chatInput) {
-        this.chatInput.placeholder = isAr ? "تحدث أو اكتب سؤالك..." : "Speak or type your question...";
+        const placeholderMap = {
+          en: "Speak or type your question...",
+          ar: "تحدث أو اكتب سؤالك...",
+          fa: "صحبت کنید یا سوال خود را بنویسید...",
+          zh: "请说话或输入您的问题..."
+        };
+        this.chatInput.placeholder = placeholderMap[lang] || placeholderMap.en;
       }
       if (this.speakNowBtn) {
         const s = this.speakNowBtn.querySelector("span");
-        if (s) s.textContent = isAr ? "تكلّم الآن" : "Speak Now";
+        if (s) {
+          const btnMap = {
+            en: "Speak Now",
+            ar: "تكلّم الآن",
+            fa: "اکنون صحبت کنید",
+            zh: "立即说话"
+          };
+          s.textContent = btnMap[lang] || btnMap.en;
+        }
       }
       if (this.quickQuestionsEl) {
-        this.quickQuestionsEl.innerHTML = this._renderQuickChips(isAr);
+        this.quickQuestionsEl.innerHTML = this._renderQuickChips(lang);
       }
       if (this.micChips) {
         const hint = this.micChips.querySelector(".rhine-mic-hint");
-        if (hint) hint.textContent = isAr ? "أو انقر للتحدث فوراً:" : "Or tap a question to speak:";
+        if (hint) {
+          const hintMap = {
+            en: "Or tap a question to speak:",
+            ar: "أو انقر للتحدث فوراً:",
+            fa: "یا روی یک سوال کلیک کنید:",
+            zh: "或点击问题进行提问："
+          };
+          hint.textContent = hintMap[lang] || hintMap.en;
+        }
         const list = this.micChips.querySelector(".rhine-mic-chip-list");
-        if (list) list.innerHTML = this._renderQuickChips(isAr);
+        if (list) list.innerHTML = this._renderQuickChips(lang);
       }
       if (this.micLabel) {
-        this.micLabel.textContent = isAr ? "نستمع إليك... تكلّم براحتك" : "Listening... Speak your question now";
+        const labelMap = {
+          en: "Listening... Speak your question now",
+          ar: "نستمع إليك... تكلّم براحتك",
+          fa: "در حال گوش دادن... سوال خود را بگویید",
+          zh: "正在倾听... 请说出您的问题"
+        };
+        this.micLabel.textContent = labelMap[lang] || labelMap.en;
       }
       if (this.micInterim) {
-        this.micInterim.textContent = isAr ? "تحدّث الآن بسؤالك، نحن نستمع إليك..." : "Speak your question clearly...";
+        const interimMap = {
+          en: "Speak your question clearly...",
+          ar: "تحدّث الآن بسؤالك، نحن نستمع إليك...",
+          fa: "سوال خود را به وضوح بیان کنید...",
+          zh: "请清晰地说出您的问题..."
+        };
+        this.micInterim.textContent = interimMap[lang] || interimMap.en;
       }
       if (this.activeRecognition) {
-        this.activeRecognition.lang = isAr ? "ar-SA" : "en-US";
+        this.activeRecognition.lang = this._getSpeechLanguage();
+      }
+      if (this.ccBtn) {
+        this.ccBtn.style.display = "";
+        const captionTitles = {
+          en: this.isCaptionsVisible ? "Hide Captions" : "Show Captions",
+          ar: this.isCaptionsVisible ? "إخفاء الترجمة" : "إظهار الترجمة",
+          fa: this.isCaptionsVisible ? "پنهان کردن زیرنویس" : "نمایش زیرنویس",
+          zh: this.isCaptionsVisible ? "隐藏字幕" : "显示字幕"
+        };
+        this.ccBtn.title = captionTitles[lang] || captionTitles.en;
+        this.ccBtn.setAttribute("aria-label", this.ccBtn.title);
       }
       if (this.enableSoundText) {
-        this.enableSoundText.textContent = isAr ? "انقر لتفعيل الصوت والترحيب" : "Click to Enable Sound & Greeting";
+        const soundMap = {
+          en: "Click to Enable Sound & Greeting",
+          ar: "انقر لتفعيل الصوت والترحيب",
+          fa: "برای فعال‌سازی صدا و خوش‌آمدگویی کلیک کنید",
+          zh: "点击启用声音和问候"
+        };
+        this.enableSoundText.textContent = soundMap[lang] || soundMap.en;
       }
     }
 
@@ -1009,8 +1194,8 @@
       }
 
       // Language Switcher (AI widget language only — does NOT change website language)
-      this.langToggleBtn.addEventListener("click", () => {
-        const nextLang = this.options.language === "en" ? "ar" : "en";
+      this.langToggleBtn.addEventListener("change", (event) => {
+        const nextLang = event.target.value;
         this.setLanguage(nextLang);
         // Speak greeting in the newly selected language
         this._greetingSpoken = true;
@@ -1034,6 +1219,8 @@
           this.videoEl.muted = true;
           this.videoEl.defaultMuted = true;
           this.videoEl.loop = true;
+          this.videoEl.playbackRate = 1;
+          this.videoEl.defaultPlaybackRate = 1;
           const p = this.videoEl.play();
           if (p !== undefined) p.catch(() => { });
         }
@@ -1122,12 +1309,19 @@
     _startListening() {
       if (this.isListening || this.isSpeaking || !this.isOpen) return;
 
-      const isAr = this.options.language === "ar";
+      const lang = this.options.language;
+      const isAr = lang === "ar";
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
       if (!SpeechRecognition) {
         if (this.chatInput) {
-          this.chatInput.placeholder = isAr ? "اكتب سؤالك هنا..." : "Type your question here...";
+          const typeMap = {
+            en: "Type your question here...",
+            ar: "اكتب سؤالك هنا...",
+            fa: "سوال خود را اینجا بنویسید...",
+            zh: "请在此输入您的问题..."
+          };
+          this.chatInput.placeholder = typeMap[lang] || typeMap.en;
         }
         return;
       }
@@ -1140,12 +1334,24 @@
       if (this.chatMic) this.chatMic.classList.add("listening");
       if (this.micBtnIcon) this.micBtnIcon.innerHTML = ICONS.micOff;
       if (this.micOverlay) this.micOverlay.style.display = "none";
-      const lbl = isAr ? "جارٍ الاستماع... تكلّم بسؤالك الآن" : "Listening... Speak your question now";
+      const lblMap = {
+        en: "Listening... Speak your question now",
+        ar: "جارٍ الاستماع... تكلّم بسؤالك الآن",
+        fa: "در حال گوش دادن... اکنون سوال خود را بگویید",
+        zh: "正在倾听... 请现在说出您的问题"
+      };
+      const statusMap = {
+        en: "Listening...",
+        ar: "جارٍ الاستماع...",
+        fa: "در حال گوش دادن...",
+        zh: "正在倾听..."
+      };
+      const lbl = lblMap[lang] || lblMap.en;
       if (this.chatInput) {
         this.chatInput.placeholder = lbl;
         this.chatInput.focus();
       }
-      this._setStatus(isAr ? "جارٍ الاستماع..." : "Listening...");
+      this._setStatus(statusMap[lang] || statusMap.en);
 
       // 2. Inject live waveform animation & countdown into overlay if not already present
       this._injectListeningExtras(isAr);
@@ -1170,7 +1376,13 @@
           } else {
             this._setStatus("Active");
             if (this.chatInput) {
-              this.chatInput.placeholder = isAr ? "تحدث أو اكتب سؤالك..." : "Speak or type your question...";
+              const activeMap = {
+                en: "Speak or type your question...",
+                ar: "تحدث أو اكتب سؤالك...",
+                fa: "صحبت کنید یا سوال خود را بنویسید...",
+                zh: "请说话或输入您的问题..."
+              };
+              this.chatInput.placeholder = activeMap[lang] || activeMap.en;
             }
           }
         }
@@ -1216,12 +1428,13 @@
         rec.continuous = !isMobile;
         rec.interimResults = true;
         rec.maxAlternatives = 1;
-        rec.lang = isAr ? "ar-SA" : "en-US";
+        rec.lang = this._getSpeechLanguage();
         this.activeRecognition = rec;
 
         rec.onstart = () => {
+          this._recognitionRestarts = 0;
           if (this.isListening) {
-            this._setStatus(isAr ? "جارٍ الاستماع..." : "Listening...");
+            this._setStatus("Listening...");
           }
         };
 
@@ -1296,7 +1509,7 @@
           if (sessionFinal && this.capturedVoiceText) {
             if (this._micDebounceTimer) clearTimeout(this._micDebounceTimer);
             const wordCount = this.capturedVoiceText.trim().split(/\s+/).length;
-            const delay = wordCount >= 3 ? 1200 : 1500;
+            const delay = wordCount >= 3 ? 650 : 850;
             this._micDebounceTimer = setTimeout(() => {
               const q = this.capturedVoiceText.trim();
               if (q && this.isListening) {
@@ -1304,10 +1517,8 @@
                 this._speechBaseText = "";
                 this.capturedVoiceText = "";
                 this._showAnalyzing(isAr);
-                setTimeout(() => {
-                  this._stopListening();
-                  this.ask(q);
-                }, 200);
+                this._stopListening();
+                this.ask(q);
               }
             }, delay);
           }
@@ -1359,12 +1570,18 @@
         rec.start();
       } catch (err) {
         console.warn("Speech recognition session start error:", err);
-        if (this.isListening && !this._micDebounceTimer) {
-          if (this._recRestartTimer) clearTimeout(this._recRestartTimer);
-          this._recRestartTimer = setTimeout(() => {
-            if (this.isListening) this._startRecognitionSession(SpeechRecognition, isAr);
-          }, 350);
+        if (!this.isListening || this._micDebounceTimer) return;
+        this._recognitionRestarts = (this._recognitionRestarts || 0) + 1;
+        if (this._recognitionRestarts >= 3) {
+          this._stopListening();
+          const retryMap = { en: "Voice input could not start. Tap the microphone to retry.", ar: "تعذر بدء الإدخال الصوتي. اضغط على الميكروفون لإعادة المحاولة.", fa: "ورودی صوتی شروع نشد. برای تلاش دوباره روی میکروفون بزنید.", zh: "语音输入无法启动。请点击麦克风重试。" };
+          this._setStatus(retryMap[this.options.language] || retryMap.en);
+          return;
         }
+        if (this._recRestartTimer) clearTimeout(this._recRestartTimer);
+        this._recRestartTimer = setTimeout(() => {
+          if (this.isListening) this._startRecognitionSession(SpeechRecognition, isAr);
+        }, 350);
       }
     }
 
@@ -1398,14 +1615,26 @@
     _updateCountdown() {
       if (!this._countdownEl) return;
       const s = this._listenSecondsLeft;
-      const isAr = this.options.language === "ar";
-      this._countdownEl.textContent = s > 0 ? (isAr ? `الاستماع مستمر (${s} ثانية)` : `Listening for ${s}s`) : "";
+      const lang = this.options.language;
+      const cdMap = {
+        en: `Listening for ${s}s`,
+        ar: `الاستماع مستمر (${s} ثانية)`,
+        fa: `در حال گوش دادن (${s} ثانیه)`,
+        zh: `正在倾听 (${s} 秒)`
+      };
+      this._countdownEl.textContent = s > 0 ? (cdMap[lang] || cdMap.en) : "";
       this._countdownEl.style.color = s <= 10 ? "#fca5a5" : "rgba(236,213,158,0.8)";
     }
 
-    _showAnalyzing(isAr) {
+    _showAnalyzing() {
+      const analyzingMap = {
+        en: "Analyzing your question...",
+        ar: "جارٍ التحليل...",
+        fa: "در حال تحلیل سوال شما...",
+        zh: "正在分析您的问题..."
+      };
       if (this.micLabel) {
-        this.micLabel.textContent = isAr ? "جارٍ التحليل..." : "Analyzing your question...";
+        this.micLabel.textContent = analyzingMap[this.options.language] || analyzingMap.en;
       }
       if (this.micInterim) {
         const captured = this.capturedVoiceText || "";
@@ -1455,14 +1684,31 @@
       this.isListening = false;
       if (this.chatMic) this.chatMic.classList.remove("listening");
       if (this.micBtnIcon) this.micBtnIcon.innerHTML = ICONS.mic;
+      const lang = this.options.language;
       if (this.speakNowBtn) {
         this.speakNowBtn.classList.remove("listening");
         const btnSpan = this.speakNowBtn.querySelector("span");
-        if (btnSpan) btnSpan.textContent = this.options.language === "ar" ? "تكلّم الآن" : "Speak Now";
+        if (btnSpan) {
+          const btnMap = {
+            en: "Speak Now",
+            ar: "تكلّم الآن",
+            fa: "اکنون صحبت کنید",
+            zh: "立即说话"
+          };
+          btnSpan.textContent = btnMap[lang] || btnMap.en;
+        }
       }
       if (this.micOverlay) this.micOverlay.style.display = "none";
       if (this.micPulseBtn) this.micPulseBtn.style.transform = "";
-      this.chatInput.placeholder = this.options.language === "ar" ? "تحدث أو اكتب سؤالك..." : "Speak or type your question...";
+      if (this.chatInput) {
+        const placeholderMap = {
+          en: "Speak or type your question...",
+          ar: "تحدث أو اكتب سؤالك...",
+          fa: "صحبت کنید یا سوال خود را بنویسید...",
+          zh: "请说话或输入您的问题..."
+        };
+        this.chatInput.placeholder = placeholderMap[lang] || placeholderMap.en;
+      }
     }
 
     _setupSpeechRecognition() {
@@ -1476,7 +1722,15 @@
     }
 
     _setStatus(text) {
-      if (this.statusText) this.statusText.textContent = text;
+      const language = this.options.language || "en";
+      const localizedStatus = {
+        "Active": { en: "Active", ar: "نشط", fa: "فعال", zh: "已就绪" },
+        "Thinking...": { en: "Thinking...", ar: "جارٍ التفكير...", fa: "در حال بررسی...", zh: "正在思考..." },
+        "Listening...": { en: "Listening...", ar: "جارٍ الاستماع...", fa: "در حال گوش دادن...", zh: "正在倾听..." },
+        "AI Assistant speaking...": { en: "AI Assistant speaking...", ar: "المساعد يتحدث...", fa: "دستیار در حال صحبت است...", zh: "人工智能助手正在说话..." }
+      };
+      const localized = localizedStatus[text];
+      if (this.statusText) this.statusText.textContent = localized ? (localized[language] || localized.en) : text;
     }
 
     _unlockSpeaker() {
@@ -1539,8 +1793,11 @@
       const sg = this.options.serverGreeting;
       const lang = this.options.language;
       let greetingText;
-      if (sg && sg.GreetingEn) {
-        greetingText = (lang === "ar" && sg.GreetingAr) ? sg.GreetingAr : sg.GreetingEn;
+      if (sg && (sg.GreetingEn || sg.greetingEn)) {
+        if (lang === "ar") greetingText = sg.GreetingAr || sg.greetingAr || (RHINE_KNOWLEDGE.ar && RHINE_KNOWLEDGE.ar.greeting);
+        else if (lang === "fa") greetingText = sg.GreetingFa || sg.greetingFa || (RHINE_KNOWLEDGE.fa && RHINE_KNOWLEDGE.fa.greeting);
+        else if (lang === "zh") greetingText = sg.GreetingZh || sg.greetingZh || (RHINE_KNOWLEDGE.zh && RHINE_KNOWLEDGE.zh.greeting);
+        else greetingText = (RHINE_KNOWLEDGE[lang] && RHINE_KNOWLEDGE[lang].greeting) || (sg.GreetingEn || sg.greetingEn);
       } else {
         const kb = RHINE_KNOWLEDGE[lang] || RHINE_KNOWLEDGE.en;
         greetingText = kb.greeting;
@@ -1549,16 +1806,23 @@
       this.lastCaption = greetingText;
       this.setCaptionAndSpeak(greetingText, false, null, "greeting");
 
-      // 5. Ask for microphone permission before starting hands-free greeting.
-      // This keeps the automatic greeting inside the popup/user media lifecycle.
       this._greetingSpoken = true;
       this._homeGreetingSpoken = true;
-      this._prepareMicrophone().then(() => {
-        if (this.isOpen && !this.isSpeechMuted) {
-          // 6. Speak the greeting through the same TTS pipeline as all responses.
-          this.speak(greetingText);
-        }
-      });
+
+      // Request mic permission first — clicking "Allow" on the browser prompt
+      // counts as a user activation that unlocks AudioContext for autoplay.
+      // This lets the greeting speak automatically without "click anywhere for voice".
+      if (this.isOpen && !this.isSpeechMuted) {
+        this._prepareMicrophone().then((granted) => {
+          if (granted) {
+            this._unlockSpeaker();
+          }
+          // Speak greeting after mic prompt resolves (granted or denied)
+          if (this.isOpen && !this.isSpeechMuted && !this._hasActuallySpoken) {
+            this.speak(greetingText);
+          }
+        });
+      }
     }
 
     speakWelcomeOnHome() {
@@ -1566,35 +1830,29 @@
     }
 
     _handleAutoplayBlocked(textToSpeak) {
-      if (this._hasActuallySpoken || !textToSpeak) return;
-      this._pendingGreetingText = textToSpeak;
-      const isAr = this.options.language === "ar";
-      this._setStatus(isAr ? "انقر في أي مكان لتفعيل الصوت..." : "Click anywhere to enable voice...");
-
-      const unlockOnce = () => {
-        window.removeEventListener("pointerdown", unlockOnce, { capture: true });
-        window.removeEventListener("keydown", unlockOnce, { capture: true });
-        if (this.isOpen && this._pendingGreetingText && !this._hasActuallySpoken) {
-          const t = this._pendingGreetingText;
-          this._pendingGreetingText = null;
-          this._unlockSpeaker();
-          this.speak(t);
-        }
+      if (!textToSpeak) return;
+      this._pendingGreetingText = null;
+      this.isSpeaking = false;
+      this._setVideoActive(false);
+      const unavailableMap = {
+        en: "Voice playback is unavailable. Listening...",
+        ar: "تعذر تشغيل الصوت. جارٍ الاستماع...",
+        fa: "پخش صدا در دسترس نیست. در حال گوش دادن...",
+        zh: "语音播放不可用。正在倾听..."
       };
-
-      window.addEventListener("pointerdown", unlockOnce, { capture: true, once: true });
-      window.addEventListener("keydown", unlockOnce, { capture: true, once: true });
+      this._setStatus(unavailableMap[this.options.language] || unavailableMap.en);
+      this._onSpeechCompleted();
     }
 
     _onSpeechCompleted() {
-      if (!this.isOpen || this.isSpeechMuted) return;
+      if (!this.isOpen) return;
 
       // Hands-free conversation: auto-resume listening after brief natural pause
       setTimeout(() => {
         if (!this.isSpeaking && this.isOpen && !this.isListening) {
           this._startListening();
         }
-      }, 350);
+      }, 400);
     }
 
     open(speakGreeting = true) {
@@ -1616,6 +1874,10 @@
       // If speakGreeting is requested, delegate to the single refreshGreeting source
       if (speakGreeting && !this.isSpeechMuted) {
         this.refreshGreeting();
+      } else {
+        setTimeout(() => {
+          if (this.isOpen && !this.isSpeaking && !this.isListening) this._startListening();
+        }, 300);
       }
     }
     close() {
@@ -1647,12 +1909,18 @@
       if (this.isCaptionsVisible) {
         this.captionOverlay.classList.remove("rhine-caption-hidden");
         this.ccBtn.classList.add("active");
-        this.ccBtn.title = "Hide Captions";
       } else {
         this.captionOverlay.classList.add("rhine-caption-hidden");
         this.ccBtn.classList.remove("active");
-        this.ccBtn.title = "Show Captions";
       }
+      const titles = {
+        en: this.isCaptionsVisible ? "Hide Captions" : "Show Captions",
+        ar: this.isCaptionsVisible ? "إخفاء الترجمة" : "إظهار الترجمة",
+        fa: this.isCaptionsVisible ? "پنهان کردن زیرنویس" : "نمایش زیرنویس",
+        zh: this.isCaptionsVisible ? "隐藏字幕" : "显示字幕"
+      };
+      this.ccBtn.title = titles[this.options.language] || titles.en;
+      this.ccBtn.setAttribute("aria-label", this.ccBtn.title);
     }
 
     async ask(question) {
@@ -1666,22 +1934,35 @@
       this.chatSend.disabled = true;
       this._setStatus("Thinking...");
 
+      // Automatic language detection from input text
+      let detectedLang = null;
+      if (/[\u4E00-\u9FFF]/.test(question)) {
+        detectedLang = "zh";
+      } else if (/[پچژگ]/.test(question)) {
+        detectedLang = "fa";
+      } else if (/[\u0600-\u06FF]/.test(question)) {
+        detectedLang = this.options.language === "fa" ? "fa" : "ar";
+      }
+      if (detectedLang && detectedLang !== this.options.language) {
+        this.setLanguage(detectedLang);
+      }
       const lang = this.options.language;
       const lower = question.toLowerCase().trim();
 
-      // 1. Intent rule matching
-      // Normalise Arabic: strip punctuation (Arabic ؟ ! ، . ) and normalise alef variants
-      const normaliseAr = (t) => t
-        .replace(/[\u060C\u061B\u061F\u06D4!?.،؛]/g, " ") // Arabic punctuation → space
-        .replace(/[أإآٱ]/g, "ا")                           // alef variants → bare alef
+      // Normalise punctuation and letter variants across Arabic, Persian, Chinese, and English
+      const normaliseText = (t) => t
+        .replace(/[\u060C\u061B\u061F\u06D4!?.،؛?？！]/g, " ")
+        .replace(/[أإآٱ]/g, "ا")
+        .replace(/[یي]/g, "ی")
+        .replace(/[كک]/g, "ک")
         .replace(/\s+/g, " ").trim();
 
-      const normalised = normaliseAr(lower);
+      const normalised = normaliseText(lower);
 
       let answer = "";
       let matchedTopic = null;
       for (const rule of INTENT_RULES) {
-        if (rule.keys.some(k => normalised.includes(normaliseAr(k.toLowerCase())))) {
+        if (rule.keys.some(k => normalised.includes(normaliseText(k.toLowerCase())))) {
           // Special sentinel: launch meeting flow instead of returning KB text
           if (rule.topic === "__meeting__") {
             this.chatSend.disabled = false;
@@ -1766,6 +2047,7 @@
       this._setStatus("Active");
       this.chatSend.disabled = false;
       this.setCaptionAndSpeak(answer, true, question, matchedTopic);
+      if (this.isSpeechMuted) this._onSpeechCompleted();
 
       // After answering a contact/consultation question, offer the meeting flow
       if (matchedTopic === "contact" || matchedTopic === "hours" || matchedTopic === "pricing") {
@@ -1779,19 +2061,18 @@
 
       // Dynamic heading and badge update as per user question / topic
       const isAr = this.options.language === "ar" || /[\u0600-\u06FF]/.test(text);
-      const titles = (TOPIC_TITLES && (TOPIC_TITLES[isAr ? 'ar' : 'en'] || TOPIC_TITLES.en)) || {};
+      const titles = (TOPIC_TITLES && (TOPIC_TITLES[this.options.language] || TOPIC_TITLES[isAr ? 'ar' : 'en'] || TOPIC_TITLES.en)) || {};
       let displayTitle = (topicKey && titles[topicKey]) ? titles[topicKey] : (customerQuestion ? customerQuestion.slice(0, 32) : this.options.title);
-      if (this.topTitleEl && displayTitle) {
-        this.topTitleEl.textContent = displayTitle;
-      }
+      // Keep the assistant header stable; conversation headings belong to the CC panel.
       if (this.captionBadgeText && displayTitle) {
-        this.captionBadgeText.textContent = displayTitle.toUpperCase();
+        this.captionBadgeText.textContent = displayTitle;
       }
 
       if (customerQuestion) {
         const qEl = document.createElement("div");
         qEl.className = "rhine-caption-q";
-        qEl.innerHTML = `<strong>${this.options.language === 'ar' ? 'سؤالك:' : 'You asked:'}</strong> "${this._escapeHtml(customerQuestion)}"`;
+        const questionPrefix = { en: 'You asked:', ar: 'سؤالك:', fa: 'سوال شما:', zh: '您问：' };
+        qEl.innerHTML = `<strong>${questionPrefix[this.options.language] || questionPrefix.en}</strong> "${this._escapeHtml(customerQuestion)}"`;
         this.captionContent.appendChild(qEl);
       }
 
@@ -1814,18 +2095,185 @@
 
       const hasArabicChars = /[\u0600-\u06FF]/.test(text);
       const isAr = this.options.language === "ar" || hasArabicChars;
+      const speechLang = this._getSpeechLanguage();
       const clean = text.replace(/[*_#`~\[\]•]/g, " ").replace(/\n/g, ". ").trim();
       if (!clean) return;
 
       const currentSessionId = (this._speechSessionId || 0) + 1;
       this._speechSessionId = currentSessionId;
+      this._hasActuallySpoken = false;
 
       this.isSpeaking = true;
       // Strict lip-sync: keep video strictly paused at 00:00 until sound is actually ready and producing audio
       this._setVideoActive(false);
-      this._setStatus(isAr ? "المساعد يتحدث..." : "AI Assistant speaking...");
+      this._setStatus("AI Assistant speaking...");
 
-      // Audio stream fallback for fluent Arabic when no native voice is installed
+      // ─── Helpers ───────────────────────────────────────────────────────────────
+
+      /** Mark speech as actually started — fires video lip-sync and updates status */
+      const _onSpeechStart = () => {
+        if (this._speechSessionId !== currentSessionId) return;
+        this.isSpeaking = true;
+        this._hasActuallySpoken = true;
+        this._greetingHasPlayed = true;
+        this._pendingGreetingText = null;
+        const sg = this.options.serverGreeting;
+        const greetingId = (sg && sg.GreetingId) ? sg.GreetingId : ("greet_" + Date.now());
+        this._playedGreetingId = greetingId;
+        try { sessionStorage.setItem("rhine_played_greeting_id", greetingId); } catch { }
+        this._setVideoActive(true);
+        const speakingStatusMap = {
+          en: "AI Assistant speaking...",
+          ar: "المساعد يتحدث...",
+          fa: "دستیار در حال صحبت است...",
+          zh: "人工智能助手正在说话..."
+        };
+        this._setStatus(speakingStatusMap[this.options.language] || speakingStatusMap.en);
+      };
+
+      /** Mark speech as completed — stops video and transitions back to active */
+      const _onSpeechEnd = () => {
+        if (this._speechSessionId !== currentSessionId) return;
+        this.isSpeaking = false;
+        this._activeAudio = null;
+        this._setVideoActive(false);
+        this._setStatus("Active");
+        this._onSpeechCompleted();
+      };
+
+      // ─── Build text chunks ─────────────────────────────────────────────────────
+      const _buildChunks = (txt, maxLen) => {
+        const normalized = this.options.language === "fa"
+          ? txt.replace(/\u200c/g, " ").replace(/\s+/g, " ").trim()
+          : txt;
+        // Split on sentence terminators (works for Arabic, Persian, Chinese, English)
+        const rawSentences = normalized.match(/[^.!?،؟;\u3002\n]+[.!?،؟;\u3002\n]*/g) || [normalized];
+        const chunks = [];
+        let curr = "";
+        for (const s of rawSentences) {
+          const trimmed = s.trim();
+          if (!trimmed) continue;
+          if ((curr + " " + trimmed).trim().length <= maxLen) {
+            curr = (curr + " " + trimmed).trim();
+          } else {
+            if (curr) chunks.push(curr);
+            curr = trimmed.slice(0, maxLen);
+          }
+        }
+        if (curr) chunks.push(curr);
+        if (chunks.length === 0) chunks.push(txt.slice(0, maxLen));
+        return chunks;
+      };
+
+      // ─── Web Audio API gapless playback ────────────────────────────────────────
+      /**
+       * Fetch all chunks as ArrayBuffers and decode via Web Audio API for
+       * truly gapless (0ms gap) playback between sentences.
+       * Falls back to HTMLAudioElement sequential chain on any error.
+       */
+      const _speakViaWebAudio = async (chunks) => {
+        if (this._speechSessionId !== currentSessionId) return;
+
+        try {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (!AudioCtx) throw new Error("No AudioContext");
+
+          if (!this._audioCtx || this._audioCtx.state === "closed") {
+            this._audioCtx = new AudioCtx();
+          }
+          if (this._audioCtx.state === "suspended") {
+            await this._audioCtx.resume();
+          }
+          const ctx = this._audioCtx;
+
+          // Fetch all chunks in parallel for speed
+          const lang = this.options.language;
+          const fetchChunk = async (c) => {
+            const url = "/api/agent/tts?text=" + encodeURIComponent(c) + "&lang=" + encodeURIComponent(lang);
+            const resp = await fetch(url);
+            if (!resp.ok) throw new Error("TTS fetch failed: " + resp.status);
+            return resp.arrayBuffer();
+          };
+
+          // Fetch first chunk immediately; fetch remaining in parallel
+          const bufferPromises = chunks.map(c => fetchChunk(c));
+
+          // Decode and schedule for gapless sequential playback
+          let scheduledTime = ctx.currentTime + 0.05; // tiny start delay for stability
+          let sourcesStarted = 0;
+
+          this._webAudioSources = [];
+
+          for (let i = 0; i < chunks.length; i++) {
+            if (this._speechSessionId !== currentSessionId) return;
+
+            let arrayBuf;
+            try {
+              arrayBuf = await bufferPromises[i];
+            } catch (e) {
+              console.warn("[RHINE AI] Web Audio chunk fetch failed, falling back to HTMLAudio", e);
+              // If first chunk fails, bail to HTMLAudioElement fallback
+              _speakViaAudioStream(clean);
+              return;
+            }
+
+            if (this._speechSessionId !== currentSessionId) return;
+
+            let audioBuf;
+            try {
+              audioBuf = await ctx.decodeAudioData(arrayBuf);
+            } catch (e) {
+              console.warn("[RHINE AI] Audio decode failed for chunk", i, e);
+              continue; // skip undecodable chunk
+            }
+
+            if (this._speechSessionId !== currentSessionId) return;
+
+            const source = ctx.createBufferSource();
+            source.buffer = audioBuf;
+            source.connect(ctx.destination);
+            this._webAudioSources.push(source);
+
+            if (sourcesStarted === 0) {
+              // First source: start and trigger lip-sync immediately
+              source.start(scheduledTime);
+              // Schedule onstart callback
+              const startDelay = Math.max(0, (scheduledTime - ctx.currentTime) * 1000);
+              setTimeout(() => {
+                if (this._speechSessionId === currentSessionId) _onSpeechStart();
+              }, startDelay);
+            } else {
+              source.start(scheduledTime);
+            }
+
+            scheduledTime += audioBuf.duration;
+            sourcesStarted++;
+
+            // Last chunk: schedule speech end
+            if (i === chunks.length - 1) {
+              const endDelay = Math.max(0, (scheduledTime - ctx.currentTime) * 1000);
+              this._webAudioEndTimer = setTimeout(() => {
+                if (this._speechSessionId === currentSessionId) _onSpeechEnd();
+              }, endDelay);
+            }
+          }
+
+          if (sourcesStarted === 0) {
+            // All chunks failed to decode
+            throw new Error("No audio chunks decoded");
+          }
+
+        } catch (err) {
+          console.warn("[RHINE AI] Web Audio gapless playback failed, using HTMLAudioElement fallback:", err);
+          _speakViaAudioStream(clean);
+        }
+      };
+
+      // ─── HTMLAudioElement sequential chain (robust fallback) ──────────────────
+      /**
+       * Sequential Audio element playback — each chunk plays after the previous
+       * ends. Less gapless than Web Audio but widely supported.
+       */
       const _speakViaAudioStream = (txt) => {
         if (this._speechSessionId !== currentSessionId) return;
 
@@ -1834,44 +2282,76 @@
           .replace(/[*_#`~\[\]•]/g, " ")
           .trim();
 
-        const rawSentences = cleanTxt.match(/[^.!?،؟;\n]+[.!?،؟;\n]*/g) || [cleanTxt];
-        const chunks = [];
-        let curr = "";
-        for (const s of rawSentences) {
-          const trimmed = s.trim();
-          if (!trimmed) continue;
-          if ((curr + " " + trimmed).trim().length <= 160) {
-            curr = (curr + " " + trimmed).trim();
-          } else {
-            if (curr) chunks.push(curr);
-            curr = trimmed.slice(0, 160);
-          }
-        }
-        if (curr) chunks.push(curr);
-        if (chunks.length === 0) chunks.push(cleanTxt.slice(0, 160));
+        const maxChunkLength = this.options.language === "fa" ? 190 : 155;
+        const chunks = _buildChunks(cleanTxt, maxChunkLength);
 
         let idx = 0;
         this.isSpeaking = true;
-        this._setStatus(isAr ? "المساعد يتحدث..." : "AI Assistant speaking...");
+        this._setStatus("AI Assistant speaking...");
 
-        // Preload queue of Audio objects for seamless playback with 0ms gap
+        // Preload all Audio objects upfront for minimum inter-chunk delay
         const preloadedAudios = chunks.map((c) => {
           const audio = new Audio();
           audio.preload = "auto";
           audio.crossOrigin = "anonymous";
-          audio.src = "/api/agent/tts?text=" + encodeURIComponent(c) + "&lang=" + (isAr ? "ar" : "en");
+          audio.src = "/api/agent/tts?text=" + encodeURIComponent(c) + "&lang=" + encodeURIComponent(this.options.language);
           audio.load();
           return audio;
         });
         this._preloadedAudios = preloadedAudios;
 
+        /** SpeechSynthesis last-resort fallback for Persian if all HTTP TTS fails */
+        const _fallbackSpeechSynthesis = (textToSpeak) => {
+          if (this._speechSessionId !== currentSessionId) return;
+          if (!("speechSynthesis" in window)) { _onSpeechEnd(); return; }
+
+          try { window.speechSynthesis.cancel(); } catch { }
+          const utt = new SpeechSynthesisUtterance(textToSpeak.slice(0, 600));
+          const voices = (window.speechSynthesis && window.speechSynthesis.getVoices()) || [];
+          const faVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith("fa"));
+          const arVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith("ar"));
+          if (faVoice) {
+            utt.voice = faVoice;
+            utt.lang = faVoice.lang;
+          } else if (arVoice) {
+            utt.voice = arVoice;
+            utt.lang = arVoice.lang;
+          } else if (this.options.language === "fa") {
+            // Avoid fallback English voice mispronouncing Persian text or only saying "Rhine"
+            _onSpeechEnd();
+            return;
+          } else {
+            utt.lang = speechLang;
+          }
+          utt.rate = 1.0;
+          utt.pitch = 1.05;
+          utt.volume = 1.0;
+          this._activeUtterance = utt;
+          window._rhineActiveUtterance = utt;
+
+          utt.onstart = () => {
+            if (this._speechSessionId === currentSessionId) _onSpeechStart();
+          };
+          utt.onend = () => {
+            this._activeUtterance = null;
+            window._rhineActiveUtterance = null;
+            if (this._speechSessionId === currentSessionId) _onSpeechEnd();
+          };
+          utt.onerror = () => {
+            this._activeUtterance = null;
+            window._rhineActiveUtterance = null;
+            if (this._speechSessionId === currentSessionId) _onSpeechEnd();
+          };
+
+          try {
+            window.speechSynthesis.speak(utt);
+          } catch { _onSpeechEnd(); }
+        };
+
         const playNext = () => {
           if (this._speechSessionId !== currentSessionId || !this.isSpeaking || idx >= preloadedAudios.length) {
-            if (this._speechSessionId === currentSessionId) {
-              this.isSpeaking = false;
-              this._setVideoActive(false);
-              this._setStatus("Active");
-              this._activeAudio = null;
+            if (this._speechSessionId === currentSessionId && this.isSpeaking) {
+              _onSpeechEnd();
             }
             return;
           }
@@ -1879,6 +2359,12 @@
           const currentAudio = preloadedAudios[idx];
           const currentChunk = chunks[idx];
           idx++;
+
+          // Preload next chunk immediately to minimize gap
+          if (idx < preloadedAudios.length) {
+            preloadedAudios[idx].load();
+          }
+
           this._activeAudio = currentAudio;
 
           currentAudio.onplaying = () => {
@@ -1886,84 +2372,40 @@
               try { currentAudio.pause(); } catch { }
               return;
             }
-            this.isSpeaking = true;
-            this._hasActuallySpoken = true;
-            this._greetingHasPlayed = true;
-            this._pendingGreetingText = null;
-            const sg = this.options.serverGreeting;
-            const greetingId = (sg && sg.GreetingId) ? sg.GreetingId : ("greet_" + Date.now());
-            this._playedGreetingId = greetingId;
-            try {
-              sessionStorage.setItem("rhine_played_greeting_id", greetingId);
-            } catch { }
-            this._setVideoActive(true);
+            _onSpeechStart();
           };
-
-          currentAudio.onwaiting = () => { };
 
           currentAudio.onended = () => {
             if (this._speechSessionId !== currentSessionId) return;
             if (idx < preloadedAudios.length) {
+              // Immediate: no setTimeout delay to eliminate gap
               playNext();
             } else {
-            this.isSpeaking = false;
-            this._setVideoActive(false);
-            this._setStatus("Active");
-            this._activeAudio = null;
-            this._onSpeechCompleted();
+              _onSpeechEnd();
             }
           };
 
           currentAudio.onerror = () => {
             if (this._speechSessionId !== currentSessionId) return;
-            const directUrl = "https://translate.google.com/translate_tts?ie=UTF-8&q=" + encodeURIComponent(currentChunk) + "&tl=" + (isAr ? "ar" : "en") + "&client=tw-ob";
-            const fallbackAudio = new Audio();
-            fallbackAudio.src = directUrl;
-            this._activeAudio = fallbackAudio;
+            // Per-chunk error: try SpeechSynthesis for this specific chunk as micro-fallback
+            const lang = this.options.language;
+            const isFa = lang === "fa";
 
-            fallbackAudio.onplaying = () => {
-              if (this._speechSessionId !== currentSessionId) {
-                try { fallbackAudio.pause(); } catch { }
-                return;
-              }
-              this.isSpeaking = true;
-              this._hasActuallySpoken = true;
-              this._greetingHasPlayed = true;
-              this._pendingGreetingText = null;
-              const sg = this.options.serverGreeting;
-              const greetingId = (sg && sg.GreetingId) ? sg.GreetingId : ("greet_" + Date.now());
-              this._playedGreetingId = greetingId;
-              try {
-                sessionStorage.setItem("rhine_played_greeting_id", greetingId);
-              } catch { }
-              this._setVideoActive(true);
-            };
-            fallbackAudio.onended = () => {
-              if (this._speechSessionId !== currentSessionId) return;
-              if (idx < preloadedAudios.length) playNext();
-              else {
-                this.isSpeaking = false;
-                this._setVideoActive(false);
-                this._setStatus("Active");
-                this._activeAudio = null;
-                this._onSpeechCompleted();
-              }
-            };
-            fallbackAudio.onerror = () => {
-              if (this._speechSessionId !== currentSessionId) return;
-              if (idx < preloadedAudios.length) playNext();
-              else {
-                this.isSpeaking = false;
-                this._setVideoActive(false);
-                this._setStatus("Active");
-              }
-            };
+            if (isFa && idx === 1) {
+              // First Persian chunk failed via server — fall back to SpeechSynthesis for full text
+              console.warn("[RHINE AI] Persian server TTS failed, trying SpeechSynthesis fa-IR...");
+              this.isSpeaking = false;
+              this._setVideoActive(false);
+              try { window.speechSynthesis.cancel(); } catch { }
+              _fallbackSpeechSynthesis(clean);
+              return;
+            }
 
-            const p = fallbackAudio.play();
-            if (p !== undefined) {
-              p.catch(() => {
-                fallbackAudio.onerror();
-              });
+            // Other languages or later chunks: skip to next chunk
+            if (idx < preloadedAudios.length) {
+              playNext();
+            } else {
+              _onSpeechEnd();
             }
           };
 
@@ -1971,7 +2413,7 @@
           if (playPromise !== undefined) {
             playPromise.catch((err) => {
               if (err && (err.name === "NotAllowedError" || err.name === "AbortError")) {
-                console.warn("[RHINE AI] Audio autoplay blocked by browser policy (incognito or strict policy)");
+                console.warn("[RHINE AI] Audio autoplay blocked by browser policy");
                 this.isSpeaking = false;
                 this._setVideoActive(false);
                 this._handleAutoplayBlocked(clean);
@@ -1985,14 +2427,32 @@
         playNext();
       };
 
-      // Native SpeechSynthesis check
+      // ─── Language routing ──────────────────────────────────────────────────────
+      //
+      // Persian (fa): ALWAYS use audio stream (server TTS) — fa-IR voices are
+      // absent on most platforms. Web Audio API for gapless play; HTMLAudio fallback.
+      // Arabic (ar), Chinese (zh): prefer server audio stream if no native voice.
+      // English (en): use SpeechSynthesis natively.
+      //
       if ("speechSynthesis" in window) {
         const _doSpeak = () => {
           if (this._speechSessionId !== currentSessionId) return;
           const allVoices = window.speechSynthesis.getVoices();
+          const lang = this.options.language;
+          const isAr = lang === "ar";
+          const isFa = lang === "fa";
+          const isZh = lang === "zh";
+
           let voice = null;
 
-          if (isAr) {
+          if (isZh) {
+            const zhVoices = allVoices.filter(v => v.lang && (v.lang.toLowerCase().startsWith("zh") || v.lang.toLowerCase().startsWith("cmn")));
+            const femaleZh = /xiaoxiao|huihui|yaoyao|tingting|meijia|female|natural/i;
+            voice = zhVoices.find(v => femaleZh.test(v.name)) || zhVoices[0] || null;
+            if (!voice && allVoices.length > 0) {
+              voice = allVoices.find(v => /chinese|mandarin/i.test(v.name)) || null;
+            }
+          } else if (isAr) {
             const arTags = ["ar-sa", "ar-ae", "ar-eg", "ar-jo", "ar-kw", "ar"];
             const femaleAr = /salma|layla|zeina|marium|yasmin|shatha|female|jenny|aria|zira|samantha/i;
             for (const tag of arTags) {
@@ -2001,15 +2461,20 @@
               if (voice) break;
             }
             if (!voice) {
-              const femaleAr = /salma|layla|zeina|marium|yasmin|shatha|female|jenny|aria|zira|samantha/i;
               voice = allVoices.find(v => (v.lang.toLowerCase().startsWith("ar") || /arabic|عرب/i.test(v.name)) && femaleAr.test(v.name)) ||
-                      allVoices.find(v => v.lang.toLowerCase().startsWith("ar") || /arabic|عرب/i.test(v.name));
+                      allVoices.find(v => v.lang.toLowerCase().startsWith("ar") || /arabic|عرب/i.test(v.name)) || null;
             }
-
-            // If no Arabic voice found on Windows/browser, stream authentic Arabic audio via Google TTS
+          } else if (isFa) {
+            const faTags = ["fa-ir", "fa", "pes", "per", "farsi"];
+            const femaleFa = /dilara|shirin|mitra|fariba|neda|mahsa|sara|maryam|female|natural/i;
+            for (const tag of faTags) {
+              const matching = allVoices.filter(v => v.lang && v.lang.toLowerCase() === tag);
+              voice = matching.find(v => femaleFa.test(v.name)) || matching[0] || null;
+              if (voice) break;
+            }
             if (!voice) {
-              _speakViaAudioStream(clean);
-              return;
+              voice = allVoices.find(v => (v.lang && (v.lang.toLowerCase().startsWith("fa") || /persian|farsi|فارسی/i.test(v.name))) && femaleFa.test(v.name)) ||
+                      allVoices.find(v => v.lang && (v.lang.toLowerCase().startsWith("fa") || /persian|farsi|فارسی/i.test(v.name))) || null;
             }
           } else {
             const enVoices = allVoices.filter(v => v.lang.toLowerCase().startsWith("en"));
@@ -2027,15 +2492,22 @@
               null;
           }
 
+          // If no matching native voice for Arabic, Persian, or Chinese — use server TTS stream
+          if (!voice && (isAr || isZh || isFa)) {
+            _speakViaAudioStream(clean);
+            return;
+          }
+
           const utterance = new SpeechSynthesisUtterance(clean.slice(0, 600));
-          utterance.lang = isAr ? "ar-SA" : "en-US";
-          utterance.rate = isAr ? 0.9 : 0.95;
-          utterance.pitch = 1.05;
+          utterance.lang = speechLang;
+          utterance.rate = (isAr || isFa) ? 0.92 : 0.95;
+          utterance.pitch = isFa ? 1.08 : (isAr ? 1.05 : 1.0);
           utterance.volume = 1.0;
           if (voice) utterance.voice = voice;
 
           // Prevent Chromium Garbage Collection bug which pauses speech or stops video early
           this._activeUtterance = utterance;
+          window._rhineActiveUtterance = utterance;
 
           let speechStarted = false;
 
@@ -2045,24 +2517,11 @@
               return;
             }
             speechStarted = true;
-            this.isSpeaking = true;
-            this._hasActuallySpoken = true;
-            this._greetingHasPlayed = true;
-            this._pendingGreetingText = null;
-            const sg = this.options.serverGreeting;
-            const greetingId = (sg && sg.GreetingId) ? sg.GreetingId : ("greet_" + Date.now());
-            this._playedGreetingId = greetingId;
-            try {
-              sessionStorage.setItem("rhine_played_greeting_id", greetingId);
-            } catch { }
-            this._setVideoActive(true);
-            this._setStatus(isAr ? "المساعد يتحدث..." : "AI Assistant speaking...");
-            console.log("[RHINE AI] SpeechSynthesis started speaking successfully.");
+            _onSpeechStart();
+            console.log("[RHINE AI] SpeechSynthesis started speaking successfully in " + speechLang);
           };
 
-          utterance.onpause = () => {
-            this._setVideoActive(false);
-          };
+          utterance.onpause = () => { this._setVideoActive(false); };
 
           utterance.onresume = () => {
             if (this.isSpeaking) this._setVideoActive(true);
@@ -2071,27 +2530,22 @@
           utterance.onend = () => {
             if (this._speechSessionId !== currentSessionId) return;
             this._activeUtterance = null;
-            this.isSpeaking = false;
-            this._setVideoActive(false);
-            this._setStatus("Active");
-            this._onSpeechCompleted();
+            window._rhineActiveUtterance = null;
+            _onSpeechEnd();
             console.log("[RHINE AI] SpeechSynthesis finished speaking.");
           };
 
           utterance.onerror = (e) => {
             if (this._speechSessionId !== currentSessionId) return;
             if (e && (e.error === "canceled" || e.error === "interrupted")) {
-              // Canceled by fallback timer or new speech session — do NOT pause video or reset speaking status!
-              return;
+              return; // Canceled intentionally
             }
             console.warn("[RHINE AI] SpeechSynthesis error:", e);
             this._activeUtterance = null;
+            window._rhineActiveUtterance = null;
             this.isSpeaking = false;
             this._setVideoActive(false);
             if (e && e.error === "not-allowed") {
-              console.warn("[RHINE AI] SpeechSynthesis blocked by browser autoplay policy.");
-              this.isSpeaking = false;
-              this._setVideoActive(false);
               this._handleAutoplayBlocked(clean);
               return;
             }
@@ -2100,10 +2554,11 @@
               _speakViaAudioStream(clean);
             } else {
               this._setStatus("Active");
+              this._onSpeechCompleted();
             }
           };
 
-          // Chromium SpeechSynthesis keep-alive timer
+          // Chromium SpeechSynthesis keep-alive timer (prevents mid-utterance pauses on long text)
           if (this._speechKeepAlive) clearInterval(this._speechKeepAlive);
           this._speechKeepAlive = setInterval(() => {
             if (!this.isSpeaking) {
@@ -2123,15 +2578,14 @@
             _speakViaAudioStream(clean);
           }
 
-          // If SpeechSynthesis does not fire onstart within 300ms (browser autoplay restricted or voice unavailable),
-          // cancel speech synthesis and seamlessly stream the audio via _speakViaAudioStream!
+          // Fallback watchdog: if SpeechSynthesis does not fire onstart within 1800ms, stream via /api/agent/tts
           setTimeout(() => {
-            if (!speechStarted && this._speechSessionId === currentSessionId && !this._hasActuallySpoken) {
-              console.warn("[RHINE AI] SpeechSynthesis did not start within 300ms. Seamlessly streaming authentic audio via /api/agent/tts...");
+            if (!speechStarted && this._speechSessionId === currentSessionId && !this._hasActuallySpoken && !(window.speechSynthesis && window.speechSynthesis.speaking)) {
+              console.warn("[RHINE AI] SpeechSynthesis did not start within 1800ms. Streaming audio via /api/agent/tts...");
               try { window.speechSynthesis.cancel(); } catch { }
               _speakViaAudioStream(clean);
             }
-          }, 300);
+          }, 1800);
         };
 
         let speakInitiated = false;
@@ -2145,13 +2599,12 @@
         if (voices.length === 0) {
           window.speechSynthesis.addEventListener("voiceschanged", initiateSpeak, { once: true });
           try { window.speechSynthesis.onvoiceschanged = initiateSpeak; } catch { }
-          setTimeout(() => {
-            initiateSpeak();
-          }, 350);
+          setTimeout(() => { initiateSpeak(); }, 350);
         } else {
           initiateSpeak();
         }
       } else {
+        // No SpeechSynthesis at all: use audio stream directly
         _speakViaAudioStream(clean);
       }
     }
@@ -2161,6 +2614,18 @@
       if (this._speechKeepAlive) {
         clearInterval(this._speechKeepAlive);
         this._speechKeepAlive = null;
+      }
+      // Stop Web Audio API scheduled sources (used for Persian gapless playback)
+      if (this._webAudioEndTimer) {
+        clearTimeout(this._webAudioEndTimer);
+        this._webAudioEndTimer = null;
+      }
+      if (this._webAudioSources && Array.isArray(this._webAudioSources)) {
+        this._webAudioSources.forEach(src => {
+          try { src.stop(); } catch { }
+          try { src.disconnect(); } catch { }
+        });
+        this._webAudioSources = [];
       }
       this._activeUtterance = null;
       if ("speechSynthesis" in window) {
@@ -2186,6 +2651,7 @@
       }
     }
 
+
     stopSpeech() {
       this._stopActiveAudioOnly();
       this.isSpeaking = false;
@@ -2194,8 +2660,13 @@
     }
 
     _setVideoActive(active) {
+      // Invalidate any in-flight play() completion before changing playback state.
+      const playbackToken = (this._videoPlaybackToken || 0) + 1;
+      this._videoPlaybackToken = playbackToken;
       if (active && this.isSpeaking) {
         this._videoIntentionallyPaused = false;
+        this._videoLastTime = null;
+        this._videoStalledTicks = 0;
         this.widgetEl.classList.add("rhine-speaking");
         if (this.launcherEl) this.launcherEl.classList.add("rhine-speaking");
         if (this.videoEl) {
@@ -2203,12 +2674,21 @@
           this.videoEl.muted = true;
           this.videoEl.defaultMuted = true;
           this.videoEl.loop = true;
+          this.videoEl.playbackRate = 1;
+          this.videoEl.defaultPlaybackRate = 1;
           const p = this.videoEl.play();
           if (p !== undefined) {
             p.then(() => {
+              // A stopped speech session may resolve its earlier play() promise late.
+              if (playbackToken !== this._videoPlaybackToken || !this.isSpeaking || this._videoIntentionallyPaused) {
+                try { this.videoEl.pause(); this.videoEl.currentTime = 0; } catch { }
+                return;
+              }
               if (this.videoFallbackEl) this.videoFallbackEl.classList.remove("visible");
             }).catch((err) => {
-              console.warn("[RHINE AI] Video play deferred or waiting for buffer:", err);
+              if (playbackToken === this._videoPlaybackToken && this.isSpeaking) {
+                console.warn("[RHINE AI] Video play deferred or waiting for buffer:", err);
+              }
             });
           }
         }
@@ -2220,11 +2700,21 @@
               this._videoWatchdog = null;
               return;
             }
-            if (this.videoEl && this.videoEl.paused && !this._videoIntentionallyPaused) {
-              this.videoEl.muted = true;
-              this.videoEl.defaultMuted = true;
-              this.videoEl.loop = true;
-              this.videoEl.play().catch(() => { });
+            if (this.videoEl && !this._videoIntentionallyPaused) {
+              this.videoEl.playbackRate = 1;
+              this.videoEl.defaultPlaybackRate = 1;
+              if (this.videoEl.paused) {
+                this.videoEl.play().catch(() => { });
+              } else if (this.videoEl.readyState >= 2) {
+                const currentTime = this.videoEl.currentTime;
+                this._videoStalledTicks = this._videoLastTime !== null && Math.abs(currentTime - this._videoLastTime) < 0.01 ? (this._videoStalledTicks || 0) + 1 : 0;
+                if (this._videoStalledTicks >= 6) {
+                  this._videoStalledTicks = 0;
+                  try { this.videoEl.currentTime = 0; } catch { }
+                  this.videoEl.play().catch(() => { });
+                }
+                this._videoLastTime = currentTime;
+              }
             }
           }, 350);
         }
@@ -2310,10 +2800,13 @@
       container.querySelector("#rhineMeetingNo").addEventListener("click", () => {
         this._clearMeetingUI();
         const lang = this.options.language;
-        const answer = lang === "ar"
-          ? "حسناً! إذا احتجت مساعدة في أي وقت، فأنا هنا."
-          : "No problem! Feel free to ask me anything else.";
-        this.setCaptionAndSpeak(answer, true, null, "contact");
+        const answerMap = {
+          en: "No problem! Feel free to ask me anything else.",
+          ar: "حسنًا! إذا احتجت مساعدة في أي وقت، فأنا هنا.",
+          fa: "مشکلی نیست! هر سؤال دیگری داشتید، با خیال راحت بپرسید.",
+          zh: "没问题！如有其他问题，欢迎随时询问。"
+        };
+        this.setCaptionAndSpeak(answerMap[lang] || answerMap.en, true, null, "contact");
       });
     }
 
@@ -2363,7 +2856,8 @@
 
       // Focus the input to invite typing/voice
       if (this.chatInput) {
-        this.chatInput.placeholder = flow.lang === "ar" ? "اكتب إجابتك هنا..." : "Type your answer here...";
+        const answerPlaceholder = { en: "Type your answer here...", ar: "اكتب إجابتك هنا...", fa: "پاسخ خود را اینجا بنویسید...", zh: "请在这里输入您的回答..." };
+        this.chatInput.placeholder = answerPlaceholder[flow.lang] || answerPlaceholder.en;
         this.chatInput.focus();
       }
     }
@@ -2420,7 +2914,7 @@
       overlay.id = "rhineMeetingModal";
       overlay.className = "rhine-modal-overlay";
 
-      const isAr = flow.lang === "ar";
+      const isRtl = flow.lang === "ar" || flow.lang === "fa";
 
       const rows = mt.steps.map(s => `
         <tr>
@@ -2430,9 +2924,9 @@
       `).join("");
 
       overlay.innerHTML = `
-        <div class="rhine-modal-box" dir="${isAr ? 'rtl' : 'ltr'}">
+        <div class="rhine-modal-box" dir="${isRtl ? 'rtl' : 'ltr'}">
           <div class="rhine-modal-header">
-            <span>${isAr ? '📋 مراجعة طلب الاجتماع' : '📋 Review Meeting Request'}</span>
+            <span>${({ en: '📋 Review Meeting Request', ar: '📋 مراجعة طلب الاجتماع', fa: '📋 بررسی درخواست جلسه', zh: '📋 查看会议申请' })[flow.lang] || '📋 Review Meeting Request'}</span>
           </div>
           <div class="rhine-modal-body">
             <table class="rhine-review-table">
@@ -2468,7 +2962,7 @@
       const flow = this._meetingFlow;
       const mt = flow.mt;
       const data = flow.data;
-      const isAr = flow.lang === "ar";
+      const isRtl = flow.lang === "ar" || flow.lang === "fa";
 
       const overlay = document.createElement("div");
       overlay.id = "rhineMeetingModal";
@@ -2485,9 +2979,9 @@
       `).join("");
 
       overlay.innerHTML = `
-        <div class="rhine-modal-box" dir="${isAr ? 'rtl' : 'ltr'}">
+        <div class="rhine-modal-box" dir="${isRtl ? 'rtl' : 'ltr'}">
           <div class="rhine-modal-header">
-            <span>${isAr ? '✏️ تعديل المعلومات' : '✏️ Edit Information'}</span>
+            <span>${({ en: '✏️ Edit Information', ar: '✏️ تعديل المعلومات', fa: '✏️ ویرایش اطلاعات', zh: '✏️ 编辑信息' })[flow.lang] || '✏️ Edit Information'}</span>
           </div>
           <div class="rhine-modal-body">
             <div class="rhine-edit-form">${fields}</div>
@@ -2539,7 +3033,8 @@
       const data = flow.data;
 
       this.setCaptionAndSpeak(mt.submitting, true, null, "contact");
-      this._setStatus(flow.lang === "ar" ? "جارٍ الإرسال..." : "Sending...");
+      const sendingStatus = { en: "Sending...", ar: "جارٍ الإرسال...", fa: "در حال ارسال...", zh: "正在发送..." };
+      this._setStatus(sendingStatus[flow.lang] || sendingStatus.en);
 
       const payload = {
         fullName: data.fullName || "",
@@ -2598,7 +3093,14 @@
         this._meetingFlow = null;
         this._clearMeetingUI();
         if (this.chatInput) {
-          this.chatInput.placeholder = isAr ? "تحدث أو اكتب سؤالك..." : "Speak or type your question...";
+          const phMap = {
+            en: "Speak or type your question...",
+            ar: "تحدث أو اكتب سؤالك...",
+            fa: "صحبت کنید یا سوال خود را بنویسید...",
+            zh: "请说话或输入您的问题..."
+          };
+          const curLang = this.options.language;
+          this.chatInput.placeholder = phMap[curLang] || phMap.en;
         }
       }
       this._setStatus("Active");
@@ -2609,12 +3111,21 @@
       this._meetingFlow = null;
       this._clearMeetingUI();
       const lang = this.options.language;
-      const answer = lang === "ar"
-        ? "تم إلغاء طلب الاجتماع. إذا أردت المحاولة مرة أخرى في أي وقت، فقط اسألني."
-        : "Your meeting request has been cancelled. Feel free to ask me anything else or arrange a meeting any time.";
-      this.setCaptionAndSpeak(answer, true, null, "contact");
+      const cancelMap = {
+        en: "Your meeting request has been cancelled. Feel free to ask me anything else or arrange a meeting any time.",
+        ar: "تم إلغاء طلب الاجتماع. إذا أردت المحاولة مرة أخرى في أي وقت، فقط اسألني.",
+        fa: "درخواست جلسه لغو شد. هر زمان خواستید دوباره تلاش کنید، فقط از من بپرسید.",
+        zh: "您的会议请求已取消。欢迎随时向我咨询或安排会议。"
+      };
+      const placeholderMap = {
+        en: "Speak or type your question...",
+        ar: "تحدث أو اكتب سؤالك...",
+        fa: "صحبت کنید یا سوال خود را بنویسید...",
+        zh: "请说话或输入您的问题..."
+      };
+      this.setCaptionAndSpeak(cancelMap[lang] || cancelMap.en, true, null, "contact");
       if (this.chatInput) {
-        this.chatInput.placeholder = lang === "ar" ? "تحدث أو اكتب سؤالك..." : "Speak or type your question...";
+        this.chatInput.placeholder = placeholderMap[lang] || placeholderMap.en;
       }
     }
 

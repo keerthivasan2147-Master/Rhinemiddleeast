@@ -27,6 +27,8 @@ namespace Rhinemiddleeast.Controllers
         public InitialGreetingModel GetInitialGreeting(string? lang = "en")
         {
             var isAr = lang?.ToLower().StartsWith("ar") == true;
+            var isFa = lang?.ToLower().StartsWith("fa") == true;
+            var isZh = lang?.ToLower().StartsWith("zh") == true;
 
             var timeOfDay = DateTime.UtcNow.Hour switch
             {
@@ -38,15 +40,21 @@ namespace Rhinemiddleeast.Controllers
 
             var greetingEn = "Hi there, welcome to RHINE ! I’m your AI Assistant. Are you looking to build something new, improve your existing business, or automate your operations? I’m here to help.";
             var greetingAr = "مرحباً بك في RHINE! أنا مساعدك الذكي. هل تتطلع لبناء مشروع جديد، أو تطوير أعمالك القائمة، أو أتمتة عملياتك التشغيلية؟ أنا هنا لمساعدتك.";
+            var greetingFa = "سلام، به RHINE خوش آمدید! من دستیار هوشمند شما هستم. آیا به دنبال ساخت کسب‌وکاری جدید، توسعه کسب‌وکار موجود یا خودکارسازی عملیات خود هستید؟ من آماده کمکم.";
+            var greetingZh = "您好，欢迎来到 RHINE！我是您的人工智能助手。您是想构建新项目、改善现有业务，还是实现自动化运营？我随时为您提供帮助。";
 
             var uniqueGreetingId = "greet_" + Guid.NewGuid().ToString("N")[..12];
+
+            string currentGreeting = isFa ? greetingFa : (isZh ? greetingZh : (isAr ? greetingAr : greetingEn));
 
             return new InitialGreetingModel
             {
                 ShouldGreet = true,
                 GreetingEn = greetingEn,
                 GreetingAr = greetingAr,
-                GreetingText = isAr ? greetingAr : greetingEn,
+                GreetingFa = greetingFa,
+                GreetingZh = greetingZh,
+                GreetingText = currentGreeting,
                 GreetingId = uniqueGreetingId,
                 Timestamp = DateTime.UtcNow.ToString("o")
             };

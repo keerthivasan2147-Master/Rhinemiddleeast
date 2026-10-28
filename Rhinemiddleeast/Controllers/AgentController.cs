@@ -15,6 +15,28 @@ namespace RhineAgent.TestWeb.Controllers
         private readonly IAntiforgery _antiforgery;
         private readonly ILogger<AgentController> _logger;
 
+        private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, byte[]> _ttsCache = new();
+        private static readonly HttpClient _ttsHttpClient = CreateTtsHttpClient();
+
+        private static HttpClient CreateTtsHttpClient()
+        {
+            var handler = new SocketsHttpHandler
+            {
+                PooledConnectionLifetime = TimeSpan.FromMinutes(15),
+                ConnectTimeout = TimeSpan.FromSeconds(3)
+            };
+            var client = new HttpClient(handler)
+            {
+                Timeout = TimeSpan.FromSeconds(5)
+            };
+            client.DefaultRequestHeaders.UserAgent.ParseAdd(
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
+            client.DefaultRequestHeaders.Accept.ParseAdd("audio/mpeg, audio/*;q=0.9, */*;q=0.8");
+            client.DefaultRequestHeaders.AcceptLanguage.ParseAdd("en-US,en;q=0.9");
+            try { client.DefaultRequestHeaders.Referrer = new Uri("https://translate.google.com/"); } catch { }
+            return client;
+        }
+
         public AgentController(
             IAgentProvider agentProvider,
             IOptionsMonitor<AgentSettings> settingsMonitor,
@@ -137,24 +159,34 @@ namespace RhineAgent.TestWeb.Controllers
         public IActionResult GetInitialGreeting([FromQuery] string? lang = "en")
         {
             var isAr = lang?.ToLower().StartsWith("ar") == true;
+            var isFa = lang?.ToLower().StartsWith("fa") == true;
+            var isZh = lang?.ToLower().StartsWith("zh") == true;
 
             var greetingEn = "Hi there, welcome to RHINE ! I’m your AI Assistant. Are you looking to build something new, improve your existing business, or automate your operations? I’m here to help.";
             var greetingAr = "مرحباً بك في RHINE! أنا مساعدك الذكي. هل تتطلع لبناء مشروع جديد، أو تطوير أعمالك القائمة، أو أتمتة عملياتك التشغيلية؟ أنا هنا لمساعدتك.";
+            var greetingFa = "سلام، به RHINE خوش آمدید! من دستیار هوشمند شما هستم. آیا به دنبال ساخت کسب‌وکاری جدید، توسعه کسب‌وکار موجود یا خودکارسازی عملیات خود هستید؟ من آماده کمکم.";
+            var greetingZh = "您好，欢迎来到 RHINE！我是您的人工智能助手。您是想构建新项目、改善现有业务，还是实现自动化运营？我随时为您提供帮助。";
             var uniqueGreetingId = "greet_" + Guid.NewGuid().ToString("N")[..12];
+
+            string currentGreeting = isFa ? greetingFa : (isZh ? greetingZh : (isAr ? greetingAr : greetingEn));
+            string retLang = isFa ? "fa" : (isZh ? "zh" : (isAr ? "ar" : "en"));
 
             return Ok(new
             {
                 shouldGreet = true,
-                greeting = isAr ? greetingAr : greetingEn,
+                greeting = currentGreeting,
                 greetingEn = greetingEn,
                 greetingAr = greetingAr,
+                greetingFa = greetingFa,
+                greetingZh = greetingZh,
                 greetingId = uniqueGreetingId,
-                language = isAr ? "ar" : "en"
+                language = retLang
             });
         }
 
         /// <summary>
-        /// Provides high-quality Arabic and multilingual audio speech stream
+        /// Provides high-quality Arabic, Persian, Chinese and multilingual audio speech stream.
+        /// Uses multiple Google TTS URL variants with retry for maximum reliability, especially for Persian (fa).
         /// </summary>
         [HttpGet("tts")]
         [ResponseCache(Duration = 86400, Location = ResponseCacheLocation.Client)]
@@ -168,22 +200,85 @@ namespace RhineAgent.TestWeb.Controllers
             try
             {
                 var clean = text.Trim();
-                if (clean.Length > 200) clean = clean.Substring(0, 200);
+                if (clean.Length > 350) clean = clean.Substring(0, 350);
 
-                var url = $"https://translate.google.com/translate_tts?ie=UTF-8&q={Uri.EscapeDataString(clean)}&tl={Uri.EscapeDataString(lang)}&client=tw-ob";
-                using var client = new HttpClient();
-                client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
-
-                var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
-                if (response.IsSuccessStatusCode)
+                var isFa = (lang?.ToLowerInvariant()) switch
                 {
-                    var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
-                    return File(stream, "audio/mpeg");
+                    "fa" or "fa-ir" or "persian" => true,
+                    _ => false
+                };
+
+                // For Persian, adapt Latin "RHINE" to Persian "راین" so the TTS engine pronounces it authentically
+                if (isFa)
+                {
+                    clean = System.Text.RegularExpressions.Regex.Replace(clean, @"\bRHINE\b", "راین", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
                 }
+
+                // Google Translate TTS rejects "fa" with 400 Bad Request, but "ur" (Urdu) natively
+                // shares the full Persian script (پ، چ، ژ، گ) and returns pristine spoken audio.
+                var normalizedLang = isFa ? "ur" : (lang?.ToLowerInvariant()) switch
+                {
+                    "zh" or "zh-cn" or "zh-tw" => "zh-CN",
+                    "ar" or "ar-sa" or "ar-ae" => "ar",
+                    _ => "en"
+                };
+
+                var cacheKey = $"{normalizedLang}:{clean}";
+                if (_ttsCache.TryGetValue(cacheKey, out var cachedBytes))
+                {
+                    return File(cachedBytes, "audio/mpeg");
+                }
+
+                // Multiple TTS URL variants ordered by reliability.
+                var urlVariants = new List<string>
+                {
+                    $"https://translate.google.com/translate_tts?ie=UTF-8&q={Uri.EscapeDataString(clean)}&tl={Uri.EscapeDataString(normalizedLang)}&client=tw-ob",
+                    $"https://translate.googleapis.com/translate_tts?ie=UTF-8&q={Uri.EscapeDataString(clean)}&tl={Uri.EscapeDataString(normalizedLang)}&client=tw-ob",
+                    $"https://translate.google.com/translate_tts?ie=UTF-8&q={Uri.EscapeDataString(clean)}&tl={Uri.EscapeDataString(normalizedLang)}&client=gtx&ttsspeed=1",
+                };
+
+                // For Persian, also add Arabic endpoints as additional fallbacks
+                if (isFa)
+                {
+                    urlVariants.Add($"https://translate.google.com/translate_tts?ie=UTF-8&q={Uri.EscapeDataString(clean)}&tl=ar&client=tw-ob");
+                }
+
+                foreach (var url in urlVariants)
+                {
+                    try
+                    {
+                        using var response = await _ttsHttpClient.GetAsync(url, HttpCompletionOption.ResponseContentRead, cancellationToken);
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            _logger.LogDebug("TTS URL {Url} returned {Status}", url, response.StatusCode);
+                            continue;
+                        }
+
+                        var bytes = await response.Content.ReadAsByteArrayAsync(cancellationToken);
+                        if (bytes == null || bytes.Length < 150)
+                        {
+                            _logger.LogDebug("TTS response too small ({Bytes} bytes) for lang={Lang}, trying next URL", bytes?.Length ?? 0, normalizedLang);
+                            continue;
+                        }
+
+                        _ttsCache.TryAdd(cacheKey, bytes);
+                        return File(bytes, "audio/mpeg");
+                    }
+                    catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
+                    {
+                        return StatusCode(499);
+                    }
+                    catch (Exception urlEx)
+                    {
+                        _logger.LogDebug(urlEx, "TTS URL attempt failed for lang={Lang}, trying next", normalizedLang);
+                    }
+                }
+
+                _logger.LogWarning("All TTS URL variants exhausted for lang={Lang}, text length={Len}", normalizedLang, clean.Length);
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "Failed to stream TTS audio for text: {Text}", text);
+                _logger.LogWarning(ex, "Failed to stream TTS audio for text: {Text}, lang: {Lang}", text, lang);
             }
 
             return NotFound();
